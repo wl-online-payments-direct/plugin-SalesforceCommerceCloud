@@ -1,0 +1,11 @@
+<isif condition="${'worldline' in payment}">
+
+	<p>${payment.worldline.paymentProductName} ${payment.worldline.creditCardAlias ? payment.worldline.creditCardAlias : ''}</p>
+	<isif condition="${payment.creditCardExpirationMonth}">
+		<p>${Resource.msg('label.worldlineDirect.card.expires','worldlineDirect',null)} ${payment.creditCardExpirationMonth}/${payment.creditCardExpirationYear}</p>
+	</isif>
+<iselse>
+	<p>${Resource.msg('label.payment.credit','account',null)} ${payment.creditCardType}</p>
+	<p>${payment.maskedCreditCardNumber}</p>
+	<p>${Resource.msg('label.payment.ending','account',null)} ${payment.creditCardExpirationMonth}/${payment.creditCardExpirationYear}</p>
+</isif>

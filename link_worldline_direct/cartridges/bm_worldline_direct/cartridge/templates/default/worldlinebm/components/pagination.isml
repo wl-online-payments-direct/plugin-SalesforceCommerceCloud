@@ -1,0 +1,98 @@
+
+<form class="worldlinebm_pagination" method="post" action="${pdict.paginationparameters.pageURL}">
+    <table class="pagecursor" cellspacing="1" cellpadding="1">
+        <tr>
+            <td nowrap="nowrap" width="40%" align="left" class="pagecursortxt top">
+                ${Resource.msg('pagination.showing', 'worldlinebm', null)}
+                <span class="pagecursoritem bold">
+                    <isprint value="${StringUtils.formatInteger(pdict.paginationparameters.showingStart)}"/>
+                </span> - <span class="pagecursoritem bold">
+                    <isprint value="${StringUtils.formatInteger(pdict.paginationparameters.showingEnd)}"/>
+                </span>
+                ${Resource.msg('pagination.of', 'worldlinebm', null)}
+                <span class="pagecursoritem bold">
+                    <isprint value="${StringUtils.formatInteger(pdict.paginationparameters.totalCount)}"/>
+                </span>
+                ${Resource.msg('pagination.items', 'worldlinebm', null)}.
+            </td>
+            <td nowrap="nowrap" class="pagecursortxt top">
+                &nbsp;
+                <isif condition="${pdict.paginationparameters.totalCount > 10}">
+                    ${Resource.msg('pagination.show', 'worldlinebm', null)}
+                    <isif condition="${pdict.paginationparameters.totalCount > 10 && pdict.paginationparameters.pageSize != 10}">
+                        <span class="pagecursortxt">
+                            <span class="pagecursortxt"><button class="pagecursorbtn perm_not_disabled" name="pagesize" value="10">10</button></span>
+                        </span>
+                    </isif>
+
+                    <isif condition="${pdict.paginationparameters.totalCount > 50 && pdict.paginationparameters.pageSize != 50}">
+                        <span class="pagecursortxt">
+                            <span class="pagecursortxt"><button class="pagecursorbtn perm_not_disabled" name="pagesize" value="50">50</button></span>
+                        </span>
+                    </isif>
+
+                    <isif condition="${pdict.paginationparameters.totalCount > 100 && pdict.paginationparameters.pageSize != 100}">
+                        <span class="pagecursortxt"><button class="pagecursorbtn perm_not_disabled" name="pagesize" value="100">100</button></span>
+                    </isif>
+
+                    <isif condition="${pdict.paginationparameters.totalCount > 1000 && pdict.paginationparameters.pageSize != 1000}">
+                        <span class="pagecursortxt"><button class="pagecursorbtn perm_not_disabled" name="pagesize" value="1000">1000</button></span>
+                    </isif>
+
+                    <isif condition="${pdict.CurrentHttpParameterMap.pagesize.intValue != 0}">
+                        <span class="pagecursortxt"><button class="pagecursorbtn perm_not_disabled" name="pagesize" value="0">${Resource.msg('pagination.button.all', 'worldlinebm', null)}</button></span>
+                    </isif>
+                    ${Resource.msg('pagination.items', 'worldlinebm', null)}
+                </isif>
+            </td>
+            <isif condition="${(pdict.paginationparameters.currentPage > 0) && (pdict.paginationparameters.maxPage > 4)}">
+                <td class="pagecursortxt" width="1">&lt;&lt;</td>
+                <td class="pagecursortxt" width="1">
+                    <button class="pagecursorbtn perm_not_disabled" name="page" value="<isprint value="${currentPage}" formatter="#"/>">${Resource.msg('pagination.button.previous', 'worldlinebm', null)}</button>
+                </td>
+            </isif>
+            <isif condition="${pdict.paginationparameters.currentPage != 0}">
+                <td width="1" class="pagecursortxt">
+                    <button class="pagecursorbtn perm_not_disabled" name="page" value="0">1</button>
+                </td>
+            <iselse>
+                <td width="1" class="pagecursoritem top"><b>[1]</b></td>
+            </isif>
+            <isif condition="${pdict.paginationparameters.rangeBegin != 1}">
+                <td width="1">...</td>
+            </isif>
+            <isif condition="${pdict.paginationparameters.maxPage >= 1}">
+                <isloop begin="${pdict.paginationparameters.rangeBegin}" end="${pdict.paginationparameters.rangeEnd}" status="i">
+                    <isif condition="${i.index != pdict.paginationparameters.currentPage}">
+                        <td width="1" class="pagecursortxt">
+                            <button class="pagecursorbtn perm_not_disabled" name="page" value="<isprint value="${i.index + 1}" formatter="#"/>"><isprint value="${i.index + 1}" formatter="#"/></button>
+                        </td>
+                    <iselse>
+                        <td width="1" class="pagecursoritem top"><b>[<isprint value="${i.index + 1}" formatter="#"/>]</b></td>
+                    </isif>
+                </isloop>
+            </isif>
+            <isif condition="${(pdict.paginationparameters.rangeEnd + 1) != pdict.paginationparameters.maxPage}">
+                <td width="1">...</td>
+            </isif>
+            <isif condition="${pdict.paginationparameters.maxPage != 0}">
+                <isif condition="${pdict.paginationparameters.maxPage != pdict.paginationparameters.currentPage}">
+                    <td width="1" class="pagecursortxt">
+                        <button class="pagecursorbtn perm_not_disabled" name="page" value="<isprint value="${pdict.paginationparameters.maxPage + 1}" formatter="#"/>"><isprint value="${pdict.paginationparameters.maxPage + 1}" formatter="#"/></button>
+                    </td>
+                <iselse>
+                    <td width="1" class="pagecursoritem top"><b>[<isprint value="${pdict.paginationparameters.maxPage + 1}" formatter="#"/>]</b></td>
+                </isif>
+            </isif>
+            <isif condition="${(pdict.paginationparameters.current < pdict.paginationparameters.totalCount - pdict.paginationparameters.pageSize) && (pdict.paginationparameters.maxPage > 4)}">
+                <td width="1" class="pagecursortxt">
+                    <button class="pagecursorbtn perm_not_disabled" name="page" value="<isprint value="${pdict.paginationparameters.currentPage+2}" formatter="#"/>">${Resource.msg('pagination.button.next', 'worldlinebm', null)}</button>
+                </td>
+                <td width="1" class="pagecursortxt">&gt;&gt;</td>
+            </isif>
+        </tr>
+    </table>
+    <isloop items="${pdict.paginationparameters.httpParameters}" var="parameter">
+        <input type="hidden" value="${parameter.value}" name="${parameter.key}"/>
+    </isloop>
+</form>

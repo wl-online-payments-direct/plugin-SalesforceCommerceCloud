@@ -1,0 +1,25 @@
+[{
+    "id": "en_US",
+    "currencyCode": "USD"
+}, {
+    "id": "en_GB",
+    "currencyCode": "GBP"
+},{
+    "id": "en_JP",
+    "currencyCode": "JPY"
+},{
+    "id": "en_AU",
+    "currencyCode": "AUD"
+},{
+    "id": "en_NL",
+    "currencyCode": "EUR"
+}, {
+    "id": "fr_FR",
+    "currencyCode": "EUR"
+}, {
+    "id": "it_IT",
+    "currencyCode": "EUR"
+}, {
+    "id": "de_DE",
+    "currencyCode": "EUR"
+}]

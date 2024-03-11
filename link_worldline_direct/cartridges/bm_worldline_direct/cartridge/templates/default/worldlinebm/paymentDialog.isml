@@ -1,0 +1,30 @@
+<div class="js_payment_details"
+    data-currency-code="${pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode}"
+    data-capture-payment-url="${URLUtils.url('WorldlineDirectAdmin-CapturePayment', 'worldlinePaymentId', pdict.paymentDetailsResponse.id, 'orderNo', pdict.order.orderNo, 'ot', pdict.order.orderToken)}"
+    data-cancel-payment-url="${URLUtils.url('WorldlineDirectAdmin-CancelPayment', 'worldlinePaymentId', pdict.paymentDetailsResponse.id)}"
+    data-refund-payment-url="${URLUtils.url('WorldlineDirectAdmin-RefundPayment', 'worldlinePaymentId', pdict.paymentDetailsResponse.id)}"
+
+    data-refresh-details-url="${URLUtils.url('WorldlineDirectAdmin-RefreshPaymentDetails', 'worldlinePaymentId', pdict.paymentDetailsResponse.id, 'orderNo', pdict.order.orderNo, 'ot', pdict.order.orderToken)}"
+    data-refresh-captures-url="${URLUtils.url('WorldlineDirectAdmin-ListPaymentCaptures', 'worldlinePaymentId', pdict.paymentDetailsResponse.id, 'orderNo', pdict.order.orderNo, 'ot', pdict.order.orderToken)}"
+    data-refresh-refunds-url="${URLUtils.url('WorldlineDirectAdmin-ListPaymentRefunds', 'worldlinePaymentId', pdict.paymentDetailsResponse.id, 'orderNo', pdict.order.orderNo, 'ot', pdict.order.orderToken)}"
+>
+    <isinclude template="worldlinebm/paymentDetails" />
+</div>
+
+<div>
+    <ul class="js_payment_transactions_tab_headings tab_headings">
+        <li>
+            <a href="javascript: void(0);" class="captures" data-contents-url="${URLUtils.url('WorldlineDirectAdmin-ListPaymentCaptures', 'worldlinePaymentId', pdict.paymentDetailsResponse.id, 'orderNo', pdict.order.orderNo, 'ot', pdict.order.orderToken)}">
+                ${Resource.msg('detailsdialog.tabtitles.captures', 'worldlinebm', null)}
+            </a>
+        </li>
+        <li>
+            <a href="javascript: void(0);" class="refunds" data-contents-url="${URLUtils.url('WorldlineDirectAdmin-ListPaymentRefunds', 'worldlinePaymentId', pdict.paymentDetailsResponse.id, 'orderNo', pdict.order.orderNo, 'ot', pdict.order.orderToken)}">
+                ${Resource.msg('detailsdialog.tabtitles.refunds', 'worldlinebm', null)}
+            </a>
+        </li>
+    </ul>
+
+    <div class="js_payment_transactions_tab_contents tab_contents">
+    </div>
+</div>

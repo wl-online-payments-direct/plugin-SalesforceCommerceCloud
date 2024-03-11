@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isWorldlineDirectOrder">
+                <display-name xml:lang="x-default">Is Worldline-Direct Order</display-name>
+                <display-name xml:lang="de">Ist eine Worldline-Direct Bestellung</display-name>
+                <display-name xml:lang="es">Es un pedido de Worldline-Direct</display-name>
+                <display-name xml:lang="fr">Est la commande Worldline-Direct</display-name>
+                <display-name xml:lang="it">L’ordine Worldline-Direct è</display-name>
+                <display-name xml:lang="nl">Is Worldline-Direct-order</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectTransactionID">
+                <display-name xml:lang="x-default">Transaction ID</display-name>
+                <display-name xml:lang="de">Transaktions-ID</display-name>
+                <display-name xml:lang="es">ID de transacción</display-name>
+                <display-name xml:lang="fr">Identifiant de transaction</display-name>
+                <display-name xml:lang="it">ID transazione</display-name>
+                <display-name xml:lang="nl">Transactie-id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectStatusCategory">
+                <display-name xml:lang="x-default">Payment Status Category</display-name>
+                <display-name xml:lang="de">Zahlungsstatuskategorie</display-name>
+                <display-name xml:lang="es">Categoría de estado del pago</display-name>
+                <display-name xml:lang="fr">Catégorie de statut de paiement</display-name>
+                <display-name xml:lang="it">Categoria Stato pagamento</display-name>
+                <display-name xml:lang="nl">Categorie betalingsstatus</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Rejected</display>
+                        <value>REJECTED</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Pending</display>
+                        <value>PENDING</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorized</display>
+                        <value>AUTHORIZED</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Completed</display>
+                        <value>COMPLETED</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cancelled</display>
+                        <value>CANCELLED</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectStatus">
+                <display-name xml:lang="x-default">Transaction Status</display-name>
+                <display-name xml:lang="de">Transaktionsstatus</display-name>
+                <display-name xml:lang="es">Estado de la transacción</display-name>
+                <display-name xml:lang="fr">Statut de la transaction</display-name>
+                <display-name xml:lang="it">Stato transazione</display-name>
+                <display-name xml:lang="nl">Transactiestatus</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectStatusCode">
+                <display-name xml:lang="x-default">Transaction Status Code</display-name>
+                <display-name xml:lang="de">Transaktionsstatuscode</display-name>
+                <display-name xml:lang="es">Código de estado de la transacción</display-name>
+                <display-name xml:lang="fr">Code du statut de la transaction</display-name>
+                <display-name xml:lang="it">Codice stato transazione</display-name>
+                <display-name xml:lang="nl">Transactiestatuscode</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectIsAuthorized">
+                <display-name xml:lang="x-default">Is Transaction Authorized</display-name>
+                <display-name xml:lang="de">Ist eine autorisierte Transaktion</display-name>
+                <display-name xml:lang="es">Es una transacción autorizada</display-name>
+                <display-name xml:lang="fr">La transaction est-elle autorisée</display-name>
+                <display-name xml:lang="it">La transazione è autorizzata</display-name>
+                <display-name xml:lang="nl">Is transactie geautoriseerd</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectIsCancellable">
+                <display-name xml:lang="x-default">Is Transaction Cancellable</display-name>
+                <display-name xml:lang="de">Ist eine stornierbare Transaktion</display-name>
+                <display-name xml:lang="es">Es una transacción cancelable</display-name>
+                <display-name xml:lang="fr">La transaction peut-elle être annulée</display-name>
+                <display-name xml:lang="it">La transazione è annullabile</display-name>
+                <display-name xml:lang="nl">Is transactie annuleerbaar</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectIsRefundable">
+                <display-name xml:lang="x-default">Is Transaction Refundable</display-name>
+                <display-name xml:lang="de">Ist eine erstattbare Transaktion</display-name>
+                <display-name xml:lang="es">Es una transacción reembolsable</display-name>
+                <display-name xml:lang="fr">La transaction peut-elle être remboursée</display-name>
+                <display-name xml:lang="it">La transazione è rimborsabile</display-name>
+                <display-name xml:lang="nl">Kan transactie worden terugbetaald</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectHasCaptures">
+                <display-name xml:lang="x-default">Has Captures</display-name>
+                <display-name xml:lang="de">Hat Zahlungserfassungen</display-name>
+                <display-name xml:lang="es">Tiene capturas</display-name>
+                <display-name xml:lang="fr">A des remises en banque</display-name>
+                <display-name xml:lang="it">Ha acquisizioni</display-name>
+                <display-name xml:lang="nl">Heeft vastleggingen</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectHasRefunds">
+                <display-name xml:lang="x-default">Has Refunds</display-name>
+                <display-name xml:lang="de">Hat Erstattungen</display-name>
+                <display-name xml:lang="es">Tiene reembolsos</display-name>
+                <display-name xml:lang="fr">A des remboursements</display-name>
+                <display-name xml:lang="it">Ha rimborsi</display-name>
+                <display-name xml:lang="nl">Heeft terugbetalingen</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectHasChargebacks">
+                <display-name xml:lang="x-default">Has Chargebacks</display-name>
+                <display-name xml:lang="de">Hat Rückbelastungen</display-name>
+                <display-name xml:lang="es">Tiene devoluciones de cargos</display-name>
+                <display-name xml:lang="fr">A des impayés</display-name>
+                <display-name xml:lang="it">Ha storni di addebito</display-name>
+                <display-name xml:lang="nl">Heeft terugboekingen</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectMandateReference">
+                <display-name xml:lang="x-default">Mandate Reference</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectSurchargeAmount">
+                <display-name xml:lang="x-default">Surcharge Amount</display-name>
+                <type>double</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WORLDLINE_DIRECT">
+                <display-name xml:lang="x-default">Worldline-Direct</display-name>
+                <attribute attribute-id="isWorldlineDirectOrder"/>
+                <attribute attribute-id="worldlineDirectTransactionID"/>
+                <attribute attribute-id="worldlineDirectStatusCategory"/>
+                <attribute attribute-id="worldlineDirectStatus"/>
+                <attribute attribute-id="worldlineDirectStatusCode"/>
+                <attribute attribute-id="worldlineDirectIsAuthorized"/>
+                <attribute attribute-id="worldlineDirectIsCancellable"/>
+                <attribute attribute-id="worldlineDirectIsRefundable"/>
+                <attribute attribute-id="worldlineDirectHasCaptures"/>
+                <attribute attribute-id="worldlineDirectHasRefunds"/>
+                <attribute attribute-id="worldlineDirectHasChargebacks"/>
+                <attribute attribute-id="worldlineDirectMandateReference"/>
+                <attribute attribute-id="worldlineDirectSurchargeAmount"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

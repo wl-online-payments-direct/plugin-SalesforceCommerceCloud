@@ -1,0 +1,34 @@
+<form method="POST" action="${URLUtils.url('WorldlineDirectAdmin-PaymentProductSave')}" class="view_payment_product">
+    <div class="form-field">
+        <label for="viewpaymentProduct_id">${Resource.msg('paymentproducts.product.id', 'worldlinebm', null)}:</label>
+        <input type="number" name="id" id="viewpaymentProduct_id" value="<isprint value="${pdict.paymentProduct ? pdict.paymentProduct.id : ""}" formatter="#" />" required <isif condition="${pdict.paymentProduct}">readonly</isif> />
+    </div>
+    
+    <div class="form-field">
+        <label for="viewpaymentProduct_name">${Resource.msg('paymentproducts.product.name', 'worldlinebm', null)}:</label>
+        <input type="text" name="name" id="viewpaymentProduct_name" value="<isprint value="${pdict.paymentProduct ? pdict.paymentProduct.name : ""}" />" required />
+    </div>
+
+    <div class="form-field">
+        <label>
+            <input type="checkbox" name="isShown" value="true" <isif condition="${pdict.paymentProduct && pdict.paymentProduct.isShown}">checked</isif> />
+            ${Resource.msg('paymentproducts.product.isshown', 'worldlinebm', null)}
+        <label>
+    </div>
+
+    <isif condition="${!pdict.paymentProduct}">
+        <input type="hidden" name="addNew" value="true" />
+    </isif>
+
+    <div class="actions">
+        <button type="submit">${Resource.msg('paymentproducts.product.save', 'worldlinebm', null)}</button>
+        <button 
+            type="button"
+            class="btn_delete"
+            data-action="${pdict.paymentProduct ? URLUtils.url('WorldlineDirectAdmin-PaymentProductDelete', 'id', pdict.paymentProduct.id) : ""}"
+            <isif condition="${!pdict.paymentProduct}">disabled</isif>
+            >
+            ${Resource.msg('paymentproducts.product.delete', 'worldlinebm', null)}
+        </button>
+    </div>
+</form>

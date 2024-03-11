@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+
+	<menuaction id="worldline_direct_transactions_manager" menupath="orders" position="100" site="true">
+		<name xml:lang="x-default">Worldline-Direct Transactions</name>
+		<short_description xml:lang="x-default"></short_description>
+		<description xml:lang="x-default">Manage the Worldline-Direct transactions for this site's orders.</description>
+		<exec pipeline="WorldlineDirectAdmin" node="Orders" />
+		<sub-pipelines>
+			<pipeline name="WorldlineDirectAdmin-Orders" />
+			<pipeline name="WorldlineDirectAdmin-PaymentDialog" />
+			<pipeline name="WorldlineDirectAdmin-RefreshPaymentDetails" />
+			<pipeline name="WorldlineDirectAdmin-ListPaymentCaptures" />
+			<pipeline name="WorldlineDirectAdmin-ListPaymentRefunds" />
+			<pipeline name="WorldlineDirectAdmin-CapturePayment" />
+			<pipeline name="WorldlineDirectAdmin-RefundPayment" />
+			<pipeline name="WorldlineDirectAdmin-CancelPayment" />
+			<pipeline name="WorldlineDirectAdmin-TestConnection" />
+		</sub-pipelines>
+		<icon>worldlinebm/images/Worldline-Mint-Symbol.png</icon>
+	</menuaction>
+
+	<menuaction id="worldline_direct_payment_products" menupath="orders" position="110" site="true">
+		<name xml:lang="x-default">Worldline-Direct Payment Products</name>
+		<name xml:lang="it">Prodotti di pagamento Worldline Online Payments</name>
+		<name xml:lang="de">Zahlungsprodukte von Worldline Online Payments</name>
+		<name xml:lang="fr">Produits de paiement Worldline Online Payments</name>
+		<name xml:lang="nl">Worldline Online Payments betaalproducten</name>
+		<name xml:lang="es">Productos de pago de Worldline Online Payments</name>
+		<short_description xml:lang="x-default"></short_description>
+		<description xml:lang="x-default">Manage the Worldline-Direct payment products.</description>
+		<description xml:lang="it">Gestire i prodotti di pagamento Worldline Online Payments.</description>
+		<description xml:lang="de">Zahlungsprodukte von Worldline Online Payments verwalten.</description>
+		<description xml:lang="fr">Gérer les produits de paiement Worldline Online Payments.</description>
+		<description xml:lang="nl">Beheer de Worldline Online Payments betaalproducten.</description>
+		<description xml:lang="es">Gestionar los productos de pago de Worldline Online Payments</description>
+		<exec pipeline="WorldlineDirectAdmin" node="PaymentProductList" />
+		<sub-pipelines>
+			<pipeline name="WorldlineDirectAdmin-Orders" />
+			<pipeline name="WorldlineDirectAdmin-PaymentDialog" />
+			<pipeline name="WorldlineDirectAdmin-RefreshPaymentDetails" />
+			<pipeline name="WorldlineDirectAdmin-ListPaymentCaptures" />
+			<pipeline name="WorldlineDirectAdmin-ListPaymentRefunds" />
+			<pipeline name="WorldlineDirectAdmin-CapturePayment" />
+			<pipeline name="WorldlineDirectAdmin-RefundPayment" />
+			<pipeline name="WorldlineDirectAdmin-CancelPayment" />
+			<pipeline name="WorldlineDirectAdmin-TestConnection" />
+			<pipeline name="WorldlineDirectAdmin-PaymentProductList" />
+			<pipeline name="WorldlineDirectAdmin-PaymentProductView" />
+			<pipeline name="WorldlineDirectAdmin-PaymentProductSave" />
+			<pipeline name="WorldlineDirectAdmin-PaymentProductDelete" />
+		</sub-pipelines>
+		<icon>worldlinebm/images/Worldline-Mint-Symbol.png</icon>
+	</menuaction>
+
+	<dialogaction id="worldline_direct_transactions_manager_dialog" extern="true" position="100" xp_ref="xp_orders_payment">
+		<name xml:lang="x-default">View Worldline Transaction</name>
+		<exec pipeline="WorldlineDirectAdmin" node="Orders" />
+	</dialogaction>
+
+</extensions>

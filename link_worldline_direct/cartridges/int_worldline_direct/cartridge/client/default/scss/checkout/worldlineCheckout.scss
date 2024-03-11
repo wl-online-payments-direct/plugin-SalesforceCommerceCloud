@@ -1,0 +1,96 @@
+.credit-card-selector-block {
+  table {
+    width: 100%;
+
+    caption {
+      caption-side: top;
+      margin-top: 20px;
+      padding: 0 0 0 10px;
+      color: inherit;
+      font-weight: 500;
+    }
+
+    tr {
+      &.card-row {
+        &.selected td,
+        &:hover td {
+          background-color: #eee;
+          cursor: pointer;
+        }
+      }
+
+      th,
+      td {
+        padding: 10px;
+        line-height: 1em;
+        vertical-align: top;
+
+        @media only screen and (min-width: 1200px) {
+          vertical-align: middle;
+        }
+
+        &:first-child {
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+
+        &.radioButton {
+          white-space: nowrap;
+        }
+
+        &.maskedCreditCardNumber {
+          span.creditCardHolder {
+            display: block;
+            color: #6c757d;
+            margin-bottom: 5px;
+          }
+
+          @media only screen and (min-width: 1200px) {
+            span.creditCardHolder {
+              display: none;
+            }
+          }
+        }
+
+        &.paymentProductName,
+        &.creditCardHolder {
+          display: none;
+
+          @media only screen and (min-width: 1200px) {
+            display: table-cell;
+          }
+        }
+
+        #HostedTokenizationDiv {
+          margin: 0 -20px;
+
+          @media only screen and (min-width: 1200px) {
+            margin: 0;
+          }
+        }
+      }
+
+      input {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+
+      .logo {
+        max-width: 50px;
+      }
+
+      &.selected .card-details {
+        display: block;
+      }
+    }
+  }
+}
+
+.hide-surcharge {
+  display:none;
+}

@@ -1,0 +1,50 @@
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue === 'ajax'}">
+
+    <isdecorate template="worldlinebm/util/pt_empty">
+
+        <div class="worldlinebm_content worldlinebm_content_ajax">
+            <isreplace/>
+        </div>
+
+    </isdecorate>
+
+<iselse>
+
+    <isdecorate template="application/MenuFrame">
+
+        <link rel="stylesheet" href="${URLUtils.staticURL('/worldlinebm/css/bm.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('/jscript/ext/resources/css/ext-all.css')}" />
+
+        <script src="${URLUtils.staticURL('/jscript/ext/adapter/ext/ext-base.js')}"></script>
+        <script src="${URLUtils.staticURL('/jscript/ext/ext-all.js')}"></script>
+
+        <script>
+            var worldlineAdminConfig = {
+                resources: {
+                    detailsDialogTitle: "${Resource.msg('search.grid.detailsdialogtitle', 'worldlinebm', null)}",
+                    submit: "${Resource.msg('forms.submit', 'worldlinebm', null)}",
+                    cancel: "${Resource.msg('forms.cancel', 'worldlinebm', null)}",
+                    errorMsgTitle: "${Resource.msg('msg.error.title', 'worldlinebm', null)}",
+                    serverError: "${Resource.msg('worldlineserver.error', 'worldlinebm', null)}",
+                    pleaseWait: "${Resource.msg('msg.pleasewait', 'worldlinebm', null)}",
+                    confirmationMessages: {
+                        cancel: "${Resource.msg('detailsdialog.confirmationmessages.cancel', 'worldlinebm', null)}",
+                        capture: "${Resource.msg('detailsdialog.confirmationmessages.capture', 'worldlinebm', null)}",
+                        refund: "${Resource.msg('detailsdialog.confirmationmessages.refund', 'worldlinebm', null)}",
+                    },
+                    apiRequestFailed: "${Resource.msg('detailsdialog.apirequestfailed', 'worldlinebm', null)}",
+                    apiRequestFailedWith: "${Resource.msg('detailsdialog.apirequestfailedwith', 'worldlinebm', null)}",
+                    connectionSucceeded: "${Resource.msg('detailsdialog.connectionsucceeded', 'worldlinebm', null)}"
+                }
+            };
+        </script>
+
+        <div class="worldlinebm_content js_worldlinebm_content">
+            <isreplace/>
+        </div>
+
+        <script src="${URLUtils.staticURL('/worldlinebm/js/worldlineAdmin.js')}"></script>
+
+    </isdecorate>
+
+</isif>

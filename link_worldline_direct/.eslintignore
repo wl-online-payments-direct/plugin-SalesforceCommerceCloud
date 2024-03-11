@@ -1,0 +1,8 @@
+cartridges/int_worldline_direct/cartridge/static/
+coverage/
+doc/
+bin/
+webpack.config.js
+cartridges/bm_worldline_direct/cartridge/static/
+codecept.conf.js
+test/

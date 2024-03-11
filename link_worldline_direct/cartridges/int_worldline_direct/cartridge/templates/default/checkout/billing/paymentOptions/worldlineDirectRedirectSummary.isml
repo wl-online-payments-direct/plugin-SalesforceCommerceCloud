@@ -1,0 +1,12 @@
+<isif condition="${'card' in payment}">
+	<div>
+	    <span><isprint value="${payment.name}" /> <isprint value="${payment.card.alias}" /></span>
+	</div>
+	<div>
+	    <span>${Resource.msg('label.worldlineDirect.card.expires','worldlineDirect',null)} <isprint value="${payment.card.expirationMonth}" />/<isprint value="${payment.card.expirationYear}" /></span>
+	</div>
+<iselse>
+	<div>
+	    <span><isprint value="${payment.name}" /></span>
+	</div>
+</isif>

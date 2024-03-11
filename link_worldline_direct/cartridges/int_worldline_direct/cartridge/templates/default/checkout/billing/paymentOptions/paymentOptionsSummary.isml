@@ -1,0 +1,12 @@
+<isset name="worldlineDirectConstants" value="${require('*/cartridge/scripts/worldline/direct/constants')}" scope="page"/>
+<div class="payment-details">
+    <isloop items="${pdict.order.billing.payment.selectedPaymentInstruments}" var="payment">
+        <isif condition="${payment.paymentMethod === 'CREDIT_CARD'}">
+            <isinclude template="checkout/billing/paymentOptions/creditCardSummary" />
+        <iselseif condition="${payment.paymentMethod === worldlineDirectConstants.PAYMENT_METHOD_REDIRECT || payment.paymentMethod === worldlineDirectConstants.PAYMENT_METHOD_CREDIT_REDIRECT}">
+            <isinclude template="checkout/billing/paymentOptions/worldlineDirectRedirectSummary" />
+        <iselseif condition="${payment.paymentMethod === worldlineDirectConstants.PAYMENT_METHOD_CARD}">
+            <isinclude template="checkout/billing/paymentOptions/worldlineDirectCardSummary" />
+        </isif>
+    </isloop>
+</div>

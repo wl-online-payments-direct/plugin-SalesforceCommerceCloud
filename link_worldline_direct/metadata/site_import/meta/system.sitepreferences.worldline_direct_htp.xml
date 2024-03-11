@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="worldlineDirectHTJS">
+                <display-name xml:lang="x-default">Hosted Tokenization JS</display-name>
+                <description xml:lang="x-default">Please provide the URL to Hosted Tokenization JS Library</description>
+                <description xml:lang="de">URL für Hosted Tokenization JS-Bibliothek</description>
+                <description xml:lang="es">Facilita la URL de la biblioteca de JS de tokenización alojada</description>
+                <description xml:lang="fr">Veuillez saisir l’URL vers la Hosted Tokenization JS Library</description>
+                <description xml:lang="it">Fornire l’URL alla libreria Hosted Tokenization JS</description>
+                <description xml:lang="nl">Geef de URL op voor de JavaScript-bibliotheek voor gehoste tokenisering</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectHTPTemplate">
+                <display-name xml:lang="x-default">Hosted Tokenization Template</display-name>
+                <description xml:lang="x-default">Please provide the template name as in Worldline Backoffice to be rendered to the customer</description>
+                <description xml:lang="de">Den Namen der Vorlage wie im Worldline Backoffice eingeben, die dem Kunden gezeigt werden soll</description>
+                <description xml:lang="es">Facilita el nombre de la plantilla tal y como aparece en el Back Office de Worldline que se va a presentar al cliente</description>
+                <description xml:lang="fr">Veuillez saisir le nom du modèle comme dans le Back Office Worldline pour qu’il soit remis au client</description>
+                <description xml:lang="it">Fornire il nome del modello come nel Back Office Worldline da rendere al cliente</description>
+                <description xml:lang="nl">Geef de sjabloonnaam op zoals deze in Worldline Back Office wordt weergegeven voor de klant.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WORLDLINE_DIRECT_HTP">
+                <display-name xml:lang="x-default">Worldline-Direct: Hosted Tokenization Page Settings</display-name>
+                <attribute attribute-id="worldlineDirectHTJS"/>
+                <attribute attribute-id="worldlineDirectHTPTemplate"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

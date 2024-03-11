@@ -1,0 +1,4 @@
+<ismodule template = "worldlinebm/components/pagination"
+    name="worldlinepagination"
+    attribute="pagingparameters"
+/>

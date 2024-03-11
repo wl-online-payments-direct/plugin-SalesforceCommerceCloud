@@ -1,0 +1,47 @@
+<isdecorate template="worldlinebm/util/pt_worldline">
+
+<isinclude template="inc/Modules" />
+<isinclude template="worldlinebm/util/modules" />
+
+<div class="page payment_products">
+    <isbreadcrumb
+        name1="${Resource.msg('transactions.breadcrumbs.name1', 'worldlinebm', null)}" url1="${URLUtils.url('ViewApplication-CompressMenuGroup', 'OverviewPage', 'SiteNavigationBar-ShowSiteOverview')}" 
+        name2="${Resource.msg('transactions.breadcrumbs.name2', 'worldlinebm', null)}" url2="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'orders')}" 
+        name3="${Resource.msg('paymentproducts.breadcrumbs.name3', 'worldlinebm', null)}" 
+        />
+
+    <table>
+        <tr>
+            <td width="50%" class="table_title w e s n">
+                ${Resource.msg('paymentproducts.breadcrumbs.name3', 'worldlinebm', null)}
+            </td>
+            <td width="50%" class="table_title w e s n" align="right">
+                <button class="btn_add_payment_product" type="button" data-action="${URLUtils.url('WorldlineDirectAdmin-PaymentProductView')}">
+                    ${Resource.msg('paymentproducts.btnadd', 'worldlinebm', null)}
+                </button>
+            </td>
+        </tr>
+        <tr><td colspan="2" class="w e s"></td></tr>
+        <tr><td colspan="2" class="table_title_description e w"><p>${Resource.msg('paymentproducts.description', 'worldlinebm', null)}</p></td></tr>
+    </table>
+
+    <table cellspacing="0" cellpadding="0" class="payment_product_list">
+        <tr>
+            <th>${Resource.msg('paymentproducts.product.id', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('paymentproducts.product.name', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('paymentproducts.product.isshown', 'worldlinebm', null)}</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        <isloop items="${pdict.worldlineDirectPaymentProducts}" var="paymentProduct">
+            <tr data-edit-url="${URLUtils.url('WorldlineDirectAdmin-PaymentProductView', 'id', paymentProduct.id)}" data-isshown="${paymentProduct.isShown}">
+                <td><isprint value="${paymentProduct.id}" formatter="#" /></td>
+                <td>${paymentProduct.name}</td>
+                <td>${paymentProduct.isShown}</td>
+                <td><a href="javascript: void(0);" class="btn_edit_payment_product">${Resource.msg('paymentproducts.product.edit', 'worldlinebm', null)}</a></td>
+            </tr>
+        </isloop>
+    </table>
+</div>
+
+</isdecorate>

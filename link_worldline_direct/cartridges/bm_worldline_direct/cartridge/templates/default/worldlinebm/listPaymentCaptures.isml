@@ -1,0 +1,53 @@
+<isscript>var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');</isscript> 
+<isif condition="${pdict.paymentCaptures.length > 0}">
+    <table>
+        <tr>
+            <th>${Resource.msg('detailsdialog.captures.id', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.captures.amount', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.captures.acquiredamount', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.captures.currencycode', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.captures.status', 'worldlinebm', null)}</th>
+            <th>
+                <a class="btn-refresh" href="javascript: void(0);"><span class="fa fa-refresh"></span></a>
+            </th>
+        </tr>
+
+        <isloop items="${pdict.paymentCaptures}" var="paymentCapture">
+            <tr>
+                <td>${paymentCapture.id}</td>
+                <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(paymentCapture.captureOutput.amountOfMoney.amount, paymentCapture.captureOutput.amountOfMoney.currencyCode).getValue()}" style="DECIMAL" /></td>
+                <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(paymentCapture.captureOutput.acquiredAmount.amount, paymentCapture.captureOutput.amountOfMoney.currencyCode).getValue()}" style="DECIMAL" /></td>
+                <td>${paymentCapture.captureOutput.amountOfMoney.currencyCode}</td>
+                <td>${paymentCapture.status} / ${paymentCapture.statusOutput.statusCode}</td>
+                <td></td>
+            </tr>
+        </isloop>
+    </table>
+<iselse>
+    <span class="no-results">
+        <isif condition="${pdict.capturedAmount > 0}">
+            ${Resource.msg('detailsdialog.captures.capturedwhenplaced', 'worldlinebm', null)}
+        <iselse>
+            ${Resource.msg('detailsdialog.captures.noresults', 'worldlinebm', null)}
+        </isif>
+    </span>
+</isif>
+
+<div class="payment_dialog_form js_payment_dialog_form">
+    <h3>
+        ${Resource.msg('detailsdialog.captures.addnew', 'worldlinebm', null)}
+    </h3>
+
+    <hr />
+
+    <label for="ing_amount" class="text_label">${Resource.msg('detailsdialog.paymentdetails.inputamount', 'worldlinebm', null)}</label>
+    <input type="number" id="ing_amount" class="ing_amount" value="<isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.capturableAmount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode).getValue() }" style="DECIMAL" />" ${pdict.capturableAmount === 0 ? "disabled" : ""} />
+
+    <isprint value="${pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode}" />
+
+    <button type="button" class="btn_capture js_btn_capture" ${pdict.capturableAmount === 0 ? "disabled" : ""}>
+        ${Resource.msg('detailsdialog.paymentdetails.btncapture', 'worldlinebm', null)}
+    </button>
+
+</div>
+

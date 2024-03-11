@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="worldlineDirectMerchantID">
+                <display-name xml:lang="x-default">Merchant ID</display-name>
+                <description xml:lang="x-default">Merchant ID for Worldline-Direct platform</description>
+                <description xml:lang="de">Händler-ID/PSPID für die Worldline-Direct-Plattform</description>
+                <description xml:lang="es">ID/PSPID del comerciante para la plataforma de Worldline-Direct</description>
+                <description xml:lang="fr">Identifiant du marchand / PSPID pour la plateforme Worldline-Direct</description>
+                <description xml:lang="it">ID commerciante/PSPID per la piattaforma Worldline-Direct</description>
+                <description xml:lang="nl">Handelaars-id / PSPID voor het Worldline-Direct-platform</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectOperationCode">
+                <display-name xml:lang="x-default">Operation code</display-name>
+                <description xml:lang="x-default">The operation code will be valid for all transactions.</description>
+                <description xml:lang="de">Der Opcode ist für alle Transaktionen gültig</description>
+                <description xml:lang="es">El código de operación será válido para todas las transacciones</description>
+                <description xml:lang="fr">Le code d’opération sera valable pour toutes les transactions</description>
+                <description xml:lang="it">Il codice operazione sarà valido per tutte le transazioni</description>
+                <description xml:lang="nl">De bewerkingscode is geldig voor alle transacties</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorization</display>
+                        <value>FINAL_AUTHORIZATION</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Sale</display>
+                        <value>SALE</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectCheckoutType">
+                <display-name xml:lang="x-default">Checkout type</display-name>
+                <description xml:lang="x-default">Checkout type for card payments: Hosted Checkout Page (Redirect) OR Hosted Tokenization Page (iFrame)</description>
+                <description xml:lang="de">Bestellvorgangsart für Kartenzahlungen: Hosted Checkout Page (Weiterleitung) ODER Hosted Tokenization Page (iFrame)</description>
+                <description xml:lang="es">Tipo de pago para pagos con tarjeta: Hosted Checkout Page (Redirect) O BIEN Hosted Tokenization Page (iFrame)</description>
+                <description xml:lang="fr">Type de passage de la commande pour les paiements par carte : Hosted Checkout Page (Redirection) OU Hosted Tokenization Page (page de tockenisation hébergée) (iFrame)</description>
+                <description xml:lang="it">Tipo check-out per i pagamenti con carta: Hosted Checkout Page (Redirect) O Hosted Tokenization Page (iFrame)</description>
+                <description xml:lang="nl">Type afrekening voor creditcardbetalingen: Hosted Checkout-pagina (doorverwijzing) OF Hosted Tokenization-pagina (iFrame)</description>
+                <type>enum-of-int</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Hosted Checkout Page</display>
+                        <value>1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Hosted Tokenization Page</display>
+                        <value>2</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectCheckoutSendLineItemPrices">
+                <display-name xml:lang="x-default">Send line item prices to the API</display-name>
+                <display-name xml:lang="it">Invia riga prezzi articolo all’API</display-name>
+                <display-name xml:lang="de">Einzelpostenpreise an API senden</display-name>
+                <display-name xml:lang="fr">Envoyer le prix des postes à l’API</display-name>
+                <display-name xml:lang="nl">Stuur artikelprijzen van de regel naar de API</display-name>
+                <display-name xml:lang="es">Enviar los precios de las partidas a la API</display-name>
+                <description xml:lang="x-default">If this is not enabled, payment methods Oney and Klarna will not be available.</description>
+                <description xml:lang="it">Se questo non è abilitato, i metodi di pagamento Oney3x-4x e Klarna non saranno disponibili.</description>
+                <description xml:lang="de">Wenn dies nicht aktiviert ist, sind die Zahlungsarten Oney3x-4x und Klarna nicht verfügbar.</description>
+                <description xml:lang="fr">Si cette option n’est pas activée, les modes de paiement Oney3x-4x et Klarna ne seront pas disponibles.</description>
+                <description xml:lang="nl">Als dit niet is ingeschakeld, zijn betaalmethoden Oney3x-4x en Klarna niet beschikbaar.</description>
+                <description xml:lang="es">Si esta opción no está habilitada, los métodos de pago Oney3x-4x y Klarna no estarán disponibles.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+            </attribute-definition>
+
+            <attribute-definition attribute-id="worldlineDirect3DSEnforceSCA">
+                <display-name xml:lang="x-default">Enforce Strong Customer Authentication</display-name>
+                <description xml:lang="x-default"></description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirect3DSExemption">
+                <display-name xml:lang="x-default">Exemption for transactions under 30 EUR</display-name>
+                <description xml:lang="x-default">When enabled, merchants are liable in case of fraud for transactions below €30.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectApplySurcharge">
+                <display-name xml:lang="x-default">Apply surcharge</display-name>
+                <description xml:lang="x-default">Surcharge only applies outside of the EU and requires a certain configuration for your Worldline Merchant Account.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WORLDLINE_DIRECT">
+                <display-name xml:lang="x-default">Worldline-Direct: Shared Config</display-name>
+                <attribute attribute-id="worldlineDirectMerchantID"/>
+                <attribute attribute-id="worldlineDirectOperationCode"/>
+                <attribute attribute-id="worldlineDirectCheckoutType"/>
+                <attribute attribute-id="worldlineDirect3DSEnforceSCA"/>
+                <attribute attribute-id="worldlineDirect3DSExemption"/>
+                <attribute attribute-id="worldlineDirectApplySurcharge"/>
+                <attribute attribute-id="worldlineDirectCheckoutSendLineItemPrices"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

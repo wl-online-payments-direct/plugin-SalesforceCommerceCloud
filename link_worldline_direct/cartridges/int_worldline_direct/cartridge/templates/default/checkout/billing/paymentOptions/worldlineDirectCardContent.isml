@@ -1,0 +1,27 @@
+<div class="tab-pane ${paymentOption.ID}-content ${pdict.selectedPaymentMethod === paymentOption.ID ? 'active' : ''}" id="${paymentOption.ID}-content" role="tabpanel">
+
+    <link rel="preload" id="WorldlineTokenizerScriptUrl" href="${dw.system.Site.getCurrent().getCustomPreferenceValue('worldlineDirectHTJS')}" as="script" />
+
+    <isinclude template="checkout/billing/paymentOptions/worldlineDirectSavedCardsList" />
+
+    <div id="HostedTokenizationDiv" data-url="${URLUtils.url('WorldlineDirect-HTPSession')}"></div>
+
+    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('worldlineDirectApplySurcharge')}">
+        <isprint value="${Resource.msg('worldline.checkout.surcharge.message','worldlineDirect', null)}"/>
+    </isif>
+
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="${paymentOption.ID}"
+        >
+
+        <!--- Worldline specific data  --->
+        <input type="hidden" class="form-control"
+        	id="HostedTokenizationSessionID"
+            name="${pdict.forms.billingForm.worldlineDirectFields.hostedCheckoutId.htmlName}"
+            value=""
+        >
+
+    </fieldset>
+</div>

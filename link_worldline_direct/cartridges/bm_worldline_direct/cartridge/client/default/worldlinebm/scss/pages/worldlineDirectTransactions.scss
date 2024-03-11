@@ -1,0 +1,141 @@
+.js_worldlinebm_order_search_form {
+  &.hidden {
+    display: none;
+  }
+}
+
+.worldlinebm_content {
+  table {
+    width: 100%;
+
+    &.list-orders {
+      margin-top: 1em;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+  }
+
+  .btn_test_connection {
+    color: #84bd00;
+
+    &:hover:not(:disabled) {
+      color: #84bd00;
+    }
+  }
+
+  .support-email-block {
+    margin-top: 15px;
+  }
+}
+
+.worldlinebm_window_content {
+  table {
+    width: 100%;
+    border-spacing: 0;
+    font-size: 14px;
+
+    th {
+      font-weight: 700;
+    }
+
+    th,
+    td {
+      padding: 10px;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f2f2f2;
+    }
+  }
+
+  table.original_transaction {
+    margin-top: 30px;
+    border-top: 1px solid #efefef;
+
+    caption {
+      text-transform: uppercase;
+      font-size: 10px;
+      padding: 0 10px 3px;
+    }
+  }
+
+  table.payment_details {
+    td {
+      width: 25%;
+    }
+
+    td:nth-child(1),
+    td:nth-child(3) {
+      font-weight: bold;
+    }
+  }
+
+  .ing_amount {
+    width: 130px;
+  }
+
+  .btn_capture,
+  .btn_refund {
+    margin-left: 10px;
+    min-width: 130px;
+  }
+
+  .payment_dialog_form {
+    padding: 15px;
+    margin: 20px 0;
+
+    label {
+      cursor: pointer;
+
+      &.text_label {
+        font-size: 14px;
+        display: block;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .tab_headings {
+    margin-top: 30px;
+    padding: 0 10px;
+
+    li {
+      display: inline-block;
+
+      a {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #555;
+        text-decoration: none;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: #efefef;
+        border: 1px solid #efefef;
+
+        &:hover,
+        &.selected {
+          color: #333;
+          background-color: #fff;
+          border-bottom: 1px solid #fff;
+        }
+      }
+    }
+  }
+
+  .tab_contents {
+    margin: 0 10px 10px;
+    padding-top: 10px;
+    border-left: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-height: 300px;
+    overflow: auto;
+
+    .no-results {
+      display: inline-block;
+      padding: 20px;
+    }
+  }
+}

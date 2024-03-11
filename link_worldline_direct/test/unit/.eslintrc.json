@@ -1,0 +1,15 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "require-jsdoc": "off",
+    "max-len": "off",
+    "quote-props": "off",
+    "no-new": "off",
+    "valid-jsdoc": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  }
+}

@@ -1,0 +1,54 @@
+<isif condition="${!empty(pdict.PagingModel) && !empty(pdict.PagingModel.pageElements)}">
+    <table class="list-orders">
+        <tr>
+            <td class="table_header s">${Resource.msg('search.grid.number', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.date', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.created', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.registration', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.customer', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.email', 'worldlinebm', null)}</td>
+            <td class="table_header s left" nowrap="nowrap">${Resource.msg('search.grid.total', 'worldlinebm', null)}</td>
+            <td class="table_header s left" nowrap="nowrap">${Resource.msg('search.grid.worldlineamount', 'worldlinebm', null)}</td>
+            <td class="table_header s left" nowrap="nowrap" colspan="2">${Resource.msg('search.grid.statuscategory', 'worldlinebm', null)}</td>
+        </tr>
+
+        <isloop items="${pdict.PagingModel.pageElements}" var="order">
+            <tr>
+                <td class="table_detail s" nowrap="nowrap">
+                    <a href="${URLUtils.url('ViewOrder_52-FindByNumber', 'OrderNo', order.orderNo)}" target="_blank">${order.orderNo}</a>
+                </td>
+                <td class="table_detail s" nowrap="nowrap">
+                    <isprint value="${order.orderDate}"/>
+                </td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.createdBy}"/></td>
+                <isif condition="${typeof order.isRegestered === 'boolean'}">
+                    <td class="table_detail s" nowrap="nowrap">
+                        <isprint value="${order.isRegestered ? Resource.msg('search.grid.registration.registered', 'worldlinebm', null) : Resource.msg('search.grid.registration.unregistered', 'worldlinebm', null)}"/>
+                    </td>
+                <iselse>
+                    <td class="table_detail s" nowrap="nowrap"><isprint value="${order.isRegestered}"/></td>
+                </isif>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.customer}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.email}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.orderTotal}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.worldlineAmount}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.statusCategory}"/></td>
+                <td class="table_detail s" nowrap="nowrap">
+                    <a class="js_worldline_ajax_dialog"
+                        href="${URLUtils.url('WorldlineDirectAdmin-PaymentDialog', 'worldlinePaymentId', order.worldlineDirectTransactionID, 'orderNo', order.orderNo, 'ot', order.orderToken)}"
+                        data-dialog-id="payments-dialog"
+                    >
+                        ${Resource.msg('search.grid.showdetails', 'worldlinebm', null)}
+                    </a>
+                </td>
+            </tr>
+        </isloop>
+
+    </table>
+
+    <isworldlinepagination paginationparameters="${pdict.paginationParameters}"/>
+<iselse>
+
+    <div class="table_detail w e s">${Resource.msg('transactions.emptysearch', 'worldlinebm', null)}</div>
+
+</isif>

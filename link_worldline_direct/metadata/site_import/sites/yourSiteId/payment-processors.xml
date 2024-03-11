@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-processors xmlns="http://www.demandware.com/xml/impex/paymentprocessor/2007-03-31">
+    
+    <payment-processor processor-id="WORLDLINE_DIRECT_CREDIT">
+        <description xml:lang="x-default">Worldline-Direct Hosted Tokenisation payment processor. Uses the "create payment" API.</description>
+        <description xml:lang="it">Elaboratore di pagamento Worldline Online Payments Hosted Tokenisation. Utilizza l’API “crea pagamento”.</description>
+        <description xml:lang="de">Zahlungsverarbeiter Worldline Online Payments Hosted Tokenisation. Nutzt die API „Zahlung erstellen“.</description>
+        <description xml:lang="fr">Opérateur de paiement Worldline Online Payments Hosted Tokenisation. Utilise l’API « create payment ».</description>
+        <description xml:lang="nl">Worldline Online Payments Hosted Tokenisation betalingsverwerker. Gebruikt de API ‘betaling aanmaken’.</description>
+        <description xml:lang="es">Procesador de pagos Worldline Online Payments Hosted Tokenisation. Utiliza la API «crear pago».</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="WORLDLINE_DIRECT_REDIRECT">
+        <description xml:lang="x-default">Worldline-Direct Hosted Checkout payment processor. Uses the "create hosted checkout" API.</description>
+        <description xml:lang="it">Elaboratore di pagamento Worldline Online Payments Hosted Checkout. Utilizza l’API “crea check-out in hosting”.</description>
+        <description xml:lang="de">Zahlungsverarbeiter Worldline Online Payments Hosted Checkout. Nutzt die API „Gehosteten Check-out erstellen“.</description>
+        <description xml:lang="fr">Opérateur de paiement Worldline Online Payments Hosted Checkout. Utilise l’API « create hosted checkout ».</description>
+        <description xml:lang="nl">Worldline Online Payments Hosted Checkout betalingsverwerker. Gebruikt de API ‘hosted checkout aanmaken’.</description>
+        <description xml:lang="es">Procesador de pagos Worldline Online Payments Hosted Checkout. Utiliza la API «crear pago alojado».</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+    
+    <payment-processor processor-id="WORLDLINE_DIRECT_CREDIT_REDIRECT">
+        <description xml:lang="x-default">The payment is created using the "create payment API" and not "create hosted checkout". The handing is then done as in "redirect" based payments. Used for the iDeal payment product.</description>
+        <description xml:lang="it">Il pagamento viene creato utilizzando l’API “crea pagamento” e non “crea check-out in hosting”. La gestione avviene poi come nei pagamenti basati su “reindirizza". Usato per il prodotto di pagamento iDeal.</description>
+        <description xml:lang="de">Die Zahlung wird mit der API „Zahlung erstellen“ erstellt und nicht mit „Gehosteten Checkout erstellen“. Dann erfolgt die Verarbeitung wie bei einer „weitergeleiteten“ Zahlung. Wird für das Zahlungsprodukt iDeal genutzt.</description>
+        <description xml:lang="fr">Le paiement est créé via l’API « create payment » et non via l’API « create hosted checkout ». Le traitement s’effectue alors comme pour les paiements basés sur la « redirection ». Utilisé pour le produit de paiement iDEAL.</description>
+        <description xml:lang="nl">De betaling wordt aangemaakt met de API ‘betaling aanmaken’ en niet met ‘hosted checkout aanmaken’. De verwerking wordt uitgevoerd zoals bij betalingen op basis van ‘doorverwijzing’. Gebruikt voor het betaalproduct iDeal.</description>
+        <description xml:lang="es">El pago se crea utilizando la API «crear pago» y no «crear pago alojado». La tramitación se realiza como en los pagos basados en «redireccionar». Se utiliza para el producto de pago iDeal.</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+</payment-processors>

@@ -1,0 +1,134 @@
+{
+    "include": {
+        "data": "./test/acceptance/metadata.json",
+        "homePage": "./test/acceptance/pages/home.page.js",
+        "productPage": "./test/acceptance/pages/product.page.js",
+        "cartPage": "./test/acceptance/pages/cart.page.js",
+        "checkoutPage": "./test/acceptance/pages/checkout.page.js",
+        "worldlineHostedPage": "./test/acceptance/pages/worldlinehosted.page.js",
+        "loginPage": "./test/acceptance/pages/login.page.js"
+    },
+    "gherkin_steps": [
+        "./test/acceptance/steps/homePage/addProductToCart.steps.js",
+        "./test/acceptance/steps/homePage/landHomePage.steps.js",
+        "./test/acceptance/steps/loginPage/loginUser.steps.js",
+        "./test/acceptance/steps/testSuites/happyPath.steps.js"
+    ],
+
+    "user1": {
+        "fName": "Test1",
+        "lName": "User1",
+        "address1": "Agoraweg 11-15",
+        "country": "United Kingdom",
+        "state": "Flevoland",
+        "stateAbr": "FL",
+        "city": "London",
+        "zip": "SW42 4RG",
+        "phone": "01222 555 555",
+        "email": "testuser1@demandware.com",
+        "password": "Test123!"
+    },
+    "account": {
+        "accountPage": "/on/demandware.store/Sites-RefArchGlobal-Site/en_GB/Account-Show",
+        "name": "John Smith",
+        "addressTitle": "Apartment",
+        "addressHome": "Home",
+        "newPassword": "Test123!",
+        "deletePaymentModalText": "Delete Payment?"
+    },
+    "product": {
+        "name": "Elbow Sleeve Ribbed Sweater",
+        "quantity": "2",
+        "editCartQuantity": "1",
+        "itemPrice": "$65.99",
+        "totalItemPrice": "$131.98",
+        "shipping": "$7.99",
+        "tax": "$7.00",
+        "estimatedTotal": "$146.97"
+    },
+    "login": {
+        "loginPage": "/on/demandware.store/Sites-RefArchGlobal-Site/en_GB/Account-Show?registration=false",
+        "homePage": "/on/demandware.store/Sites-RefArchGlobal-Site/en_GB/Home-Show",
+        "email": "testuser1@demandware.com",
+        "password": "Test123!",
+        "fName": "John",
+        "lName": "Smith",
+        "phone": "781-555-1212",
+        "newRegEmail": "jsmith@email.com",
+        "loginHomeScreen": "span.user-message",
+        "emailLogin": "#login-form-email",
+        "passwordLogin": "#login-form-password",
+        "primaryButton": ".btn.btn-block.btn-primary",
+        "registrationError": "Username is invalid."
+    },
+    "checkout": {
+        "fName": "Test1",
+        "lName": "User1",
+        "address1": "Agoraweg 11-15",
+        "country": "United Kingdom",
+        "state": "Flevoland",
+        "stateAbr": "FL",
+        "city": "London",
+        "zip": "SW42 4RG",
+        "phone": "01222 555 555",
+        "email": "testuser1@demandware.com",
+        "cards": {
+            "visa": {
+                "ccNum": "4000000000000002",
+                "ccSecCode": "555",
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": true
+            },
+            "amex": {
+                "ccNum": "374111111111111",
+                "ccSecCode": "5555",
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": false
+            },
+            "master": {
+                "ccNum": "5399999999999999",
+                "ccSecCode": "555",
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": false
+            },
+            "dinersClub": {
+                "ccNum": "36255695580017",
+                "ccSecCode": "555",
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": false
+            },
+            "jcb": {
+                "ccNum": "3569990010095841",
+                "ccSecCode": "555",
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": false
+            },
+            "maestro": {
+                "ccNum": "6771798021000008",
+                "ccSecCode": null,
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": false
+            },
+            "bcmc": {
+                "ccNum": "67030000000000003",
+                "ccSecCode": null,
+                "expMonth": "03",
+                "expYear": "2027",
+                "ccExpDate": "3/2027",
+                "is3DSecure": true
+            }
+        }
+    }
+}

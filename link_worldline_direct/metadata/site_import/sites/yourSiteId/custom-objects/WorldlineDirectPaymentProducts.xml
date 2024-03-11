@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="WorldlineDirectPaymentProducts" object-id="entries">
+        <object-attribute attribute-id="entriesJSON">{
+    "1": [
+        "Visa",
+        true
+    ],
+    "2": [
+        "American Express",
+        true
+    ],
+    "3": [
+        "Mastercard",
+        true
+    ],
+    "861": [
+        "Alipay",
+        true
+    ],
+    "302": [
+        "Apple Pay",
+        true
+    ],
+    "3012": [
+        "Bancontact",
+        true
+    ],
+    "5001": [
+        "Bizum",
+        true
+    ],
+    "5100": [
+        "Cpay",
+        true
+    ],
+    "132": [
+        "Diners Club",
+        true
+    ],
+    "320": [
+        "Google Pay",
+        true
+    ],
+    "809": [
+        "iDEAL",
+        true
+    ],
+    "3112": [
+        "Illicado",
+        true
+    ],
+    "5700": [
+        "Intersolve",
+        true
+    ],
+    "125": [
+        "JCB",
+        true
+    ],
+    "3301": [
+        "Klarna Pay Now",
+        true
+    ],
+    "3302": [
+        "Klarna Pay Later",
+        true
+    ],
+    "117": [
+        "Maestro",
+        true
+    ],
+    "5402": [
+        "Mealvouchers",
+        true
+    ],
+    "5500": [
+        "Multibanco",
+        true
+    ],
+    "5110": [
+        "Oney 3x-4x",
+        true
+    ],
+    "5125": [
+        "Oney Financement long",
+        true
+    ],
+    "5600": [
+        "OneyBrandedGiftCard",
+        true
+    ],
+    "840": [
+        "Paypal",
+        true
+    ],
+    "771": [
+        "SEPA Direct Debit",
+        true
+    ],
+    "863": [
+        "WeChat Pay",
+        true
+    ]
+}</object-attribute>
+    </custom-object>
+
+</custom-objects>

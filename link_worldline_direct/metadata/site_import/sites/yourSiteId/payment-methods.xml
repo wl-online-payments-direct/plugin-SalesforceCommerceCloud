@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-settings xmlns="http://www.demandware.com/xml/impex/paymentsettings/2009-09-15">
+
+    <payment-method method-id="WORLDLINE_DIRECT_CARD">
+        <name xml:lang="x-default">Credit Card</name>
+        <name xml:lang="de">Kartenzahlung</name>
+        <name xml:lang="es">Pagos con tarjeta</name>
+        <name xml:lang="fr">Paiements par carte</name>
+        <name xml:lang="it">Pagamenti con carta</name>
+        <name xml:lang="nl">Creditcardbetalingen</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>WORLDLINE_DIRECT_CREDIT</processor-id>
+    </payment-method>
+
+    <payment-method method-id="WORLDLINE_DIRECT_REDIRECT">
+        <name xml:lang="x-default">Worldline Redirect Payment Methods</name>
+        <name xml:lang="de">Andere Zahlungsarten</name>
+        <name xml:lang="es">Métodos de pago alternativos</name>
+        <name xml:lang="fr">Méthodes de paiement alternatives</name>
+        <name xml:lang="it">Metodi di pagamento alternati</name>
+        <name xml:lang="nl">Alternatieve betalingsmethoden</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>WORLDLINE_DIRECT_REDIRECT</processor-id>
+    </payment-method>
+
+    <payment-method method-id="WORLDLINE_DIRECT_CREDIT_REDIRECT">
+        <name xml:lang="x-default">Worldline Credit Redirect Payment Methods</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>WORLDLINE_DIRECT_CREDIT_REDIRECT</processor-id>
+    </payment-method>
+
+</payment-settings>

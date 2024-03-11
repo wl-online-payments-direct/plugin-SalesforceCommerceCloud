@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="WorldlineCaptureAuthorizedPayments" priority="0">
+        <description>A cronjob that captures the payments that are awaiting capture. It can be configured to either capture all awaiting payments or capture only the payments that have been made more than X days ago (using the worldlineDirectCaptureProcedureDelay parameter).</description>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_24">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_24">
+                <step step-id="WorldlineCaptureAuthorizedPayments" type="custom.worldlineCaptureAuthorizedPayments" enforce-restart="false">
+                    <description/>
+                    <parameters/>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-06-10Z</date-from>
+                    <start-time>03:00:00.000Z</start-time>
+                    <interval>1d</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="WorldlinePaymentStatusCheck" priority="0">
+        <description>Runs through orders that are in status "CREATED" or have a pending payment and updates their status using Worldline's API.</description>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_24">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_24">
+                <step step-id="WorldlinePaymentStatusCheck" type="custom.worldlinePaymentStatusCheck" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="cancelUncofirmedOrderAfterHours">30</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-06-10Z</date-from>
+                    <start-time>16:00:00.000Z</start-time>
+                    <interval>1h</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="WorldlineProcessWebhooks" priority="0">
+        <description>Takes the webhooks stored in the WorldlineDirectWebhooks custom object and processes them in a first come, first served manner.</description>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_45">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_45">
+                <step step-id="WorldlineProcessWebhooks" type="custom.worldlineProcessWebhooks" enforce-restart="false">
+                    <description/>
+                    <parameters/>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-06-10Z</date-from>
+                    <start-time>16:00:00.000Z</start-time>
+                    <interval>5m</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+</jobs>

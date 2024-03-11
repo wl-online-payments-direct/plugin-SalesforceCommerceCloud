@@ -1,0 +1,8 @@
+<isset name="worldlineDirectConstants" value="${require('*/cartridge/scripts/worldline/direct/constants')}" scope="page"/>
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
+    <isif condition="${paymentOption.ID === 'CREDIT_CARD'}">
+        <isinclude template="checkout/billing/paymentOptions/creditCardTab" />
+    <iselseif condition="${paymentOption.ID.indexOf(worldlineDirectConstants.PAYMENT_METHOD_PREFIX) > -1}">
+        <isinclude template="checkout/billing/paymentOptions/worldlineDirectPaymentTab" />
+    </isif>
+</isloop>

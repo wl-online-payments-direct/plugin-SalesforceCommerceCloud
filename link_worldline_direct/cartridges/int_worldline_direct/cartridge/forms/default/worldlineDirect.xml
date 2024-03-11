@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+    <field formid="paymentProductID" type="string" mandatory="false" />
+    <field formid="paymentProductName" type="string" mandatory="false" />
+    <field formid="paymentMethod" type="string" mandatory="false" />
+    <field formid="paymentDirectoryIssuerID" type="string" mandatory="false" />
+    <field formid="browserData" type="string" mandatory="false" />
+    <field formid="hostedCheckoutId" type="string" mandatory="false" />
+    <field formid="savedCardToken" type="string" mandatory="false" />
+
+</form>

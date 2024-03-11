@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <form method="POST" action="${URLUtils.https('Order-Confirm').toString()}">
+            <input type="hidden" name="orderID" value="<isprint value="${pdict.orderID}" />" />
+            <input type="hidden" name="orderToken" value="<isprint value="${pdict.orderToken}" />" />
+        </form>
+
+        <script>
+        document.forms[0].submit();
+        </script>
+    </body>
+</html>

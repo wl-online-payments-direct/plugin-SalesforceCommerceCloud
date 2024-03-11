@@ -1,0 +1,65 @@
+<isscript>var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');</isscript> 
+<table class="payment_details">
+    <tr>
+        <td>${Resource.msg('detailsdialog.paymentdetails.orderno', 'worldlinebm', null)}</td>
+        <td><a href="${URLUtils.url('ViewOrder_52-FindByNumber', 'OrderNo', pdict.order.orderNo)}" target="_blank">${pdict.order.orderNo}</a></td>
+
+        <td>${Resource.msg('detailsdialog.paymentdetails.ordertotal', 'worldlinebm', null)}</td>
+        <td><isprint value="${pdict.order.getTotalGrossPrice()}" style="MONEY_LONG" /></td>
+    </tr>
+    <tr>
+        <td>${Resource.msg('detailsdialog.paymentdetails.orderstatus', 'worldlinebm', null)}</td>
+        <td>${pdict.order.getStatus()}</td>
+
+        <td>
+            ${Resource.msg('detailsdialog.paymentdetails.transactionamount', 'worldlinebm', null)}
+            <isif condition="${'surchargeSpecificOutput' in pdict.paymentDetailsResponse.paymentOutput &&  pdict.paymentDetailsResponse.paymentOutput.surchargeSpecificOutput.surchargeAmount.amount > 0}">
+                <br/><br/>${Resource.msg('detailsdialog.paymentdetails.surchargeamount', 'worldlinebm', null)}
+            </isif>
+        </td>
+        <td>
+             <isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.amount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode)}" style="MONEY_LONG" />
+            <isif condition="${'surchargeSpecificOutput' in pdict.paymentDetailsResponse.paymentOutput &&  pdict.paymentDetailsResponse.paymentOutput.surchargeSpecificOutput.surchargeAmount.amount > 0}">
+                <br/><br/><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.paymentDetailsResponse.paymentOutput.surchargeSpecificOutput.surchargeAmount.amount, pdict.paymentDetailsResponse.paymentOutput.surchargeSpecificOutput.surchargeAmount.currencyCode)}" style="MONEY_LONG" />
+            </isif>
+        </td>
+    </tr>
+    <tr>
+        <td>${Resource.msg('detailsdialog.paymentdetails.worldlinepaymentid', 'worldlinebm', null)}</td>
+        <td>${pdict.order.custom.worldlineDirectTransactionID}</td>
+
+        <td>${Resource.msg('detailsdialog.paymentdetails.capturedamount', 'worldlinebm', null)}</td>
+        <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.capturedAmount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode)}" style="MONEY_LONG" /></td>
+    </tr>
+    <tr>
+        <td>${Resource.msg('detailsdialog.paymentdetails.paymentstatus', 'worldlinebm', null)}</td>
+        <td>${pdict.order.custom.worldlineDirectStatusCategory.value}</td>
+
+        <td>${Resource.msg('detailsdialog.paymentdetails.refundedamount', 'worldlinebm', null)}</td>
+        <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.refundedAmount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode)}" style="MONEY_LONG" /></td>
+    </tr>
+</table>
+
+<table class="original_transaction">
+    <caption>${Resource.msg('detailsdialog.paymentdetails.original.title', 'worldlinebm', null)}</caption>
+    <tr>
+        <th>${Resource.msg('detailsdialog.paymentdetails.original.id', 'worldlinebm', null)}</th>
+        <th>${Resource.msg('detailsdialog.paymentdetails.original.amount', 'worldlinebm', null)}</th>
+        <th>${Resource.msg('detailsdialog.paymentdetails.original.acquiredamount', 'worldlinebm', null)}</th>
+        <th>${Resource.msg('detailsdialog.paymentdetails.original.currencycode', 'worldlinebm', null)}</th>
+        <th>${Resource.msg('detailsdialog.paymentdetails.original.status', 'worldlinebm', null)}</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <td>${pdict.paymentDetailsResponse.id}</td>
+        <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.amount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode).getValue()}" style="DECIMAL" /></td>
+        <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.paymentDetailsResponse.paymentOutput.acquiredAmount.amount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode).getValue()}" style="DECIMAL" /></td>
+        <td>${pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode}</td>
+        <td><isprint value="${pdict.paymentDetailsResponse.status}" /> / <isprint value="${pdict.paymentDetailsResponse.statusOutput.statusCode}" /></td>
+        <td>
+            <button type="button" class="btn_cancel js_btn_cancel">
+                ${Resource.msg('detailsdialog.paymentdetails.btncancel', 'worldlinebm', null)}
+            </button>
+        </td>
+    </tr>
+</table>

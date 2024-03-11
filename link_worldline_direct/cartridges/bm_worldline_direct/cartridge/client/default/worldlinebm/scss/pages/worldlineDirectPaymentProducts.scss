@@ -1,0 +1,44 @@
+.page.payment_products {
+  table.payment_product_list {
+    max-width: 600px;
+
+    th {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    tr {
+      &:nth-child(odd) td {
+        background-color: #f5f5f5;
+      }
+
+      &:hover td {
+        background-color: #eee;
+      }
+
+      th,
+      td {
+        padding: 3px 10px;
+      }
+
+      &[data-isshown="false"] td {
+        background-color: rgb(255, 210, 210);
+      }
+    }
+  }
+}
+
+.worldlinebm_window_content.payment_product_dialog {
+  .x-window-body {
+    padding: 25px;
+
+    input[type="text"],
+    input[type="number"] {
+      width: 300px;
+    }
+
+    .actions {
+      margin-top: 20px;
+    }
+  }
+}

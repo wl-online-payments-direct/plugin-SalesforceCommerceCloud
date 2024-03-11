@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="WorldlineDirectPaymentProducts">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="ID">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="entriesJSON">
+                <display-name xml:lang="x-default">Entries JSON</display-name>
+                <display-name xml:lang="it">Voci JSON</display-name>
+                <display-name xml:lang="de">Eingaben JSON</display-name>
+                <display-name xml:lang="fr">Entrées JSON</display-name>
+                <display-name xml:lang="nl">Items JSON</display-name>
+                <display-name xml:lang="es">Entradas JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="general">
+                <display-name xml:lang="x-default">General</display-name>
+                <display-name xml:lang="it">Generale</display-name>
+                <display-name xml:lang="de">Allgemeines</display-name>
+                <display-name xml:lang="fr">Général</display-name>
+                <display-name xml:lang="nl">Algemeen</display-name>
+                <display-name xml:lang="es">General</display-name>
+                <attribute attribute-id="ID"/>
+                <attribute attribute-id="entriesJSON"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+</metadata>

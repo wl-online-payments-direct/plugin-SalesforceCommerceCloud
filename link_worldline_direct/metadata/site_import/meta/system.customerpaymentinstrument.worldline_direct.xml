@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="CustomerPaymentInstrument">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="worldlineDirectPaymentProductID">
+                <display-name xml:lang="x-default">Payment Product ID</display-name>
+                <display-name xml:lang="de">Zahlungsprodukt-ID</display-name>
+                <display-name xml:lang="es">ID del producto de pago</display-name>
+                <display-name xml:lang="fr">Identifiant du produit de paiement</display-name>
+                <display-name xml:lang="it">ID prodotto del pagamento</display-name>
+                <display-name xml:lang="nl">ID betalingsproduct</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectPaymentProductName">
+                <display-name xml:lang="x-default">Payment Product Name</display-name>
+                <display-name xml:lang="de">Zahlungsproduktname</display-name>
+                <display-name xml:lang="es">Nombre del producto de pago</display-name>
+                <display-name xml:lang="fr">Nom du produit de paiement</display-name>
+                <display-name xml:lang="it">Nome prodotto del pagamento</display-name>
+                <display-name xml:lang="nl">Naam betalingsproduct</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectPaymentMethod">
+                <display-name xml:lang="x-default">Payment Method</display-name>
+                <display-name xml:lang="de">Zahlungsart</display-name>
+                <display-name xml:lang="es">Método de pago</display-name>
+                <display-name xml:lang="fr">Méthode de paiement</display-name>
+                <display-name xml:lang="it">Metodo di pagamento</display-name>
+                <display-name xml:lang="nl">Betalingsmethode</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectCreditCardAlias">
+                <display-name xml:lang="x-default">Credit Card Alias</display-name>
+                <display-name xml:lang="it">Alias carta di credito</display-name>
+                <display-name xml:lang="de">Kreditkarten-Alias</display-name>
+                <display-name xml:lang="fr">Alias de carte de crédit</display-name>
+                <display-name xml:lang="nl">Creditcardalias</display-name>
+                <display-name xml:lang="es">Alias de la tarjeta de crédito</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WORLDLINE_DIRECT">
+                <display-name xml:lang="x-default">Worldline-Direct</display-name>
+                <attribute attribute-id="worldlineDirectPaymentMethod"/>
+                <attribute attribute-id="worldlineDirectPaymentProductID"/>
+                <attribute attribute-id="worldlineDirectPaymentProductName"/>
+                <attribute attribute-id="worldlineDirectCreditCardAlias"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

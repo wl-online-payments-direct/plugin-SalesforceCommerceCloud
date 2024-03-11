@@ -1,0 +1,68 @@
+<isif condition="${pdict.customer.registeredUser && pdict.customer.customerPaymentInstruments.length > 0}">
+    <fieldset class="credit-card-selector-block">
+        <table>
+            <caption>${Resource.msg('heading.worldlineDirect.saved.card', 'worldlineDirect', null)}</caption>
+            <tbody>
+                <tr>
+                    <th class="radioButton">&nbsp;</th>
+                    <th class="paymentProductName">&nbsp;</th>
+                    <th class="creditCardHolder">${Resource.msg('label.worldlineDirect.card.holder','worldlineDirect',null)}</th>
+                    <th class="maskedCreditCardNumber">&nbsp;</th>
+                    <th class="creditCardExpiration">${Resource.msg('label.worldlineDirect.card.expires','worldlineDirect',null)}</th>
+                </tr>
+
+            <isloop items="${pdict.customer.customerPaymentInstruments}" var="paymentInstrument" status="loopState">
+                <isif condition="${'worldline' in paymentInstrument && paymentInstrument.worldline.paymentMethod === 'card'}">
+                    <tr class="card-row">
+                        <td class="radioButton">
+                            <input type="radio" 
+                                name="worldlineDirectCardSeletor"
+                                id="worldlineDirectCardSeletor_${loopState.index}"
+                                value="${paymentInstrument.worldline.htpt}"
+                                data-worldlinepaymentproductid="${paymentInstrument.worldline.paymentProductID}"
+                                class="js-worldlineDirectCardSeletor" 
+                                <isif condition="${pdict.order.billing.payment.selectedPaymentInstruments && pdict.order.billing.payment.selectedPaymentInstruments[0] && pdict.order.billing.payment.selectedPaymentInstruments[0].savedCardToken === paymentInstrument.worldline.htpt}">checked</isif>
+                                />
+
+                            <isif condition="${pdict.order.billing.payment.worldlinePaymentProductLogos[paymentInstrument.worldline.paymentProductID] !== undefined}">
+                                <img src="${pdict.order.billing.payment.worldlinePaymentProductLogos[paymentInstrument.worldline.paymentProductID].logo}" alt="" class="logo" />
+                            </isif>
+                        </td>
+                        <td class="paymentProductName">
+                            ${paymentInstrument.worldline.paymentProductName}
+                        </td>
+                        <td class="creditCardHolder">
+                            ${paymentInstrument.creditCardHolder}
+                        </td>
+                        <td class="maskedCreditCardNumber">
+                            <span class="creditCardHolder">${paymentInstrument.creditCardHolder}</span>
+                            ${paymentInstrument.worldline.creditCardAlias}
+                        </td>
+                        <td class="creditCardExpiration">
+                            ${paymentInstrument.creditCardExpirationMonth}/${paymentInstrument.creditCardExpirationYear}
+                        </td>
+                    </tr>
+                </isif>
+            </isloop>
+
+                <tr class="card-row">
+                    <td colspan="5">
+                        <input type="radio" 
+                            name="worldlineDirectCardSeletor"
+                            id="worldlineDirectCardSeletor_another"
+                            value=""
+                            data-worldlinepaymentproductid=""
+                            class="js-worldlineDirectCardSeletor" 
+                            />
+
+                        <isif condition="${pdict.order.billing.payment.hostedTokenizationEnabled}">
+                            ${Resource.msg('label.worldlineDirect.saved.card.new', 'worldlineDirect', null)}
+                        <iselse>
+                            ${Resource.msg('label.worldlineDirect.saved.card.another', 'worldlineDirect', null)}
+                        </isif>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</isif>

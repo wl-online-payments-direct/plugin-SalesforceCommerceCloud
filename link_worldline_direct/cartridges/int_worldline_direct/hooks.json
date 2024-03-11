@@ -1,0 +1,28 @@
+{
+    "hooks": [
+        {
+            "name": "app.payment.processor.worldline_direct_credit",
+            "script": "./cartridge/scripts/hooks/payment/processor/worldline_direct_credit"
+        },
+        {
+            "name": "app.payment.processor.worldline_direct_redirect",
+            "script": "./cartridge/scripts/hooks/payment/processor/worldline_direct_redirect"
+        },
+        {
+            "name": "app.payment.processor.worldline_direct_credit_redirect",
+            "script": "./cartridge/scripts/hooks/payment/processor/worldline_direct_credit_redirect"
+        },
+        {
+            "name": "app.payment.form.processor.worldline_direct_redirect",
+            "script": "./cartridge/scripts/hooks/payment/processor/worldline_form_processor"
+        },
+        {
+            "name": "app.payment.form.processor.worldline_direct_credit",
+            "script": "./cartridge/scripts/hooks/payment/processor/worldline_form_processor"
+        },
+        {
+            "name": "app.payment.form.processor.worldline_direct_credit_redirect",
+            "script": "./cartridge/scripts/hooks/payment/processor/worldline_form_processor"
+        }
+    ]
+}

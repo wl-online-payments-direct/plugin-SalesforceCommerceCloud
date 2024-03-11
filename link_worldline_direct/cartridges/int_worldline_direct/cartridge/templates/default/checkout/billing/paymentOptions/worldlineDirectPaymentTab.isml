@@ -1,0 +1,14 @@
+<li class="nav-item" data-method-id="${paymentOption.ID}">
+    <a class="nav-link ${paymentOption.ID}-tab ${pdict.selectedPaymentMethod === paymentOption.ID ? 'active' : ''}" data-toggle="tab" href="${'#' + paymentOption.ID}-content" role="tab">
+    	<isif condition="${!empty(paymentOption.logo)}">
+	        <img class="credit-card-option"
+	                src="${paymentOption.logo}"
+	                height="32"
+	                alt="${paymentOption.name}"
+	                title="${paymentOption.name}"
+	        >
+	    <iselse>
+	    	<span>${paymentOption.name}</span>
+	    </isif>
+    </a>
+</li>

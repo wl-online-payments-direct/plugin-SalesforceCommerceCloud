@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	<field formid="stateCode" label="label.input.state" type="string" mandatory="true" binding="stateCode" missing-error="error.message.required" value-error="address.field.invalid">
+        <options>
+            <option optionid=""     label="resource.select"         value=""/>
+
+            <!-- Italian states -->
+            <option optionid="DR"   label="state.nl.DR" value="DR"/>
+            <option optionid="FL"   label="state.nl.FL" value="FL" />
+            <option optionid="FR"   label="state.nl.FR" value="FR" />
+            <option optionid="GE"   label="state.nl.GE" value="GE" />
+            <option optionid="GR"   label="state.nl.GR" value="GR" />
+            <option optionid="LI"   label="state.nl.LI" value="LI" />
+            <option optionid="NB"   label="state.nl.NB" value="NB" />
+            <option optionid="NH"   label="state.nl.NH" value="NH" />
+            <option optionid="OV"   label="state.nl.OV" value="OV" />
+            <option optionid="ZH"   label="state.nl.ZH" value="ZH" />
+            <option optionid="UT"   label="state.nl.UT" value="UT" />
+            <option optionid="ZE"   label="state.nl.ZE" value="ZE" />
+
+        </options>
+	</field>
+</form>

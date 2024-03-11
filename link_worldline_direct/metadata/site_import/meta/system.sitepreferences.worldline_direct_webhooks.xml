@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="worldlineDirectWebhooksKeyID">
+                <display-name xml:lang="x-default">Webhooks Key ID</display-name>
+                <description xml:lang="x-default">The webhooks key id that should be copied from Worldline's backoffice</description>
+                <description xml:lang="de">Die Webhooks-Schlüssel-ID, die aus dem Worldline Backoffice kopiert werden soll</description>
+                <description xml:lang="es">El ID de la clave de los webhooks que debe copiarse desde el Back Office de Worldline</description>
+                <description xml:lang="fr">L’identifiant de la clé webhooks qui doit être copié depuis le back office Worldline</description>
+                <description xml:lang="it">ID chiave Webhooks che dovrebbe essere copiato dal Back Office di Worldline</description>
+                <description xml:lang="nl">De sleutel-id voor Webhooks die uit Worldline's Backoffice moet worden gekopieerd</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectWebhooksKeySecret">
+                <display-name xml:lang="x-default">Webhooks Key Secret</display-name>
+                <description xml:lang="x-default">The webhooks key secret that should be copied from Worldline's backoffice</description>
+                <description xml:lang="de">Der Webhooks-Geheimschlüssel, der aus dem Worldline Backoffice kopiert werden soll</description>
+                <description xml:lang="es">El secreto de la clave de los webhooks que debe copiarse desde el Back Office de Worldline</description>
+                <description xml:lang="fr">Le secret de la clé webhooks qui doit être copié depuis le back office Worldline</description>
+                <description xml:lang="it">Segreto chiave Webhooks che dovrebbe essere copiato dal Back Office di Worldline</description>
+                <description xml:lang="nl">De sleutelgeheim voor Webhooks dat uit Worldline's Backoffice moet worden gekopieerd</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WORLDLINE_DIRECT_WEBHOOKS">
+                <display-name xml:lang="x-default">Worldline-Direct: Webhooks Config</display-name>
+                <attribute attribute-id="worldlineDirectWebhooksKeyID"/>
+                <attribute attribute-id="worldlineDirectWebhooksKeySecret"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

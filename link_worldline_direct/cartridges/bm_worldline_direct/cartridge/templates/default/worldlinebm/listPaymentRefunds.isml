@@ -1,0 +1,46 @@
+<isscript>var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');</isscript> 
+<isif condition="${pdict.paymentRefunds.length > 0}">
+    <table>
+        <tr>
+            <th>${Resource.msg('detailsdialog.refunds.id', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.refunds.amount', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.refunds.currencycode', 'worldlinebm', null)}</th>
+            <th>${Resource.msg('detailsdialog.refunds.status', 'worldlinebm', null)}</th>
+            <th>
+                <a class="btn-refresh" href="javascript: void(0);"><span class="fa fa-refresh"></span></a>
+            </th>
+        </tr>
+
+        <isloop items="${pdict.paymentRefunds}" var="paymentRefund">
+            <tr>
+                <td>${paymentRefund.id}</td>
+                <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(paymentRefund.refundOutput.amountOfMoney.amount,paymentRefund.refundOutput.amountOfMoney.currencyCode).getValue()}" style="DECIMAL" /></td>
+                <td>${paymentRefund.refundOutput.amountOfMoney.currencyCode}</td>
+                <td>${paymentRefund.status} / ${paymentRefund.statusOutput.statusCode}</td>
+                <td></td>
+            </tr>
+        </isloop>
+    </table>
+<iselse>
+    <span class="no-results">
+        ${Resource.msg('detailsdialog.refunds.noresults', 'worldlinebm', null)}
+    </span>
+</isif>
+
+<div class="payment_dialog_form js_payment_dialog_form">
+    <h3>
+        ${Resource.msg('detailsdialog.refunds.addnew', 'worldlinebm', null)}
+    </h3>
+
+    <hr />
+
+    <label for="ing_amount" class="text_label">${Resource.msg('detailsdialog.paymentdetails.inputamount', 'worldlinebm', null)}</label>
+    <input type="number" id="ing_amount" class="ing_amount" value="<isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.refundableAmount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode).getValue()}" style="DECIMAL" />" ${pdict.refundableAmount === 0 ? "disabled" : ""} />
+
+    <isprint value="${pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode}" />
+
+    <button type="button" class="btn_refund js_btn_refund" ${pdict.refundableAmount === 0 ? "disabled" : ""} >
+        ${Resource.msg('detailsdialog.paymentdetails.btnrefund', 'worldlinebm', null)}
+    </button>
+</div>
+

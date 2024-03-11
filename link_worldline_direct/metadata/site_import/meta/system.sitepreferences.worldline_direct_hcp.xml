@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="worldlineDirectHCPTemplate">
+                <display-name xml:lang="x-default">Hosted Checkout Template</display-name>
+                <description xml:lang="x-default">Please provide the template name as in Worldline Backoffice to be rendered to the customer</description>
+                <description xml:lang="de">Den Namen der Vorlage wie im Worldline Backoffice eingeben, die dem Kunden gezeigt werden soll</description>
+                <description xml:lang="es">Facilita el nombre de la plantilla tal y como aparece en el Back Office de Worldline que se va a presentar al cliente</description>
+                <description xml:lang="fr">Veuillez saisir le nom du modèle comme dans le Back Office Worldline pour qu’il soit remis au client</description>
+                <description xml:lang="it">Fornire il nome del modello come nel Back Office Worldline da rendere al cliente</description>
+                <description xml:lang="nl">Geef de sjabloonnaam op zoals deze in Worldline Back Office wordt weergegeven voor de klant.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectHCPGroupCards">
+                <display-name xml:lang="x-default">Groups Cards on the Hosted Checkout Page</display-name>
+                <description xml:lang="x-default">Group credit and debit cards under one single button on the hosted checkout page</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectHCPSessionTimeout">
+                <display-name xml:lang="x-default">Hosted Checkout Session Timeout (min)</display-name>
+                <description xml:lang="x-default">The number of minutes after which the session will expire. By default, the value is set to 180 minutes.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-value>1.0</min-value>
+                <max-value>1440.0</max-value>
+                <default-value>180</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WORLDLINE_DIRECT_HCP">
+                <display-name xml:lang="x-default">Worldline-Direct: Hosted Checkout Page Settings</display-name>
+                <attribute attribute-id="worldlineDirectHCPTemplate"/>
+                <attribute attribute-id="worldlineDirectHCPGroupCards"/>
+                <attribute attribute-id="worldlineDirectHCPSessionTimeout"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

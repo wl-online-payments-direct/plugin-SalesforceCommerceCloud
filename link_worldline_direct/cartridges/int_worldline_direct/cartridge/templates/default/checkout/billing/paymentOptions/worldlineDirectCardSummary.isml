@@ -1,0 +1,6 @@
+<div>
+    <span><isprint value="${payment.name}" /> <isprint value="${payment.maskedCreditCardNumber}" /></span>
+</div>
+<div>
+    <span>${Resource.msg('label.worldlineDirect.card.expires','worldlineDirect',null)} <isprint value="${payment.expirationMonth}" />/<isprint value="${payment.expirationYear}" /></span>
+</div>

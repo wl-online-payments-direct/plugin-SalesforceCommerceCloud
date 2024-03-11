@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+
+    <service-credential service-credential-id="worldline.https.direct.yoursiteid.TEST">
+        <url>https://payment.preprod.direct.ingenico.com</url>
+        <user-id>API_KEY</user-id>
+        <password encrypted="true" encryption-type="common.export">API_SECRET</password>
+    </service-credential>
+	
+	<service-credential service-credential-id="worldline.https.direct.yoursiteid.LIVE">
+        <url>https://payment.direct.ingenico.com</url>
+        <user-id>API_KEY</user-id>
+        <password encrypted="true" encryption-type="common.export">API_SECRET</password>
+    </service-credential>
+
+    <service-profile service-profile-id="worldline.direct.profile">
+        <timeout-millis>60000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="worldline.https.direct.yoursiteid">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>worldline</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>worldline.direct.profile</profile-id>
+        <credential-id>worldline.https.direct.yoursiteid.TEST</credential-id>
+    </service>
+
+</services>
