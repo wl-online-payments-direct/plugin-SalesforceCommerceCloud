@@ -31,27 +31,6 @@
             value="${pdict.forms.billingForm.worldlineDirectFields.savedCardToken.value || ""}"
         >
 
-        <isif condition="${!empty(paymentOption.custom.worldline.issuers)}">
-            <div class="row">
-                <div class="col-12">
-                  <div class="form-group required ${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName}">
-                        <label class="form-control-label" for="${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName}">
-                            ${Resource.msg('label.worldlineDirect.paymentProductIssuerId','worldlineDirect',null)}
-                        </label>
-                        <select class="form-control ${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName} custom-select" name="${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName}" id="${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName}" aria-describedby="${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName}-error">
-                            <option value="">${Resource.msg('resource.select','forms',null)}</option>
-                            <isloop items="${paymentOption.custom.worldline.issuers}" var="paymentProductIssuer">
-                                <option id="${paymentProductIssuer.issuerId}" value="${paymentProductIssuer.issuerId}">
-                                    ${paymentProductIssuer.issuerName}
-                                </option>
-                            </isloop>
-                        </select>
-                        <div class="invalid-feedback ${pdict.forms.billingForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName}-error"></div>
-                    </div>
-                </div>
-            </div>
-        </isif>
-
         <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('worldlineDirectApplySurcharge')}">
             <isprint value="${Resource.msg('worldline.checkout.surcharge.message','worldlineDirect', null)}"/>
         </isif>

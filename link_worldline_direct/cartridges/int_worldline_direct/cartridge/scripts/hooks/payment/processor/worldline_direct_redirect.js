@@ -57,10 +57,6 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
             paymentInstrument.creditCardExpirationYear = savedPaymentInstrument.creditCardExpirationYear;
             paymentInstrument.creditCardExpirationMonth = savedPaymentInstrument.creditCardExpirationMonth;
         }
-
-        if ('paymentDirectoryIssuerID' in paymentInformation && paymentInformation.paymentDirectoryIssuerID.value) {
-            paymentInstrument.custom.worldlineDirectPaymentDirectoryIssuerID = paymentInformation.paymentDirectoryIssuerID.value;
-        }
     });
 
     return { fieldErrors: cardErrors, serverErrors: serverErrors, error: false };
@@ -157,14 +153,15 @@ function validatePayment(order, paymentInstrument, hostedCheckoutResult) {
         var payment = hostedCheckoutResult.createdPaymentOutput.payment;
         var paymentStatusCategory = hostedCheckoutResult.createdPaymentOutput.paymentStatusCategory;
 
-        var acquiredAmount = payment.paymentOutput.acquiredAmount;
-        var amountPaid = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(acquiredAmount.amount, acquiredAmount.currencyCode);
-
+        let transactionAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(payment.paymentOutput.amountOfMoney.amount, payment.paymentOutput.amountOfMoney.currencyCode);
+        let acquiredAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(payment.paymentOutput.acquiredAmount.amount, payment.paymentOutput.acquiredAmount.currencyCode);
+    
         Transaction.wrap(function () {
             var paymentTransaction = paymentInstrument.paymentTransaction;
 
             paymentTransaction.setTransactionID(payment.id);
-            paymentTransaction.setAmount(amountPaid);
+            paymentTransaction.setAmount(transactionAmount);
+            paymentTransaction.custom.worldlineDirectAcquiredAmount = acquiredAmount;
         });
 
         try {

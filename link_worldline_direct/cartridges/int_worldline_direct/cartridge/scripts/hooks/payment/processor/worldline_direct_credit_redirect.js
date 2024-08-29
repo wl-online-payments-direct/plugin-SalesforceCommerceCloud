@@ -18,12 +18,13 @@ const logger = Logger.getRootLogger();
  * @param {Object} payment -  The PaymentResult Object
  */
 function updatePaymentTransaction(order, paymentTransaction, payment) {
-    let acquiredAmount = payment.paymentOutput.acquiredAmount;
-    let amountPaid = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(acquiredAmount.amount, acquiredAmount.currencyCode);
+    let transactionAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(payment.paymentOutput.amountOfMoney.amount, payment.paymentOutput.amountOfMoney.currencyCode);
+    let acquiredAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(payment.paymentOutput.acquiredAmount.amount, payment.paymentOutput.acquiredAmount.currencyCode);
 
     Transaction.wrap(function () {
         paymentTransaction.setTransactionID(payment.id);
         paymentTransaction.setAmount(amountPaid);
+        paymentTransaction.custom.worldlineDirectAcquiredAmount = acquiredAmount;
     });
 
     worldlineDirectCommonHelper.updatePaymentTransaction(order, payment.status, payment.statusOutput, null);
@@ -58,10 +59,6 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
         paymentInstrument.custom.worldlineDirectPaymentProductName = paymentInformation.paymentProductName.value;
         paymentInstrument.custom.worldlineDirectPaymentMethod = paymentInformation.paymentMethod.value;
         paymentInstrument.custom.worldlineDirectSavedCardToken = paymentInformation.savedCardToken.value;
-
-        if ('paymentDirectoryIssuerID' in paymentInformation && paymentInformation.paymentDirectoryIssuerID.value) {
-            paymentInstrument.custom.worldlineDirectPaymentDirectoryIssuerID = paymentInformation.paymentDirectoryIssuerID.value;
-        }
     });
 
     return { fieldErrors: cardErrors, serverErrors: serverErrors, error: false };
@@ -137,14 +134,15 @@ function validatePayment(order, paymentInstrument, paymentResult) {
     try {
         var paymentStatusCategory = paymentResult.statusOutput.statusCategory;
 
-        var acquiredAmount = paymentResult.paymentOutput.acquiredAmount;
-        var amountPaid = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(acquiredAmount.amount, acquiredAmount.currencyCode);
+        let transactionAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(paymentResult.paymentOutput.amountOfMoney.amount, paymentResult.paymentOutput.amountOfMoney.currencyCode);
+        let acquiredAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(paymentResult.paymentOutput.acquiredAmount.amount, paymentResult.paymentOutput.acquiredAmount.currencyCode);
 
         Transaction.wrap(function () {
             var paymentTransaction = paymentInstrument.paymentTransaction;
 
             paymentTransaction.setTransactionID(paymentResult.id);
-            paymentTransaction.setAmount(amountPaid);
+            paymentTransaction.setAmount(transactionAmount);
+            paymentTransaction.custom.worldlineDirectAcquiredAmount = acquiredAmount;
         });
 
         worldlineDirectCommonHelper.updatePaymentTransaction(order, paymentResult.status, paymentResult.statusOutput, paymentStatusCategory);

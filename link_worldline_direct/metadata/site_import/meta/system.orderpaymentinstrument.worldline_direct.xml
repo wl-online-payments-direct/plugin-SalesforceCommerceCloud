@@ -38,18 +38,6 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="worldlineDirectPaymentDirectoryIssuerID">
-                <display-name xml:lang="x-default">Issuer ID</display-name>
-                <display-name xml:lang="de">Bank-ID</display-name>
-                <display-name xml:lang="es">ID del banco</display-name>
-                <display-name xml:lang="fr">Identifiant de la banque</display-name>
-                <display-name xml:lang="it">ID banca</display-name>
-                <display-name xml:lang="nl">Bank-id</display-name>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-            </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectCardExpiry">
                 <display-name xml:lang="x-default">Card Expiry</display-name>
                 <display-name xml:lang="de">Kartenverfallsdatum</display-name>
@@ -117,7 +105,6 @@
                 <attribute attribute-id="worldlineDirectPaymentMethod"/>
                 <attribute attribute-id="worldlineDirectPaymentProductID"/>
                 <attribute attribute-id="worldlineDirectPaymentProductName"/>
-                <attribute attribute-id="worldlineDirectPaymentDirectoryIssuerID"/>
                 <attribute attribute-id="worldlineDirectCardExpiry"/>
                 <attribute attribute-id="worldlineDirectAuthorisationCode"/>
                 <attribute attribute-id="worldlineDirectHostedCheckoutID"/>

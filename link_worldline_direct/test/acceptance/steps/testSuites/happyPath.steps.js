@@ -51,11 +51,6 @@ Then('shopper selects Worldline payment method {string}', (paymentMethod) => {
 
     I.scrollTo(checkoutPage.locators.paymentOptionsContainer);
     I.click(worldlinePaymentMethod, checkoutPage.locators.paymentOptionsContainer);
-
-    if (worldlinePaymentMethod.toUpperCase() === 'IDEAL') {
-        I.waitForElement(checkoutPage.locators.worldline_paymentDirectoryIssuerDropDown);
-        I.selectOption(checkoutPage.locators.worldline_paymentDirectoryIssuerDropDown, "Issuer Simulation");
-    }
 });
 
 Then('shopper fills out registered user billing information', () => {

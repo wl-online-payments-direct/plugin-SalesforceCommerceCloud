@@ -52,22 +52,6 @@ function processForm(req, paymentForm, viewFormData) {
         }
     };
 
-    if (paymentForm.worldlineDirectFields.paymentProductID.value == WorldlineDirectConstants.PAYMENT_PRODUCT_IDEAL_ID) {
-        if (!paymentForm.worldlineDirectFields.paymentDirectoryIssuerID.value) {
-            fieldErrors[paymentForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName] = Resource.msg('error.worldlineDirect.paymentProductIssuerId.required', 'worldlineDirect', null);
-
-            return {
-                error: true,
-                fieldErrors: fieldErrors
-            };
-        }
-
-        viewData.paymentInformation.paymentDirectoryIssuerID = {
-            value: paymentForm.worldlineDirectFields.paymentDirectoryIssuerID.value,
-            htmlName: paymentForm.worldlineDirectFields.paymentDirectoryIssuerID.htmlName
-        };
-    }
-
     if (!empty(paymentForm.worldlineDirectFields.hostedCheckoutId)) {
         viewData.paymentInformation.hostedCheckoutId = {
             value: paymentForm.worldlineDirectFields.hostedCheckoutId.value,

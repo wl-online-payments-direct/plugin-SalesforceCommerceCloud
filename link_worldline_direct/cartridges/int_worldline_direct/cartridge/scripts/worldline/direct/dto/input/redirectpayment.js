@@ -24,12 +24,6 @@ function WorldlineDirectRedirectPaymentMethodSpecificInput(paymentInstrument, pa
     this.redirectionData = {
         returnUrl: returnURL
     };
-
-    if (this.paymentProductId === WorldlineDirectConstants.PAYMENT_PRODUCT_IDEAL_ID) {
-        this.paymentProduct809SpecificInput = {
-            issuerId: paymentInstrument.custom.worldlineDirectPaymentDirectoryIssuerID
-        };
-    }
 }
 
 module.exports = WorldlineDirectRedirectPaymentMethodSpecificInput;

@@ -25,7 +25,6 @@ module.exports = {
         paySecCode: '#securityCode',
         paySecCodeSaved: '.form-control.saved-payment-security-code',
         paymentOptionsContainer: '.payment-options',
-        worldline_paymentDirectoryIssuerDropDown: '[name=dwfrm_billing_worldlineDirectFields_paymentDirectoryIssuerID]',
         placeOrder: '.btn.btn-primary.btn-block.submit-payment',
         confirmOrder: '.btn.btn-primary.btn-block.place-order',
         billingConfirmation: '.addressSelector.form-control',

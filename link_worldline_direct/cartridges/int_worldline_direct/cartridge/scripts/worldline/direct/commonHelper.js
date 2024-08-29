@@ -51,6 +51,7 @@ function handlePaymentStatus(order, payment) {
     if (order.status.value === Order.ORDER_STATUS_CREATED && WorldlineDirectConstants.REJECTED_PAYMENT_STATUSES.indexOf(payment.status) > -1) {
         Transaction.wrap(function () {
             order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY;
+            order.trackOrderChange('Order Worldline Direct Status Category changed to  '  + WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY);
             OrderMgr.failOrder(order, true);
         });
 
@@ -59,21 +60,27 @@ function handlePaymentStatus(order, payment) {
     } else if (WorldlineDirectConstants.REJECTED_PAYMENT_STATUSES.indexOf(payment.status) > -1) {
         Transaction.wrap(function () {
             order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY;
+            order.trackOrderChange('Order Worldline Direct Status Category changed to  '  + WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY);
             OrderMgr.cancelOrder(order);
         });
     } else if (WorldlineDirectConstants.UNKNOWN_PAYMENT_STATUSES.indexOf(payment.status) > -1) {
         Transaction.wrap(function () {
-            order.setPaymentStatus(Order.PAYMENT_STATUS_NOTPAID);
             order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.UNKNOWN_PAYMENT_STATUS_CATEGORY;
+            order.trackOrderChange('Order Worldline Direct Status Category changed to  '  + WorldlineDirectConstants.UNKNOWN_PAYMENT_STATUS_CATEGORY);
+            order.setPaymentStatus(Order.PAYMENT_STATUS_NOTPAID);
+            order.trackOrderChange("Order payment status changed to NOT PAID.");
         });
     } else if (WorldlineDirectConstants.SUCCESSFUL_PAYMENT_STATUSES.indexOf(payment.status) > -1) {
         Transaction.wrap(function () {
             order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.AUTHORIZED_PAYMENT_STATUS_CATEGORY;
+            order.trackOrderChange('Order Worldline Direct Status Category changed to  '  + WorldlineDirectConstants.AUTHORIZED_PAYMENT_STATUS_CATEGORY);
         });
     } else if (WorldlineDirectConstants.COMPLETED_PAYMENT_STATUSES.indexOf(payment.status) > -1) {
         Transaction.wrap(function () {
-            order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
             order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.COMPLETED_PAYMENT_STATUS_CATEGORY;
+            order.trackOrderChange('Order Worldline Direct Status Category changed to  '  + WorldlineDirectConstants.COMPLETED_PAYMENT_STATUS_CATEGORY);
+            order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
+            order.trackOrderChange("Order payment status changed to PAID.");
         });
     }
 }
@@ -400,6 +407,18 @@ function allPaymentsAreCaptured(paymentTransaction) {
         }
     }
 
+    // we may be looking at the original transaction that has changed its own status... 
+    if (capturedAmount === 0) {
+        var transactionResponse = worldlineApiFacade.getPayment(paymentTransaction.getTransactionID());
+        if (transactionResponse.success !== true) {
+            return false;
+        }
+
+        if (transactionResponse.status === WorldlineDirectConstants.CAPTURED_PAYMENT_STATUS) {
+            capturedAmount = convertWorldlineAmountToMoney(transactionResponse.paymentOutput.acquiredAmount.amount, transactionResponse.paymentOutput.acquiredAmount.currencyCode).value;
+        }
+    }
+
     return capturedAmount >= originalAmount;    // depending on the configuration in Worldline, it may be possible to capture a higher amount than the original transaction
 }
 
@@ -432,7 +451,7 @@ function handlePaymentCapture(order, worldlinePaymentInstrument, worldlineStatus
                 order.setExportStatus(Order.EXPORT_STATUS_READY);
                 order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
 
-                order.trackOrderChange("Order marked as paid.");
+                order.trackOrderChange("Order payment status changed to PAID.");
 
                 // isAuthorized, isCancellable and isRefundable are sometimes not available in the capture response JSON and in the first webhook with type "payment.capture_requested".
                 // A later webhook with type "payment.captured" has them.
@@ -587,11 +606,12 @@ function validateAmountPaid(order, paymentOutput) {
         Transaction.wrap(function () {
             order.custom.worldlineDirectSurchargeAmount = surchargeAmount.value;
         });
-    } 
+    }
 
-    if (paymentOutput.paymentMethod !== 'directDebit' && amountPaid.compareTo(order.getTotalGrossPrice()) < 0) {
+    if ([WorldlineDirectConstants.AUTHORIZED_PAYMENT_STATUS_CATEGORY, WorldlineDirectConstants.UNKNOWN_PAYMENT_STATUS_CATEGORY].indexOf(order.custom.worldlineDirectStatusCategory.value) < 0 && amountPaid.compareTo(order.getTotalGrossPrice()) < 0) {
         Transaction.wrap(function () {
-            order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY;
+            //order.custom.worldlineDirectStatusCategory = WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY;
+            order.trackOrderChange('Order failed due to amount paid being less than order total.');
             OrderMgr.failOrder(order, true);
         });
 

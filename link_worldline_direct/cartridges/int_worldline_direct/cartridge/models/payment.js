@@ -88,9 +88,6 @@ function addPaymentProductsToApplicablePaymentMethods(paymentMethods, paymentMet
                     (includeLineItemPrices || worldlineDirectConstants.PAYMENT_PRODUCTS_WITH_LINEITEM_PRICES.indexOf(paymentProduct.id) === -1)
                 ) {
                     var paymentMethodName = worldlineDirectConstants.PAYMENT_METHOD_REDIRECT;
-                    if (paymentProduct.id === worldlineDirectConstants.PAYMENT_PRODUCT_IDEAL_ID) {
-                        paymentMethodName = worldlineDirectConstants.PAYMENT_METHOD_CREDIT_REDIRECT;
-                    }
 
                     newPaymentMethods.push({
                         ID: paymentMethodName + '__' + paymentProduct.id,
@@ -184,26 +181,6 @@ function applicableWorldlineDirectPaymentMethods(sfccPaymentMethods, worldlineDi
     if (!hostedTokenizationEnabled) {
         paymentMethods = removeApplicablePaymentMethod(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_CARD);
     }
-
-    paymentMethods.forEach(function (paymentMethod) {
-        if (paymentMethod && paymentMethod.custom.worldline && paymentMethod.custom.worldline.id === worldlineDirectConstants.PAYMENT_PRODUCT_IDEAL_ID) {
-            try {
-                var serviceResponse = worldlineDirectApiFacade.getPaymentProductDirectory(paymentMethod.custom.worldline.id, {
-                    countryCode: "NL", // Hardcoded NL as per discussion with Worldline
-                    currencyCode: basketCurrencyCode
-                });
-
-                if (serviceResponse.error || empty(serviceResponse.entries)) {
-                    throw new Error('error.worldline.getpaymentproductdirectory');
-                }
-
-                paymentMethod.custom.worldline.issuers = serviceResponse.entries;
-            } catch (e) {
-                logger.error(e);
-                paymentMethods = removeApplicablePaymentMethod(paymentMethods, paymentMethod.ID);
-            }
-        }
-    });
 
     return paymentMethods;
 }

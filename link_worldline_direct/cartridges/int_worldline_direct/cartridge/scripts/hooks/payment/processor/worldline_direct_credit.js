@@ -22,12 +22,13 @@ const currentSite = Site.getCurrent();
  * @param {Object} payment -  The PaymentResult Object
  */
 function updatePaymentTransaction(order, paymentTransaction, payment) {
-    let acquiredAmount = payment.paymentOutput.acquiredAmount;
-    let amountPaid = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(acquiredAmount.amount, acquiredAmount.currencyCode);
+    let transactionAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(payment.paymentOutput.amountOfMoney.amount, payment.paymentOutput.amountOfMoney.currencyCode);
+    let acquiredAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(payment.paymentOutput.acquiredAmount.amount, payment.paymentOutput.acquiredAmount.currencyCode);
 
     Transaction.wrap(function () {
         paymentTransaction.setTransactionID(payment.id);
-        paymentTransaction.setAmount(amountPaid);
+        paymentTransaction.setAmount(transactionAmount);
+        paymentTransaction.custom.worldlineDirectAcquiredAmount = acquiredAmount;
     });
 
     worldlineDirectCommonHelper.updatePaymentTransaction(order, payment.status, payment.statusOutput, null);
