@@ -46,4 +46,19 @@
         </preferences>
     </payment-processor>
 
+    <payment-processor processor-id="WORLDLINE_DIRECT_DIRECTDEBIT">
+        <description xml:lang="x-default">Worldline-Direct Direct Debit payment processor.</description>
+        <description xml:lang="it">Elaboratore di pagamento Worldline-Direct Direct Debit.</description>
+        <description xml:lang="de">Zahlungsverarbeiter Worldline-Direct Direct Debit.</description>
+        <description xml:lang="fr">Opérateur de paiement Worldline-Direct Direct Debit.</description>
+        <description xml:lang="nl">Worldline-Direct Direct Debit betalingsverwerker.</description>
+        <description xml:lang="es">Procesador de pagos Worldline-Direct Direct Debit.</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
 </payment-processors>

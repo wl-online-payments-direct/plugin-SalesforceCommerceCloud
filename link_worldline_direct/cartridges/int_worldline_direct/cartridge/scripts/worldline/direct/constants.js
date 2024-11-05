@@ -21,11 +21,13 @@ Constants.PAYMENT_METHOD_PREFIX                 = 'WORLDLINE_DIRECT';
 Constants.PAYMENT_METHOD_CARD                   = Constants.PAYMENT_METHOD_PREFIX + '_CARD';
 Constants.PAYMENT_METHOD_REDIRECT               = Constants.PAYMENT_METHOD_PREFIX + '_REDIRECT';
 Constants.PAYMENT_METHOD_CREDIT_REDIRECT        = Constants.PAYMENT_METHOD_PREFIX + '_CREDIT_REDIRECT';
+Constants.PAYMENT_METHOD_DIRECTDEBIT            = Constants.PAYMENT_METHOD_PREFIX + '_DIRECTDEBIT';
 
 Constants.PAYMENT_PROCESSOR_PREFIX             = 'WORLDLINE_DIRECT';
 Constants.PAYMENT_PROCESSOR_CREDIT             = Constants.PAYMENT_PROCESSOR_PREFIX + '_CREDIT';
 Constants.PAYMENT_PROCESSOR_REDIRECT           = Constants.PAYMENT_PROCESSOR_PREFIX + '_REDIRECT';
 Constants.PAYMENT_PROCESSOR_CREDIT_REDIRECT    = Constants.PAYMENT_PROCESSOR_PREFIX + '_CREDIT_REDIRECT';
+Constants.PAYMENT_PROCESSOR_DIRECTDEBIT        = Constants.PAYMENT_PROCESSOR_PREFIX + '_DIRECTDEBIT';
 
 // Worldline-Direct Payment Product Constants
 Constants.PAYMENT_PRODUCT_GROUP_CARD            = 'card';
@@ -36,6 +38,7 @@ Constants.PAYMENT_PRODUCT_BANCONTACT_ID         = 3012;
 Constants.PAYMENT_PRODUCT_IDEAL_ID              = 809;
 Constants.PAYMENT_PRODUCT_APPLE_PAY_ID          = 302;
 Constants.PAYMENT_PRODUCT_INTERSOLVE_ID         = 5700;
+Constants.PAYMENT_PRODUCT_SEPA_DIRECT_DEBIT_ID  = 771;
 
 // Klarna and Oney require us to send the line item prices with the API request. They will be hidden if the worldlineDirectCheckoutSendLineItemPrices site preference is not checked
 Constants.PAYMENT_PRODUCTS_WITH_LINEITEM_PRICES = [3301, 3302, 5110, 5600];
@@ -67,6 +70,13 @@ Constants.TOKEN_UPDATED                         = 'UPDATED';
 Constants.TOKEN_UNCHANGED                       = 'UNCHANGED';
 
 Constants.SURCHARGE_TRANSACTION_ID_REGEXP       = /(900000)(\d{10})(\d{3})/;
+
+Constants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_ACTIVE = 'active';
+Constants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_BLOCKED = 'blocked';
+Constants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_CANCELLED = 'cancelled';
+Constants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_COMPLETED = 'completed';
+Constants.RECURRING_ORDERS_CREATED_BY_MERCHANT	= 'MIT';
+Constants.RECURRING_ORDERS_CREATED_BY_CUSTOMER	= 'CIT';
 
 module.exports = Constants;
 /* eslint no-multi-spaces: "off" */

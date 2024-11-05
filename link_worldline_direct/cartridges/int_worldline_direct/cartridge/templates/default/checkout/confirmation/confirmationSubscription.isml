@@ -1,0 +1,19 @@
+<!--- TEMPLATENAME: confirmationSubscription.isml --->
+<div class="card confirm-details">
+    <div class="card-header">
+        <h2 class="card-header-custom">${Resource.msg('title.subscription', 'worldlineDirect', null)}</h2>
+    </div>
+
+    <div class="card-body">
+        <p>
+            <span class="summary-section-label order-number-label">${Resource.msg('label.subscription.period', 'worldlineDirect', null)}:</span>
+            <span class="summary-details order-number">${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionPeriod}</span><br/>
+            <span class="summary-section-label order-number-label">${Resource.msg('label.subscription.frequency', 'worldlineDirect', null)}:</span>
+            <span class="summary-details order-number">${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionFrequency}</span><br/>
+            <span class="summary-section-label order-date-label">${Resource.msg('label.subscription.startdate', 'worldlineDirect', null)}:</span>
+            <span class="summary-details order-date"><isprint value="${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionStartDate}" style="DATE_SHORT"/></span><br/>
+            <span class="summary-section-label order-date-label">${Resource.msg('label.subscription.enddate', 'worldlineDirect', null)}:</span>
+            <span class="summary-details order-date"><isprint value="${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionEndDate}" style="DATE_SHORT"/></span>
+        </p>
+    </div>
+</div>

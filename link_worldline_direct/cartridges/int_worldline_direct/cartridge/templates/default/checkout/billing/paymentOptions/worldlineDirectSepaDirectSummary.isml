@@ -1,0 +1,28 @@
+<div>
+    <span><isprint value="${payment.name}" /></span>
+</div>
+<isif condition="${pdict.mandate}">
+    <div>
+        <br/>
+        <span class="summary-section-label billing-addr-label">${Resource.msg('worldline.mandate.title', 'worldlineDirect', null)}</span>
+        <br/>
+
+        <span class="summary-details">${pdict.mandate.name}</span>
+        <br/>
+
+        <isif condition="${!empty(pdict.mandate.companyName)}">
+            <span class="summary-details">${pdict.mandate.companyName}</span>
+            <br/>
+        </isif>
+
+        <span class="summary-details"><isprint value="${pdict.mandate.address}" encoding="off"/></span>
+        <br/>
+
+        <span class="summary-details" style="margin-top: 0.5em;">${Resource.msg('worldline.mandate.label.iban', 'worldlineDirect', null)}:</span>
+        <span class="summary-details">${pdict.mandate.iban}</span>
+        <br/>
+        <span class="summary-details">${Resource.msg('worldline.mandate.label.status', 'worldlineDirect', null)}:</span>
+        <span class="summary-details">${pdict.mandate.status}</span>
+        <br/>
+    </div>
+</isif>

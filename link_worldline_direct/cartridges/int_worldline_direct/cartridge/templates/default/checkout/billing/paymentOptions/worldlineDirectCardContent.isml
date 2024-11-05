@@ -1,13 +1,18 @@
 <div class="tab-pane ${paymentOption.ID}-content ${pdict.selectedPaymentMethod === paymentOption.ID ? 'active' : ''}" id="${paymentOption.ID}-content" role="tabpanel">
-
     <link rel="preload" id="WorldlineTokenizerScriptUrl" href="${dw.system.Site.getCurrent().getCustomPreferenceValue('worldlineDirectHTJS')}" as="script" />
-
-    <isinclude template="checkout/billing/paymentOptions/worldlineDirectSavedCardsList" />
-
-    <div id="HostedTokenizationDiv" data-url="${URLUtils.url('WorldlineDirect-HTPSession')}"></div>
+	<isscript>
+        var worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper.js');
+    </isscript>
+    <isif condition="${worldlineDirectSubscriptionHelper.isSubscriptionSelected(pdict.order)}">
+        <div id="HostedTokenizationDiv" data-url="${URLUtils.url('WorldlineDirect-HTPSession')}"></div>
+        <p><isprint value="${Resource.msg('worldline.checkout.subscription.tokenize.message','worldlineDirect', null)}"/></p>
+    <iselse/>
+        <isinclude template="checkout/billing/paymentOptions/worldlineDirectSavedCardsList" />
+        <div id="HostedTokenizationDiv" data-url="${URLUtils.url('WorldlineDirect-HTPSession')}"></div>
+    </isif>
 
     <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('worldlineDirectApplySurcharge')}">
-        <isprint value="${Resource.msg('worldline.checkout.surcharge.message','worldlineDirect', null)}"/>
+        <p><isprint value="${Resource.msg('worldline.checkout.surcharge.message','worldlineDirect', null)}"/></p>
     </isif>
 
     <fieldset class="payment-form-fields">

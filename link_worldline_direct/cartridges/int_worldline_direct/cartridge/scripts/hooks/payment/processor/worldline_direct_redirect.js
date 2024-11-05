@@ -6,6 +6,7 @@ const Logger = require('dw/system/Logger');
 
 const collections = require('*/cartridge/scripts/util/collections');
 const worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');
+const worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper');
 
 const logger = Logger.getRootLogger();
 
@@ -149,6 +150,8 @@ function validatePayment(order, paymentInstrument, hostedCheckoutResult) {
     var redirectUrl;
     var paymentResponse = {};
 
+    var subscriptionData = worldlineDirectSubscriptionHelper.getSubscriptionData(order);
+
     try {
         var payment = hostedCheckoutResult.createdPaymentOutput.payment;
         var paymentStatusCategory = hostedCheckoutResult.createdPaymentOutput.paymentStatusCategory;
@@ -191,7 +194,7 @@ function validatePayment(order, paymentInstrument, hostedCheckoutResult) {
 
                     if ('expiryDate' in cardPayment.card) {
                         paymentInstrument.setCreditCardExpirationMonth(parseInt(cardPayment.card.expiryDate.slice(0, 2), 10));
-                        paymentInstrument.setCreditCardExpirationYear(parseInt(cardPayment.card.expiryDate.slice(2, 4), 10));
+                        paymentInstrument.setCreditCardExpirationYear(parseInt('20' + cardPayment.card.expiryDate.slice(2, 4), 10));
                         paymentInstrument.custom.worldlineDirectCardExpiry = cardPayment.card.expiryDate;
                     }
 
@@ -199,9 +202,16 @@ function validatePayment(order, paymentInstrument, hostedCheckoutResult) {
                         paymentInstrument.custom.worldlineDirectAuthorisationCode = cardPayment.authorisationCode;
                     }
 
+                    if ('schemeReferenceData' in cardPayment) {
+                        paymentInstrument.custom.worldlineDirectCardSchemeReferenceData = cardPayment.schemeReferenceData;
+                    }
+
                     if ('token' in cardPayment) {
                         paymentInstrument.setCreditCardToken(cardPayment.token);
-                        paymentResponse.token = cardPayment.token;
+
+                        if (!subscriptionData.selected) {
+                            paymentResponse.token = cardPayment.token;
+                        }
                     }
                 });
             } catch (e) {
@@ -224,12 +234,16 @@ function validatePayment(order, paymentInstrument, hostedCheckoutResult) {
                 Transaction.wrap(function () {
                     if ('expiryDate' in mobilePayment.paymentData) {
                         paymentInstrument.setCreditCardExpirationMonth(parseInt(mobilePayment.paymentData.expiryDate.slice(0, 2), 10));
-                        paymentInstrument.setCreditCardExpirationYear(parseInt(mobilePayment.paymentData.expiryDate.slice(2, 4), 10));
+                        paymentInstrument.setCreditCardExpirationYear(parseInt('20' + mobilePayment.paymentData.expiryDate.slice(2, 4), 10));
                         paymentInstrument.custom.worldlineDirectCardExpiry = mobilePayment.card.expiryDate;
                     }
 
                     if ('authorisationCode' in mobilePayment) {
                         paymentInstrument.custom.worldlineDirectAuthorisationCode = mobilePayment.authorisationCode;
+                    }
+
+                    if ('schemeReferenceData' in mobilePayment) {
+                        paymentInstrument.custom.worldlineDirectCardSchemeReferenceData = mobilePayment.schemeReferenceData;
                     }
                 });
             } catch (e) {

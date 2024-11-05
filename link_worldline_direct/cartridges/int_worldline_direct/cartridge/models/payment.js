@@ -87,7 +87,7 @@ function addPaymentProductsToApplicablePaymentMethods(paymentMethods, paymentMet
                     (canMakeApplePayPayments || paymentProduct.id !== worldlineDirectConstants.PAYMENT_PRODUCT_APPLE_PAY_ID) &&
                     (includeLineItemPrices || worldlineDirectConstants.PAYMENT_PRODUCTS_WITH_LINEITEM_PRICES.indexOf(paymentProduct.id) === -1)
                 ) {
-                    var paymentMethodName = worldlineDirectConstants.PAYMENT_METHOD_REDIRECT;
+                    var paymentMethodName = (paymentMethodID === worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT) ? worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT : worldlineDirectConstants.PAYMENT_METHOD_REDIRECT;
 
                     newPaymentMethods.push({
                         ID: paymentMethodName + '__' + paymentProduct.id,
@@ -153,7 +153,6 @@ function applicableWorldlineDirectPaymentMethods(sfccPaymentMethods, worldlineDi
 
         var worldlineDirectRedirectPaymentProducts = worldlineDirectPaymentProducts.filter(function (paymentProduct) {
             return (
-                paymentProduct.paymentMethod === worldlineDirectConstants.PAYMENT_PRODUCT_DIRECT_DEBIT ||
                 paymentProduct.paymentMethod === worldlineDirectConstants.PAYMENT_PRODUCT_GROUP_REDIRECT ||
                 paymentProduct.paymentMethod === worldlineDirectConstants.PAYMENT_PRODUCT_GROUP_MOBILE ||
                 (paymentProduct.paymentMethod === worldlineDirectConstants.PAYMENT_PRODUCT_GROUP_CARD &&
@@ -165,6 +164,10 @@ function applicableWorldlineDirectPaymentMethods(sfccPaymentMethods, worldlineDi
             );
         });
 
+        var worldlineDirectDDPaymentProducts = worldlineDirectPaymentProducts.filter(function (paymentProduct) {
+            return (paymentProduct.paymentMethod === worldlineDirectConstants.PAYMENT_PRODUCT_DIRECT_DEBIT);
+        });
+
         // check if hosted tokanization is enabled for card
         if (!hostedTokenizationEnabled && !empty(worldlineDirectCardPaymentProducts)) {
             paymentMethods = addPaymentProductsToApplicablePaymentMethods(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_CARD, worldlineDirectCardPaymentProducts);
@@ -173,10 +176,15 @@ function applicableWorldlineDirectPaymentMethods(sfccPaymentMethods, worldlineDi
         if (!empty(worldlineDirectRedirectPaymentProducts)) {
             paymentMethods = addPaymentProductsToApplicablePaymentMethods(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_REDIRECT, worldlineDirectRedirectPaymentProducts);
         }
+
+        if (!empty(worldlineDirectDDPaymentProducts)) {
+            paymentMethods = addPaymentProductsToApplicablePaymentMethods(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT, worldlineDirectDDPaymentProducts);
+        }
     }
 
     paymentMethods = removeApplicablePaymentMethod(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_REDIRECT);
     paymentMethods = removeApplicablePaymentMethod(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_CREDIT_REDIRECT);
+    paymentMethods = removeApplicablePaymentMethod(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT);
 
     if (!hostedTokenizationEnabled) {
         paymentMethods = removeApplicablePaymentMethod(paymentMethods, worldlineDirectConstants.PAYMENT_METHOD_CARD);
@@ -226,6 +234,9 @@ function getSelectedPaymentInstruments(selectedPaymentInstruments) {
             results.expirationYear = paymentInstrument.creditCardExpirationYear;
             results.expirationMonth = ("0" + paymentInstrument.creditCardExpirationMonth).substr(-2);
             results.maskedCreditCardNumber = paymentInstrument.custom.worldlineDirectCreditCardAlias;
+        } else if (paymentInstrument.paymentMethod === worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT) {
+            results.name = paymentInstrument.custom.worldlineDirectPaymentProductName;
+            results.paymentProductID = paymentInstrument.custom.worldlineDirectPaymentProductID;
         }
 
         return results;
@@ -241,6 +252,8 @@ function getSelectedPaymentInstruments(selectedPaymentInstruments) {
  */
 function Payment(currentBasket, currentCustomer, countryCode) {
     const Basket = require('dw/order/Basket');
+    const worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper');
+
     module.superModule.call(this, currentBasket, currentCustomer, countryCode);
 
     var paymentMethods = PaymentMgr.getApplicablePaymentMethods(
@@ -248,7 +261,6 @@ function Payment(currentBasket, currentCustomer, countryCode) {
         countryCode,
         currentBasket.totalGrossPrice.value
     );
-
 
     /*
     * Actually {currentBasket} param can be Basket or Order instance!
@@ -266,7 +278,8 @@ function Payment(currentBasket, currentCustomer, countryCode) {
             var basketCountryCode = worldlineDirectCommonHelper.getCustomerCountryCode(currentBasket);
             var worldlineDirectApiResponse = worldlineDirectApiFacade.getPaymentProducts({
                 countryCode: basketCountryCode,
-                currencyCode: basketCurrencyCode
+                currencyCode: basketCurrencyCode,
+                isRecurring: worldlineDirectSubscriptionHelper.isSubscriptionSelected(currentBasket),
             });
 
             var worldlinePaymentProductLogos = {};
@@ -289,7 +302,6 @@ function Payment(currentBasket, currentCustomer, countryCode) {
             this.applicablePaymentMethods = worldlinePaymentMethods;
         }
     }
-
 
     var paymentInstruments = currentBasket.paymentInstruments;
     this.selectedPaymentInstruments = paymentInstruments ?

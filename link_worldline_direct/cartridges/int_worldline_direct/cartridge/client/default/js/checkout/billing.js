@@ -47,7 +47,7 @@ base.methods.updatePaymentInformation = function (order) {
                 + order.billing.payment.selectedPaymentInstruments[0].expirationMonth
                 + '/' + order.billing.payment.selectedPaymentInstruments[0].expirationYear
                 + '</span></div>';
-        } else if (order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'WORLDLINE_DIRECT_REDIRECT' || order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'WORLDLINE_DIRECT_CREDIT_REDIRECT') {
+        } else if (order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'WORLDLINE_DIRECT_REDIRECT' || order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'WORLDLINE_DIRECT_CREDIT_REDIRECT' || order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'WORLDLINE_DIRECT_DIRECTDEBIT') {
             htmlToAppend += '<div><span>'
                 + order.billing.payment.selectedPaymentInstruments[0].name
                 + '</span><div>';

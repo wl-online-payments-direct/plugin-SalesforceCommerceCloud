@@ -94,6 +94,14 @@
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
             </attribute-definition>
+			<attribute-definition attribute-id="worldlineDirectSubscription">
+                <display-name xml:lang="x-default">Subscription</display-name>
+                <description xml:lang="x-default">Turns on and off the order subscription functionality</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="WORLDLINE_DIRECT">
@@ -105,6 +113,7 @@
                 <attribute attribute-id="worldlineDirect3DSExemption"/>
                 <attribute attribute-id="worldlineDirectApplySurcharge"/>
                 <attribute attribute-id="worldlineDirectCheckoutSendLineItemPrices"/>
+				<attribute attribute-id="worldlineDirectSubscription"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

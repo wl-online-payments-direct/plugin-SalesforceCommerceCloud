@@ -4,6 +4,7 @@
     <!-- Load Static Assets -->
     <!----------------------------------------------------------------------------------->
     <isscript>
+    	var worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper.js');
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addJs('/js/checkout.js');
         assets.addCss('/css/checkout/checkout.css');
@@ -94,8 +95,19 @@
                         <isinclude template="checkout/billing/billingSummary" />
                     </div>
                 </div>
+                
+                <isif condition="${worldlineDirectSubscriptionHelper.isSubscriptionSelected(pdict.order)}">
+                	<div class="card payment-summary">
+                		<div class="card-body">
+                			<div class="custom-control custom-checkbox">
+			                	<input id="wlSubscriptionReplenishOrderConsent" type="checkbox" class="custom-control-input" name="recurringOrder" value="true" />
+			                	<label for="wlSubscriptionReplenishOrderConsent" class="custom-control-label checkout-checkbox">${Resource.msg('worldline.checkout.subscription.confirmation', 'worldlineDirect', null)}</label>
+		                	</div>
+		                </div>
+	                </div>
+                </isif>
 
-            
+           
                 <!----------------------------------------------------------------------------------->
                 <!-- Checkout Workflow Buttons -->
                 <!----------------------------------------------------------------------------------->
@@ -111,7 +123,9 @@
                             </button>
 
                             <button class="btn btn-primary btn-block place-order" data-action="${URLUtils.url('CheckoutServices-PlaceOrder')}"
-                                    type="submit" name="submit" value="place-order">${Resource.msg('button.place.order', 'checkout', null)}
+                                    type="submit" name="submit" value="place-order">
+                                    ${Resource.msg('button.place.order', 'checkout', null)}
+                                   
                             </button>
                         </div>
                     </div>

@@ -27,4 +27,15 @@ $(document).ready(function () {
             }
         }
     });
+    
+    $("body").on('change', '#wlSubscriptionReplenishOrderConsent', (e) => {
+    	var el = $(e.target);
+    	if (el.is(':checked')) {
+    		$('body').trigger('checkout:enableButton', '.next-step-button button.place-order');
+    	} else {
+    		$('body').trigger('checkout:disableButton', '.next-step-button button.place-order');
+    	}
+    });
+    
 });
+

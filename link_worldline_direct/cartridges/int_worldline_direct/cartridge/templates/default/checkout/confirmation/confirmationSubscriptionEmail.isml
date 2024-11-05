@@ -1,0 +1,14 @@
+<!--- TEMPLATENAME: confirmationSubscription.isml --->
+<p>
+	<strong>${Resource.msg('title.subscription', 'worldlineDirect', null)}</strong>
+</p>
+<p>
+    <span>${Resource.msg('label.subscription.period', 'worldlineDirect', null)}:</span>
+    <span>${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionPeriod}</span><br/>
+    <span>${Resource.msg('label.subscription.frequency', 'worldlineDirect', null)}:</span>
+    <span>${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionFrequency}</span><br/>
+    <span>${Resource.msg('label.subscription.startdate', 'worldlineDirect', null)}:</span>
+    <span><isprint value="${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionStartDate}" style="DATE_SHORT"/></span><br/>
+    <span>${Resource.msg('label.subscription.enddate', 'worldlineDirect', null)}:</span>
+    <span><isprint value="${pdict.order.worldlineDirectSubscriptionData.worldlineDirectSubscriptionEndDate}" style="DATE_SHORT"/></span>
+</p>

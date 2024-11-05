@@ -7,6 +7,8 @@
             <isinclude template="checkout/billing/paymentOptions/worldlineDirectRedirectSummary" />
         <iselseif condition="${payment.paymentMethod === worldlineDirectConstants.PAYMENT_METHOD_CARD}">
             <isinclude template="checkout/billing/paymentOptions/worldlineDirectCardSummary" />
+        <iselseif condition="${payment.paymentMethod === worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT}">
+            <isinclude template="checkout/billing/paymentOptions/worldlineDirectSepaDirectSummary" />
         </isif>
     </isloop>
 </div>

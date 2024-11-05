@@ -1,4 +1,7 @@
-<isif condition="${pdict.customer.registeredUser && pdict.customer.customerPaymentInstruments.length > 0}">
+<isscript>
+	var worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper.js');
+</isscript>
+<isif condition="${!worldlineDirectSubscriptionHelper.isSubscriptionSelected(pdict.order) && pdict.customer.registeredUser && pdict.customer.customerPaymentInstruments.length > 0}">
     <fieldset class="credit-card-selector-block">
         <table>
             <caption>${Resource.msg('heading.worldlineDirect.saved.card', 'worldlineDirect', null)}</caption>

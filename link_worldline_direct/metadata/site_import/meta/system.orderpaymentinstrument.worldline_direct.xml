@@ -98,6 +98,20 @@
                 <externally-managed-flag>true</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectCardSchemeReferenceData">
+                <display-name xml:lang="x-default">Card Scheme Reference Data</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectMandateReference">
+                <display-name xml:lang="x-default">Mandate Reference</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="WORLDLINE_DIRECT">
@@ -110,6 +124,8 @@
                 <attribute attribute-id="worldlineDirectHostedCheckoutID"/>
                 <attribute attribute-id="worldlineDirectSavedCardToken"/>
                 <attribute attribute-id="worldlineDirectCreditCardAlias"/>
+                <attribute attribute-id="worldlineDirectCardSchemeReferenceData"/>
+                <attribute attribute-id="worldlineDirectMandateReference"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

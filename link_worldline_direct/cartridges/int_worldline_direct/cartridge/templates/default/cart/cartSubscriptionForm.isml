@@ -1,0 +1,63 @@
+<isif condition="${pdict.subscriptionData.enabled}">
+	<isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/wlsubscription.js');
+    </isscript>
+    <div class="subscription" style="background: #f5f5f5;padding: 1rem;margin-bottom: 1rem;">
+        <p>Auto replenish order</p>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group custom-control custom-checkbox">
+                    <input class="custom-control-input" data-url="${URLUtils.url('Cart-SetSubscriptionData')}" type="checkbox" id="wlSubscriptionReplenishOrder" name="replenish_order" value="true"<isif condition="${!pdict.subscriptionData.allowed}"> disabled</isif><isif condition="${pdict.subscriptionData.selected}"> checked</isif>>
+                    <label for="wlSubscriptionReplenishOrder" class="custom-control-label checkout-checkbox">${Resource.msg('label.subscription.replenishorrder', 'worldlineDirect', null)}</label>
+                </div>
+            </div>
+        </div>
+        
+        <isif condition="${pdict.subscriptionData.allowed}">
+        	<div id="wlSubscriptionFormValues" <isif condition="${!pdict.subscriptionData.selected}">style="display: none;"</isif>>
+	            <div class="row">
+	                <div class="col-sm-6">
+	                    <div class="form-group">
+	                        <label class="form-control-label line-item-attributes" for="subscriptionPeriod">${Resource.msg('label.subscription.startdate', 'worldlineDirect', null)}</label>
+	                        <input type="date" id="wlSubscriptionStartDate" onkeydown="return false" name="wlSubscriptionStartDate" value="${pdict.dates.startDate}" min="${pdict.dates.startDate}" max="2099-12-31" />
+	                    </div>
+	                </div>
+	                <div class="col-sm-6">
+	                    <div class="form-group">
+	                        <label class="form-control-label line-item-attributes" for="wlSubscriptionEndDate">${Resource.msg('label.subscription.enddate', 'worldlineDirect', null)}</label>
+	                        <input type="date" id="wlSubscriptionEndDate" onkeydown="return false" name="wlSubscriptionEndDate" value="${pdict.dates.endDate}" min="${pdict.dates.minEndDate}" max="2099-12-31" />
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-sm-6">
+	                    <div class="form-group">
+	                    
+	                        <label class="form-control-label line-item-attributes" for="wlSbscriptionPeriod">${Resource.msg('label.subscription.period', 'worldlineDirect', null)}</label>
+	                        <select class="form-control subscription-period" id="wlSbscriptionPeriod" data-url="/on/demandware.store/Sites-RefArchGlobal-Site/en_NL/Cart-UpdateSubscriptionDetails" data-field="subscriptionPeriod">
+								<isloop items="${pdict.subscriptionData.periodValues}" var="period">
+									<option value="${period.value}"<isif condition="${period.value == pdict.subscriptionData.subscriptionPeriod}"> selected</isif>>${period.displayValue}</option>
+								</isloop>
+	                        </select>
+	                    </div>
+	                </div>
+	                <div class="col-sm-6">
+	                    <div class="form-group">
+	                        <label class="form-control-label line-item-attributes" for="wlSubscriptionFrequency">${Resource.msg('label.subscription.frequency', 'worldlineDirect', null)}</label>
+	                        <select class="form-control subscription-frequency" id="wlSubscriptionFrequency" data-url="/on/demandware.store/Sites-RefArchGlobal-Site/en_NL/Cart-UpdateSubscriptionDetails" data-field="subscriptionFrequency">
+	                            <isloop items="${pdict.subscriptionData.frequencyValues}" var="frequency">
+									<option value="${frequency.value}"<isif condition="${frequency.value == pdict.subscriptionData.subscriptionFrequency}"> selected</isif>>${frequency.displayValue}</option>
+								</isloop>
+	                        </select>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+        <iselse>
+            <div class="row">
+                <div class="col-12">${Resource.msg('label.accountrequired', 'worldlineDirect', null)}</div>
+            </div>
+        </isif>
+    </div>
+</isif>

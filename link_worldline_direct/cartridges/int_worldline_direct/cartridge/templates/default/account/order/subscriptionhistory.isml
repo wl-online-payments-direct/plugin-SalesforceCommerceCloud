@@ -1,0 +1,42 @@
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/orderHistory.js');
+        assets.addCss('/css/account/profile.css');
+    </isscript>
+
+    <div class="hero slant-down account-image">
+        <h1 class="page-title">${Resource.msg('page.title.myaccount','account',null)}</h1>
+    </div>
+    <div class="container">
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+        <div class="row justify-content-center">
+           	<div class="col-12 col-sm-4 col-md-4">
+               	<h2>${Resource.msg('label.subscriptions','worldlineDirect',null)}</h2>
+            </div>
+            <div class="col-12 col-sm-4 col-md-3">
+                <div class="form-group">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="container order-list-container">
+                <isloop items="${pdict.orders}" var="order">
+    				<div class="row">
+				        <div class="col-xs-12 col-sm-8 offset-sm-2">
+				            <isinclude template="account/order/worldline/direct/subscriptionOrderHistoryCard"/>
+				        </div>
+				    </div>
+				</isloop>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-6 text-center">
+                <a href="${URLUtils.url('Account-Show')}" class="normal">
+                    ${Resource.msg('link.profile.backtomyaccount','account',null)}
+                </a>
+            </div>
+        </div>
+    </div>
+</isdecorate>

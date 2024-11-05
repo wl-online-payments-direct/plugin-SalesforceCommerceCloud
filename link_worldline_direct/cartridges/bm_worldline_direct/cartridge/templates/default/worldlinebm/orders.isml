@@ -15,7 +15,7 @@
         <isloop items="${pdict.PagingModel.pageElements}" var="order">
             <tr>
                 <td class="table_detail s" nowrap="nowrap">
-                    <a href="${URLUtils.url('ViewOrder_52-FindByNumber', 'OrderNo', order.orderNo)}" target="_blank">${order.orderNo}</a>
+                    <a href="${URLUtils.url('ViewOrder-FindByUUID', 'OrderUUID', order.orderUUID)}" target="_blank">${order.orderNo}</a>
                 </td>
                 <td class="table_detail s" nowrap="nowrap">
                     <isprint value="${order.orderDate}"/>

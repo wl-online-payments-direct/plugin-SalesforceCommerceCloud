@@ -1,0 +1,37 @@
+<isif condition="${!empty(pdict.PagingModel) && !empty(pdict.PagingModel.pageElements)}">
+    <table class="list-orders">
+        <tr>
+            <td class="table_header s">${Resource.msg('search.grid.number', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.date', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.customer', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('search.grid.email', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap">${Resource.msg('recurringorders.subscriptionstatus', 'worldlinebm', null)}</td>
+            <td class="table_header s left" nowrap="nowrap">${Resource.msg('search.grid.total', 'worldlinebm', null)}</td>
+            <td class="table_header s center" width="120px" nowrap="nowrap"></td>
+        </tr>
+
+        <isloop items="${pdict.PagingModel.pageElements}" var="order">
+            <tr>
+                <td class="table_detail s" nowrap="nowrap">
+                    <a href="${URLUtils.url('WorldlineDirectAdmin-SubscriptionOrders', 'OrderNo', order.orderNo)}"><b>${order.orderNo}</b></a>
+                </td>
+                <td class="table_detail s" nowrap="nowrap">
+                    <isprint value="${dw.util.StringUtils.formatCalendar(new dw.util.Calendar(new Date(order.creationDate)), 'M/dd/yy h:mm a')}"/>
+                </td>
+                
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.customer.profile.firstName}"/> <isprint value="${order.customer.profile.lastName}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.customer.profile.email}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.custom.worldlineDirectSubscriptionStatus.displayValue}"/></td>
+                <td class="table_detail s" nowrap="nowrap"><isprint value="${order.adjustedMerchandizeTotalPrice.toString()}"/></td>
+                <td class="table_detail s center" nowrap="nowrap"><a href="${URLUtils.url('WorldlineDirectAdmin-SubscriptionOrders', 'OrderNo', order.orderNo)}">${Resource.msg('search.grid.showdetails', 'worldlinebm', null)}</a></td>
+            </tr>
+        </isloop>
+
+    </table>
+
+    <isworldlinepagination paginationparameters="${pdict.paginationParameters}"/>
+<iselse>
+
+    <div class="table_detail w e s padding-small">${Resource.msg('transactions.emptysearch', 'worldlinebm', null)}</div>
+
+</isif>

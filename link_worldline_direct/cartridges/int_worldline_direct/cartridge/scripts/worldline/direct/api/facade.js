@@ -284,7 +284,6 @@ let refundPayment = function (paymentId, amount, currencyCode) {
     return { success: false, errorMessage: serviceResponse.errorMessage };
 };
 
-
 let getToken = function (tokenId) {
     const method = 'GET';
     const path = '/v2/{{merchantId}}/tokens/' + tokenId;
@@ -338,6 +337,42 @@ let calculateSurcharge = function (args) {
     return { error: true, errorMessage: serviceResponse.errorMessage };
 };
 
+let getMandate = function (mandateReference) {
+    const method = 'GET';
+    const path = '/v2/{{merchantId}}/mandates/' + mandateReference;
+
+    let requestObj = worldlineServiceHelper.prepareRequestObject(method, path, []);
+    let serviceResponse = worldlineService.call(requestObj);
+
+    if (serviceResponse.status == 'OK') {
+        let responseObj = serviceResponse.object;
+        responseObj.success = true;
+
+        return responseObj;
+    }
+
+    logger.error('Error getting mandate. ' + serviceResponse.errorMessage);
+    return { success: false, errorMessage: serviceResponse.errorMessage };
+};
+
+let revokeMandate = function (mandateReference) {
+    const method = 'POST';
+    const path = '/v2/{{merchantId}}/mandates/' + mandateReference + '/revoke';
+
+    let requestObj = worldlineServiceHelper.prepareRequestObject(method, path, []);
+    let serviceResponse = worldlineService.call(requestObj);
+
+    if (serviceResponse.status == 'OK') {
+        let responseObj = serviceResponse.object;
+        responseObj.success = true;
+
+        return responseObj;
+    }
+
+    logger.error('Error revoke mandate. ' + serviceResponse.errorMessage);
+    return { error: true, errorMessage: serviceResponse.errorMessage };
+};
+
 module.exports = {
     testConnection: testConnection,
     getPaymentProducts: getPaymentProducts,
@@ -356,5 +391,7 @@ module.exports = {
     refundPayment: refundPayment,
     getToken: getToken,
     deleteToken: deleteToken,
-    calculateSurcharge: calculateSurcharge
+    calculateSurcharge: calculateSurcharge,
+    getMandate: getMandate,
+    revokeMandate: revokeMandate,
 };

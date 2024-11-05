@@ -53,6 +53,21 @@
 		</sub-pipelines>
 		<icon>worldlinebm/images/Worldline-Mint-Symbol.png</icon>
 	</menuaction>
+	
+	<menuaction id="worldline_direct_recurring_orders" menupath="orders" position="120" site="true">
+		<name xml:lang="x-default">Worldline-Direct Subscriptions</name>
+		<short_description xml:lang="x-default"></short_description>
+		<description xml:lang="x-default">Manage the Worldline-Direct Subscriptions.</description>
+		<exec pipeline="WorldlineDirectAdmin" node="RecurringOrders" />
+		<sub-pipelines>
+			<pipeline name="WorldlineDirectAdmin-RecurringOrders" />
+			<pipeline name="WorldlineDirectAdmin-SubscriptionOrders" />
+			<pipeline name="WorldlineDirectAdmin-CancelSubscription" />
+			<pipeline name="WorldlineDirectAdmin-UnblockSubscription" />
+			<pipeline name="WorldlineDirectAdmin-BlockSubscription" />
+		</sub-pipelines>
+		<icon>worldlinebm/images/Worldline-Mint-Symbol.png</icon>
+	</menuaction>
 
 	<dialogaction id="worldline_direct_transactions_manager_dialog" extern="true" position="100" xp_ref="xp_orders_payment">
 		<name xml:lang="x-default">View Worldline Transaction</name>

@@ -4,6 +4,7 @@ const URLUtils = require('dw/web/URLUtils');
 const Site = require('dw/system/Site');
 const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
 const worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');
+const worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper');
 
 const currentSite = Site.getCurrent();
 
@@ -50,6 +51,13 @@ function WorldlineDirectHostedCheckoutSpecificInput(paymentInstrument, order) {
 
     if (tokens.length) {
         this.tokens = tokens.join(',');
+    }
+
+    let subscribtionData = worldlineDirectSubscriptionHelper.getSubscriptionData(order);
+    if (subscribtionData.selected) {
+        this.isRecurring = true;
+
+        delete this.tokens;
     }
 }
 

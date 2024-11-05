@@ -6,7 +6,8 @@ module.exports = [{
         name: 'js',
         entry: {
             'cartridges/bm_worldline_direct/cartridge/static/default/worldlinebm/js/worldlineAdmin': path.resolve('./cartridges/bm_worldline_direct/cartridge/client/default/worldlinebm/js/worldlineAdmin.js'),
-            'cartridges/int_worldline_direct/cartridge/static/default/js/checkout': path.resolve('./cartridges/int_worldline_direct/cartridge/client/default/js/checkout.js')
+            'cartridges/int_worldline_direct/cartridge/static/default/js/checkout': path.resolve('./cartridges/int_worldline_direct/cartridge/client/default/js/checkout.js'),
+			'cartridges/int_worldline_direct/cartridge/static/default/js/wlsubscription': path.resolve('./cartridges/int_worldline_direct/cartridge/client/default/js/wlsubscription.js')
         },
         output: {
             path: path.resolve('./'),
@@ -17,7 +18,8 @@ module.exports = [{
         name: 'scss',
         entry: {
             'cartridges/bm_worldline_direct/cartridge/static/default/worldlinebm/css/bm': path.resolve('./cartridges/bm_worldline_direct/cartridge/client/default/worldlinebm/scss/bm.scss'),
-            'cartridges/int_worldline_direct/cartridge/static/default/css/checkout/worldlineCheckout': path.resolve('./cartridges/int_worldline_direct/cartridge/client/default/scss/checkout/worldlineCheckout.scss')
+            'cartridges/int_worldline_direct/cartridge/static/default/css/checkout/worldlineCheckout': path.resolve('./cartridges/int_worldline_direct/cartridge/client/default/scss/checkout/worldlineCheckout.scss'),
+			'cartridges/int_worldline_direct/cartridge/static/default/css/account/worldlineOrderTrack': path.resolve('./cartridges/int_worldline_direct/cartridge/client/default/scss/account/worldlineOrderTrack.scss')
         },
         output: {
             path: path.resolve('./'),

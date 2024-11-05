@@ -1,0 +1,30 @@
+<isif condition="${!empty(pdict.PagingModel) && !empty(pdict.PagingModel.pageElements)}">
+    <table class="list-orders">
+        <tr>
+            <td class="table_header s">${Resource.msg('search.grid.number', 'worldlinebm', null)}</td>
+            <td class="table_header s center" nowrap="nowrap">${Resource.msg('search.grid.date', 'worldlinebm', null)}</td>
+            <td class="table_header s right" nowrap="nowrap">${Resource.msg('search.grid.total', 'worldlinebm', null)}</td>
+            <td class="table_header s" nowrap="nowrap" width="120px"></td>
+        </tr>
+
+        <isloop items="${pdict.PagingModel.pageElements}" var="order">
+            <tr>
+                <td class="table_detail s" nowrap="nowrap">
+                    <a href="${URLUtils.url('ViewOrder-FindByUUID', 'OrderUUID', order.getUUID())}" target="_blank"><b>${order.orderNo}</b></a>
+                </td>
+                <td class="table_detail s center" nowrap="nowrap">
+                    <isprint value="${dw.util.StringUtils.formatCalendar(new dw.util.Calendar(new Date(order.creationDate)), 'M/dd/yy h:mm a')}"/>
+                </td>             
+                <td class="table_detail s right" nowrap="nowrap"><isprint value="${order.adjustedMerchandizeTotalPrice.toString()}"/></td>
+                <td class="table_detail s right"><a href="${URLUtils.url('ViewOrder-FindByUUID', 'OrderUUID', order.getUUID())}" target="_blank">${Resource.msg('recurringorders.viewinorders', 'worldlinebm', null)}</a></td>
+            </tr>
+        </isloop>
+
+    </table>
+
+    <isworldlinepagination paginationparameters="${pdict.paginationParameters}"/>
+<iselse>
+
+    <div class="table_detail" style="padding: 0; margin-top: 15px;">${Resource.msg('recurringorders.emptysearch', 'worldlinebm', null)}</div>
+
+</isif>

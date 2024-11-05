@@ -3,6 +3,7 @@
 const Site = require('dw/system/Site');
 const currentSite = Site.getCurrent();
 const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+const worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper');
 
 /**
  * @param {dw.order.OrderPaymentInstrument} paymentInstrument Current Payment Instrument
@@ -33,6 +34,16 @@ function WorldlineDirectCardPaymentMethodSpecificInput(paymentInstrument, order)
         currentSite.getCustomPreferenceValue('worldlineDirect3DSExemption')
     ) {
         this.threeDSecure.exemptionRequest = 'low-value';
+    }
+
+    let subscribtionData = worldlineDirectSubscriptionHelper.getSubscriptionData(order);
+
+    if (subscribtionData.selected) {
+        this.threeDSecure.challengeIndicator = 'challenge-required';
+        this.recurring = {
+            recurringPaymentSequenceIndicator: 'first',
+        };
+        this.tokenize = true;
     }
 }
 

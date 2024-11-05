@@ -1,0 +1,199 @@
+<isset name="none" value="style='display: none;'" scope="page" />
+<isset name="block" value="style='display: block;'" scope="page" />
+<isdecorate template="worldlinebm/util/pt_worldline">
+
+<isinclude template="inc/Modules" />
+<isinclude template="worldlinebm/util/modules" />
+<isscript>
+	const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+</isscript>
+
+<div class="page worldline-subscriptions">
+    <div class="worldlinebm_header">
+        <isset name="ordersUrl" value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'orders')}" scope="page" />
+        <isbreadcrumb
+        	name1="${Resource.msg('transactions.breadcrumbs.name1', 'worldlinebm', null)}" url1="${URLUtils.https('ViewApplication-CompressMenuGroup', 'OverviewPage', 'SiteNavigationBar-ShowSiteOverview')}" 
+            name2="${Resource.msg('transactions.breadcrumbs.name2', 'worldlinebm', null)}" url2="${URLUtils.https('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'orders')}" 
+            name3="${Resource.msg('transactions.breadcrumbs.recurringorders', 'worldlinebm', null)}" url3="${URLUtils.https('WorldlineDirectAdmin-RecurringOrders')}"
+            name4="${Resource.msgf('recurringorders.subscriptionorder.breadcrumb', 'worldlinebm', null, pdict.order.orderNo)}"
+            />
+
+        <table>
+            <tr>
+                <td width="50%" class="table_title w e s n">
+                    ${Resource.msg('recurringorders.subscriptiosfor.title', 'worldlinebm', null)} ${pdict.order.orderNo}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="worldlinebm_subscription_order_details" class="js_worldlinebm_order_search_form">
+    	<table class="infobox w e s n" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+            	<td class="infobox_title top" width="15%">
+			    	${Resource.msg('recurringorders.subscription.subscriptionno', 'worldlinebm', null)}
+			    </td>
+			    <td width="35%">
+					${pdict.order.orderNo}
+					<a href="${URLUtils.url('ViewOrder-FindByUUID', 'OrderUUID', pdict.order.getUUID())}" target="_blank">${Resource.msg('recurringorders.viewinorders', 'worldlinebm', null)}</a>
+			    </td>
+			</tr>
+
+            <tr>
+            	<td class="infobox_title top" width="15%">
+			    	${Resource.msg('recurringorders.subscriptionstatus', 'worldlinebm', null)}:
+			    </td>
+			    <td width="35%">
+					${pdict.order.custom.worldlineDirectSubscriptionStatus.displayValue}
+			    </td>
+
+				<td class="infobox_title top" width="15%">
+			    	${Resource.msg('recurringorders.subscription.retry', 'worldlinebm', null)}:
+			    </td>
+			    <td width="35%">
+					${pdict.order.custom.worldlineDirectSubscriptionRetryCount ? pdict.order.custom.worldlineDirectSubscriptionRetryCount : 0}
+			    </td>
+			</tr>
+            <tr>
+            	<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.subscription.startdate', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${dw.util.StringUtils.formatCalendar(new dw.util.Calendar(pdict.order.custom.worldlineDirectSubscriptionStartDate), 'dd/MM/yyyy')}
+			    </td>
+				<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.subscription.nextdate', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${pdict.order.custom.worldlineDirectSubscriptionNextDate ? dw.util.StringUtils.formatCalendar(new dw.util.Calendar(pdict.order.custom.worldlineDirectSubscriptionNextDate), 'dd/MM/yyyy') : 'N/A'}
+			    </td>
+			</tr>
+			<tr>
+            	<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.subscription.enddate', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${pdict.order.custom.worldlineDirectSubscriptionEndDate ? dw.util.StringUtils.formatCalendar(new dw.util.Calendar(pdict.order.custom.worldlineDirectSubscriptionEndDate), 'dd/MM/yyyy') : 'N/A'}
+			    </td>
+			</tr>
+			<tr>
+            	<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.subscription.period', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${pdict.order.custom.worldlineDirectSubscriptionPeriod}
+			    </td>
+			</tr>
+			<tr>
+				<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.subscription.freq', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${pdict.order.custom.worldlineDirectSubscriptionFrequency}
+			    </td>
+			</tr>
+			<tr><td colspan="4"></td></tr>
+			<tr><td colspan="4" class="infobox_title top s"></td></tr>
+			<tr>
+				<td class="infobox_title top">
+					${Resource.msg('search.grid.customer', 'worldlinebm', null)}:
+				</td>
+				<td>
+					${pdict.order.getCustomerName()}
+				</td>
+			</tr>
+			<tr>
+				<td class="infobox_title top">
+					${Resource.msg('search.customer.number', 'worldlinebm', null)}:
+				</td>
+				<td>
+					${pdict.order.getCustomerNo()}
+				</td>
+			</tr>
+			<tr>
+				<td class="infobox_title top">
+					${Resource.msg('search.grid.email', 'worldlinebm', null)}:
+				</td>
+				<td>
+					${pdict.order.getCustomerEmail()}
+				</td>
+			</tr>
+			<tr><td colspan="4"></td></tr>
+			<tr><td colspan="4" class="infobox_title top s"></td></tr>
+			<tr>
+            	<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.paymentproductname', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${pdict.paymentInstrument.custom.worldlineDirectPaymentProductName}
+			    </td>
+				<isif condition="${!empty(pdict.mandate)}">
+					<td width="15%" class="infobox_title top">${Resource.msg('recurringorders.mandate.info', 'worldlinebm', null)}</td>
+					<td rowspan="3">
+						${pdict.mandate.name}<br/>
+						${!empty(pdict.mandate.companyName) ? pdict.mandate.companyName + '<br/>' : ''}
+						${pdict.mandate.address}<br/>
+						${Resource.msg('recurringorders.mandate.iban', 'worldlinebm', null)}: ${pdict.mandate.iban}<br/>
+						${Resource.msg('recurringorders.mandate.status', 'worldlinebm', null)}: ${pdict.mandate.status}
+					<td>
+				</isif>
+			</tr>
+			<tr>
+            	<td class="infobox_title top">
+			    	${Resource.msg('recurringorders.paymentproductid', 'worldlinebm', null)}:
+			    </td>
+			    <td>
+					${pdict.paymentInstrument.custom.worldlineDirectPaymentProductID}
+			    </td>
+			</tr>
+			<isif condition="${!empty(pdict.mandate)}">
+				<tr><td></td><td></td></tr>
+			</isif>
+		</table>
+		<table class="w e s" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td>
+					<isif condition="${(pdict.order.custom.worldlineDirectSubscriptionStatus.value == WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_ACTIVE) || (pdict.order.custom.worldlineDirectSubscriptionStatus.value == WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_BLOCKED)}">
+						<isif condition="${pdict.order.custom.worldlineDirectSubscriptionStatus.value == WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_BLOCKED}">
+							<form action="${URLUtils.url('WorldlineDirectAdmin-UnblockSubscription', 'orderNo', pdict.order.orderNo)}" method="post" onsubmit="return confirm('${Resource.msg('confirmation.complete.subscription', 'worldlinebm', null)}');">
+								<input type="hidden" value="${pdict.order.orderNo}" name="OrderNo"/>
+								<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+								<input
+								type="submit"
+								class="button"
+								value="${Resource.msg('recurringorders.unblocksubscription', 'worldlinebm', null)}"
+								/>
+							</form>
+						<iselse>
+							<form action="${URLUtils.url('WorldlineDirectAdmin-BlockSubscription', 'orderNo', pdict.order.orderNo)}" method="post" onsubmit="return confirm('${Resource.msg('confirmation.block.subscription', 'worldlinebm', null)}');">
+								<input type="hidden" value="${pdict.order.orderNo}" name="OrderNo"/>
+								<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+								<input
+								type="submit"
+								class="button"
+								value="${Resource.msg('recurringorders.blocksubscription', 'worldlinebm', null)}"
+								/>
+							</form>
+						</isif>
+						<form action="${URLUtils.url('WorldlineDirectAdmin-CancelSubscription', 'orderNo', pdict.order.orderNo)}" method="post" onsubmit="return confirm('${Resource.msg('confirmation.cancel.subscription', 'worldlinebm', null)}');">
+							<input type="hidden" value="${pdict.order.orderNo}" name="OrderNo"/>
+							<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+							<input
+							type="submit"
+							class="button"
+							value="${Resource.msg('recurringorders.cancelsubscription', 'worldlinebm', null)}"
+							/>
+						</form>
+					</isif>
+				</td>
+			</tr>
+		</table>					
+    </div>
+
+    <isinclude template="worldlinebm/subscriptionOrders"/>
+    
+    <div class="support-email-block">
+        ${Resource.msg('worldline.contactsupportteam', 'worldlinebm', null)}
+        <a href="mailto:${Resource.msg('worldline.supportemail', 'worldlinebm', null)}">${Resource.msg('worldline.supportemail', 'worldlinebm', null)}</a>
+    </div>
+</div>
+</isdecorate>

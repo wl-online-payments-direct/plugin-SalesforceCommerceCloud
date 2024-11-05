@@ -29,4 +29,10 @@
         <processor-id>WORLDLINE_DIRECT_CREDIT_REDIRECT</processor-id>
     </payment-method>
 
+    <payment-method method-id="WORLDLINE_DIRECT_DIRECTDEBIT">
+        <name xml:lang="x-default">Worldline Direct Debit Payment Methods</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>WORLDLINE_DIRECT_DIRECTDEBIT</processor-id>
+    </payment-method>
+
 </payment-settings>

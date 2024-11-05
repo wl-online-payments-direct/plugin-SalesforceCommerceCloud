@@ -11,6 +11,7 @@ const worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direc
 const worldlineDirectApiFacade = require('*/cartridge/scripts/worldline/direct/api/facade');
 const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
 const paymentProductOverridesHelper = require('*/cartridge/scripts/worldline/direct/paymentProductOverridesHelper');
+const worldlineDirectSubscriptionHelper = require('*/cartridge/scripts/worldline/direct/subscriptionHelper');
 
 const logger = Logger.getRootLogger();
 const currentSite = Site.getCurrent();
@@ -68,11 +69,11 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
     var currentBasket = basket;
     var tokenizationResult = worldlineDirectApiFacade.getHostedTokenizationSession(paymentInformation.hostedCheckoutId.value);
 
+    logger.debug(JSON.stringify(tokenizationResult));
+
     if (tokenizationResult.error || !('token' in tokenizationResult)) {
         return { fieldErrors: {}, serverErrors: [Resource.msg('error.payment.not.valid', 'worldlineDirect', null)], error: true };
     }
-
-    logger.debug(JSON.stringify(tokenizationResult));
 
     var worldlineDirectPaymentProductID = tokenizationResult.token.paymentProductId;
     var paymentProductOverride = paymentProductOverridesHelper.getPaymentProduct(worldlineDirectPaymentProductID);
@@ -95,7 +96,6 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
         countryCode: countryCode,
         currencyCode: currentBasket.currencyCode
     });
-
 
     if (currentSite.getCustomPreferenceValue('worldlineDirectApplySurcharge')) {
         var surchargeResult = worldlineDirectApiFacade.calculateSurcharge({
@@ -139,7 +139,7 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
         paymentInstrument.setCreditCardHolder(cardData.cardholderName);
         paymentInstrument.setCreditCardType(paymentProduct.displayHints.label);
         paymentInstrument.setCreditCardExpirationMonth(parseInt(cardData.expiryDate.slice(0, 2), 10));
-        paymentInstrument.setCreditCardExpirationYear(parseInt(cardData.expiryDate.slice(2, 4), 10));
+        paymentInstrument.setCreditCardExpirationYear(parseInt('20' + cardData.expiryDate.slice(2, 4), 10));
         paymentInstrument.setCreditCardToken(token.id);
 
         paymentInstrument.custom.worldlineDirectCardExpiry = cardData.expiryDate;
@@ -151,12 +151,18 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
         return paymentInstrument;
     });
 
-    if (!token.isTemporary && tokenizationResult.status === WorldlineDirectConstants.TOKEN_CREATED) {
+    var subscribtionData = worldlineDirectSubscriptionHelper.getSubscriptionData(basket);
+
+    if (!token.isTemporary && tokenizationResult.status === WorldlineDirectConstants.TOKEN_CREATED && !subscribtionData.selected) {
         var customer = session.getCustomer();
 
         if (customer.authenticated) {
             worldlineDirectCommonHelper.savePaymentInstrumentToWallet(token.id, orderPaymentInstrument, customer);
         }
+    }
+
+    if (subscribtionData.selected && token.isTemporary) {
+        return { fieldErrors: {}, serverErrors: [Resource.msg('worldline.checkout.subscription.tokenize.error', 'worldlineDirect', null)], error: true };
     }
 
     return { fieldErrors: {}, serverErrors: [], error: false };
@@ -194,9 +200,22 @@ function Authorize(order, paymentInstrument, paymentProcessor) {
         worldlineDirectCommonHelper.handlePaymentStatus(order, paymentResponse.payment);
 
         Transaction.wrap(function () {
-            paymentInstrument.paymentTransaction.setPaymentProcessor(paymentProcessor);
             order.custom.isWorldlineDirectOrder = true;
             order.custom.worldlineDirectTransactionID = worldlineDirectCommonHelper.standartiseTransactionId(paymentResponse.payment.id);
+            paymentInstrument.paymentTransaction.setPaymentProcessor(paymentProcessor);
+
+            if ('authorisationCode' in paymentResponse.payment.paymentOutput.cardPaymentMethodSpecificOutput) {
+                paymentInstrument.custom.worldlineDirectAuthorisationCode = paymentResponse.payment.paymentOutput.cardPaymentMethodSpecificOutput.authorisationCode;
+            }
+            
+            if ('schemeReferenceData' in paymentResponse.payment.paymentOutput.cardPaymentMethodSpecificOutput) {
+                paymentInstrument.custom.worldlineDirectCardSchemeReferenceData = paymentResponse.payment.paymentOutput.cardPaymentMethodSpecificOutput.schemeReferenceData;
+            }
+
+            if ('surchargeSpecificOutput' in paymentResponse.payment.paymentOutput && 'surchargeAmount' in paymentResponse.payment.paymentOutput.surchargeSpecificOutput) {
+                var surchargeAmount = worldlineDirectCommonHelper.convertWorldlineAmountToMoney(paymentResponse.payment.paymentOutput.surchargeSpecificOutput.surchargeAmount.amount, paymentResponse.payment.paymentOutput.surchargeSpecificOutput.surchargeAmount.currencyCode);
+                order.custom.worldlineDirectSurchargeAmount = surchargeAmount.value;
+            }
         });
 
         if ('merchantAction' in paymentResponse && 'actionType' in paymentResponse.merchantAction && paymentResponse.merchantAction.actionType === 'REDIRECT') {
@@ -238,6 +257,16 @@ function validatePayment(order, paymentInstrument, paymentResult) {
             try {
                 Transaction.wrap(function () {
                     paymentInstrument.custom.worldlineDirectAuthorisationCode = cardPaymentData.authorisationCode;
+                });
+            } catch (e) {
+                logger.error(e);
+            }
+        }
+
+        if ('schemeReferenceData' in cardPaymentData) {
+            try {
+                Transaction.wrap(function () {
+                    paymentInstrument.custom.worldlineDirectCardSchemeReferenceData = cardPaymentData.schemeReferenceData;
                 });
             } catch (e) {
                 logger.error(e);

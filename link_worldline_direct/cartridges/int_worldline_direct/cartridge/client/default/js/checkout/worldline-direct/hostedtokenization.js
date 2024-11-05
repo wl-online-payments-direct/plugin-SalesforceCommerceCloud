@@ -24,27 +24,27 @@ function initTokenizerForm(onReady) {
 
     // reset hostedTokenizationField value and hostedTokenizationDiv content
     hostedTokenizationSessionIdField.val('');
-    hostedTokenizationDiv.html('');
+    hostedTokenizationDiv.html("");
 
     $.getJSON(createHTPSessionURL, function (sessionResponse) {
-        if (!sessionResponse.error && 'redirectUrl' in sessionResponse) {
+        if (!sessionResponse.error && 'redirectUrl' in sessionResponse) {        
             window.tokenizer = new window.Tokenizer(sessionResponse.redirectUrl, hostedTokenizationDivID, { hideCardholderName: false, hideTokenFields: false });
-
+                        
             window.tokenizer.initialize()
-                            .then(function (tokenizerResponse) {
-                                var $iframeEl = hostedTokenizationDiv.find('iframe');
-                                $iframeEl.css({ width: '100%', border: 0 });
+                .then(function () {
+                    var $iframeEl = hostedTokenizationDiv.find('iframe');
+                    $iframeEl.css({ width: '100%', border: 0 });
 
-                                billingForm.spinner().stop();
+                    billingForm.spinner().stop();
 
-                                if (typeof onReady === "function") {
-                                    onReady();
-                                }
-                            })
-                            .catch(function (tokenizerError) {
-                                billingForm.spinner().stop();
-                                console.error(tokenizerError); // eslint-disable-line no-console
-                            });
+                    if (typeof onReady === "function") {
+                        onReady();
+                    }
+                })
+                .catch(function (tokenizerError) {
+                    billingForm.spinner().stop();
+                    console.error(tokenizerError); // eslint-disable-line no-console
+                });
         }
     });
 }
@@ -55,7 +55,7 @@ function initTokenizerForm(onReady) {
 function initializeHostedTokenizationEvents() {
     var checkoutMain = document.getElementById(checkoutMainID);
     var checkoutStageAttr = 'data-checkout-stage';
-    var checkoutStepChanged = function (mutationsList, observer) {
+    var checkoutStepChanged = function (mutationsList) {
         mutationsList.forEach(function (mutation) {
             if (mutation.type === 'attributes' && mutation.attributeName === checkoutStageAttr) {
                 if (checkoutMain.getAttribute(mutation.attributeName) === 'payment') {
@@ -68,8 +68,28 @@ function initializeHostedTokenizationEvents() {
         });
     };
 
-    var observer = new MutationObserver(checkoutStepChanged);
-    observer.observe(checkoutMain, { attributes: true, childList: false, subtree: false });
+    var checkoutStepObserver = new MutationObserver(checkoutStepChanged);
+    checkoutStepObserver.observe(checkoutMain, { attributes: true, childList: false, subtree: false });
+
+    var errorMessageDiv = $(checkoutMain).find('.error-message').get(0);
+    var lastErrorDisplayValue = errorMessageDiv.style.display;
+
+    var errorObserver = new MutationObserver(function(mutationsList) {
+        mutationsList.forEach( function(mutation) {
+            if (mutation.attributeName !== 'style') {
+                return;
+            }
+
+            var errorDisplayValue = mutation.target.style.display;
+
+            if (checkoutMain.getAttribute(checkoutStageAttr) === 'payment' && errorDisplayValue !== 'none' && lastErrorDisplayValue !== errorDisplayValue) {
+                initTokenizerForm();
+            }
+            lastErrorDisplayValue = errorDisplayValue;
+        });
+    });
+
+    errorObserver.observe(errorMessageDiv, { attributes: true, childList: false, subtree: false });
 
     $('.submit-payment').on('click.worldline', function (e) {
         if (paymentInformationDiv.data('payment-method-id') === hostedTokenizationPaymentMethodID && hostedTokenizationSessionIdField.val() == '') {

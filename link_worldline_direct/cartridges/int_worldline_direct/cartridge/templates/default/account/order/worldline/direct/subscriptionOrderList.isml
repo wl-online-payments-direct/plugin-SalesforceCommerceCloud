@@ -1,0 +1,43 @@
+<!--- TEMPLATENAME: subscriptionOrderList.isml --->
+<isif condition="${pdict.order.custom.worldlineDirectSubscriptionStartDate}">
+	<isinclude template="account/order/worldline/direct/subscriptionOrderDetailsCard" />
+</isif>
+<isif condition="${!pdict.orders.empty}">
+	<div class="card">
+	    <div class="card-header">
+	        <h2 class="pull-left">${Resource.msg('title.replenishmenthistory', 'worldlineDirect', null)}</h2>
+	    </div>
+	
+	    <div class="card-body clearfix">
+	        <div class="row justify-content-center">
+	            <div class="container order-list-container">
+	            	<div class="row">
+	            		<div class="col-4">${Resource.msg('label.subscriptionorderhistory.ordernumber', 'worldlineDirect', null)}</div>
+	            		<div class="col-3">${Resource.msg('label.subscriptionorderhistory.creationdate', 'worldlineDirect', null)}</div>
+	            		<div class="col-3"><p class="text-right">${Resource.msg('label.subscriptionorderhistory.ordertotal', 'worldlineDirect', null)}</p></div>
+	            		<div class="col-2"></div>
+	            	</div>
+	                <isloop items="${pdict.orders}" var="order">
+					    <div class="row">
+					        <div class="col-4">
+					        	${order.orderNumber}
+					        </div>
+					        <div class="col-3">
+					        	${dw.util.StringUtils.formatCalendar(new dw.util.Calendar(order.creationDate), "dd.MM.YYYY")}
+					        </div>
+					        <div class="col-3">
+					        	<p class="text-right">${order.priceTotal}</p>
+					        </div>	
+					         <div class="col-2">
+					        	<p class="text-right">
+					        		<a target="_blank" href="${URLUtils.url('Order-Details', 'orderID', order.orderNumber, 'orderFilter', '')}" class="pull-right" aria-label="${Resource.msgf('label.orderhistory.vieworderdetails', 'account', null, order.orderNumber)}">${Resource.msg('link.view','account',null)}</a>
+					        	</p>
+					        </div>	
+					    </div>
+					</isloop>
+	            </div>
+	        </div>
+	
+	    </div>
+	</div>
+</isif>

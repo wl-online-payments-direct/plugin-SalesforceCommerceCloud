@@ -1,0 +1,6 @@
+<!--- TEMPLATENAME: adminemail.isml --->
+<isif condition="${pdict.orderNo != null}">
+Subscription order number: ${pdict.orderNo}<br/>
+</isif>
+Original order number: ${pdict.originalOrderNo}</br/>
+${pdict.error}<br/>

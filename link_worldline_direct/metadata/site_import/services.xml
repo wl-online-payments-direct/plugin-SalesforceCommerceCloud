@@ -12,9 +12,25 @@
         <user-id>API_KEY</user-id>
         <password encrypted="true" encryption-type="common.export">API_SECRET</password>
     </service-credential>
+	
+	<service-credential service-credential-id="worldline.httpform.ocapi">
+        <url>https://zzok-002.dx.commercecloud.salesforce.com</url>
+        <user-id>OCAPI_CLIENT_ID</user-id>
+        <password encrypted="true" encryption-type="common.export">OCAPI_CLIENT_SECRET</password>
+    </service-credential>
 
     <service-profile service-profile-id="worldline.direct.profile">
         <timeout-millis>60000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+	
+	<service-profile service-profile-id="worldline.ocapi.profile">
+        <timeout-millis>10000</timeout-millis>
         <rate-limit-enabled>false</rate-limit-enabled>
         <rate-limit-calls>0</rate-limit-calls>
         <rate-limit-millis>0</rate-limit-millis>
@@ -32,6 +48,17 @@
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>worldline.direct.profile</profile-id>
         <credential-id>worldline.https.direct.yoursiteid.TEST</credential-id>
+    </service>
+	
+	<service service-id="worldline.httpform.ocapi">
+        <service-type>HTTPForm</service-type>
+        <enabled>true</enabled>
+        <log-prefix>wdocapi</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>worldline.ocapi.profile</profile-id>
+        <credential-id>worldline.httpform.ocapi</credential-id>
     </service>
 
 </services>

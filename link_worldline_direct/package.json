@@ -2,7 +2,7 @@
   "name": "int_worldline_direct",
   "description": "Worldline-Direct Payments Cartridge",
   "main": "index.js",
-  "version": "23.1.0",
+  "version": "24.1.0",
   "scripts": {
     "test": "sgmf-scripts --test 'test/unit/**/*.js'",
     "test:acceptance:allPaymentMethods": "npx codeceptjs run --grep @allPaymentMethods --verbose",

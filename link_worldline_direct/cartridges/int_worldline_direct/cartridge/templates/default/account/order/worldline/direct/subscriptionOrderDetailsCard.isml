@@ -1,0 +1,76 @@
+<!--- TEMPLATENAME: subscriptionOrderDetailsCard.isml --->
+<isscript>
+	var WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+	var startDate = new dw.util.Calendar(pdict.order.custom.worldlineDirectSubscriptionStartDate);
+	var startDateFormated = dw.util.StringUtils.formatCalendar(startDate, "dd.MM.YYYY");
+	var endDateFormated = 'N/A';
+	if (pdict.order.custom.worldlineDirectSubscriptionEndDate) {
+		var endDate = new dw.util.Calendar(pdict.order.custom.worldlineDirectSubscriptionEndDate);
+		var endDateFormated = dw.util.StringUtils.formatCalendar(endDate, "dd.MM.YYYY")
+	}
+</isscript>
+<div class="card">
+    <div class="card-header">
+        <h2 class="pull-left">${Resource.msg('title.subscriptiondetails', 'worldlineDirect', null)}</h2>
+    </div>
+
+    <div class="card-body clearfix">
+        <div class="row justify-content-center">
+        	<div class="col-6">
+        		<span>
+        			${Resource.msg('label.subscriptionorderhistory.subscriptionnumber', 'worldlineDirect', null)}
+        		</span>
+        	</div>
+        	<div class="col-6">
+        		<p class="text-right">${pdict.order.orderNo}</p>
+        	</div>
+        	<div class="col-6">
+        		<span>
+        			${Resource.msg('label.subscription.status', 'worldlineDirect', null)}
+        		</span>
+        	</div>
+        	<div class="col-6">
+        		<p class="text-right">${pdict.order.custom.worldlineDirectSubscriptionStatus.displayValue}</p>
+        	</div>
+        	<div class="col-6">
+        		<span>
+        			${Resource.msg('label.subscription.period', 'worldlineDirect', null)}
+        		</span>
+        	</div>
+        	<div class="col-6">
+        		<p class="text-right">${pdict.order.custom.worldlineDirectSubscriptionPeriod}</p>
+        	</div>
+        	<div class="col-6">
+        		<span>
+        			${Resource.msg('label.subscription.frequency', 'worldlineDirect', null)}
+        		</span>
+        	</div>
+        	<div class="col-6">
+        		<p class="text-right">${pdict.order.custom.worldlineDirectSubscriptionFrequency}</p>
+        	</div>
+        	<div class="col-6">
+        		<span>
+        			${Resource.msg('label.subscription.startdate', 'worldlineDirect', null)}
+        		</span>
+        	</div>
+        	<div class="col-6">
+        		<p class="text-right">${startDateFormated}</p>
+        	</div>
+        	<div class="col-6">
+        		<span>
+        			${Resource.msg('label.subscription.enddate', 'worldlineDirect', null)}
+        		</span>
+        	</div>
+        	<div class="col-6">
+        		<p class="text-right">
+        			${endDateFormated}
+        		</p>
+        	</div>
+        	<isif condition="${pdict.order.custom.worldlineDirectSubscriptionStatus.value == WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_ACTIVE}">
+	        	<div  class="col-12">
+	        		<a href="javascript:void(0);" class="cancel-subscription text-danger" data-url="${URLUtils.url('SubscriptionOrder-CancelSubscription')}" data-order="${pdict.CurrentHttpParameterMap.orderNo.stringValue}" data-confirmMsg="${Resource.msg('label.confirmordercancelation', 'worldlineDirect', null)}" aria-label="${Resource.msg('label.cancelsubscrition','worldlineDirect',null)}">${Resource.msg('label.cancelsubscrition','worldlineDirect',null)}</a>
+	        	</div>
+        	</isif>
+        </div>
+    </div>
+</div>

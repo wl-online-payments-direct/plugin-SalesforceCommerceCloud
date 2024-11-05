@@ -155,13 +155,6 @@
                 <externally-managed-flag>true</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="worldlineDirectMandateReference">
-                <display-name xml:lang="x-default">Mandate Reference</display-name>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>true</externally-managed-flag>
-                <min-length>0</min-length>
-            </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSurchargeAmount">
                 <display-name xml:lang="x-default">Surcharge Amount</display-name>
                 <type>double</type>
@@ -184,7 +177,6 @@
                 <attribute attribute-id="worldlineDirectHasCaptures"/>
                 <attribute attribute-id="worldlineDirectHasRefunds"/>
                 <attribute attribute-id="worldlineDirectHasChargebacks"/>
-                <attribute attribute-id="worldlineDirectMandateReference"/>
                 <attribute attribute-id="worldlineDirectSurchargeAmount"/>
             </attribute-group>
         </group-definitions>

@@ -83,6 +83,7 @@ function getOrders(orderNo, orderUUID) {
             orderNo: order.orderNo,
             orderToken: order.orderToken,
             orderDate: StringUtils.formatCalendar(new Calendar(orderDate), 'M/dd/yy h:mm a'),
+            orderUUID: order.getUUID(),
             createdBy: order.createdBy,
             isRegestered: order.customer.registered,
             customer: order.customerName,
@@ -566,6 +567,184 @@ function (req, res, next) {
     });
     return next();
 });
+
+server.use('RecurringOrders',
+    server.middleware.https,
+    csrfProtection.validateRequest,
+function (req, res, next) {
+	var isSearchAdvanced = false;
+	
+	var searchQuery = "custom.worldlineDirectSubscriptionStartDate != {0}";
+	var parameters = [null];
+	var paramIndex = 1; //0 is used in the base searchQuery above
+	if (request.httpParameterMap.orderNo.value) {
+		parameters.push(request.httpParameterMap.orderNo.value);
+		searchQuery += " AND orderNo={" + paramIndex + "}";
+		paramIndex++;
+	}
+	if (request.httpParameterMap.customerNo.value) {
+		parameters.push(request.httpParameterMap.customerNo.value);
+		searchQuery += " AND customerNo={" + paramIndex + "}";
+		paramIndex++;
+		isSearchAdvanced = true;
+	}
+	if (request.httpParameterMap.statusFilter.value) {
+		if (request.httpParameterMap.statusFilter.value != 'all') {
+			parameters.push(request.httpParameterMap.statusFilter.value);
+			searchQuery += " AND custom.worldlineDirectSubscriptionStatus={" + paramIndex + "}";
+			paramIndex++;
+		}
+		isSearchAdvanced = true;
+	}
+
+	var orders = OrderMgr.searchOrders(searchQuery, "creationDate desc", parameters);
+	
+	var pageSize = !empty(request.httpParameterMap.pagesize.intValue) ? request.httpParameterMap.pagesize.intValue : 10;
+    var currentPage = request.httpParameterMap.page.intValue ? request.httpParameterMap.page.intValue : 1;
+    pageSize = pageSize === 0 ? orders.count : pageSize;
+    var start = pageSize * (currentPage - 1);
+
+    var orderPagingModel = new PagingModel(orders, orders.count);
+
+    orderPagingModel.setPageSize(pageSize);
+    orderPagingModel.setStart(start);
+
+    var firstOrder = OrderMgr.searchOrder("orderNo != {0}", "creationDate desc", null);
+    
+    statusValues = firstOrder.describe().getCustomAttributeDefinition('worldlineDirectSubscriptionStatus').values;
+    
+    res.render('worldlinebm/recurringOrderList', {
+    	PagingModel: orderPagingModel,
+        paginationParameters: getPaginationParameters(orderPagingModel, URLUtils.https('WorldlineDirectAdmin-RecurringOrders').toString()),
+        isSearchAdvanced: isSearchAdvanced,
+        statusValues: statusValues
+    });
+    next();
+});
+
+server.use('SubscriptionOrders',
+	    server.middleware.https,
+	function (req, res, next) {
+        var WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+        var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');
+        var worldlineApiFacade = require('*/cartridge/scripts/worldline/direct/api/facade');
+        
+		var originalOrder = OrderMgr.getOrder(request.httpParameterMap.OrderNo.value);
+
+        var subscriptionOrders = OrderMgr.searchOrders("custom.worldlineDirectSubscriptionOriginalOrderID = {0}", "creationDate desc", request.httpParameterMap.OrderNo.value);
+
+		var pageSize = !empty(request.httpParameterMap.pagesize.intValue) ? request.httpParameterMap.pagesize.intValue : 10;
+	    var currentPage = request.httpParameterMap.page.intValue ? request.httpParameterMap.page.intValue : 1;
+	    pageSize = pageSize === 0 ? orders.length : pageSize;
+	    var start = pageSize * (currentPage - 1);
+
+	    var subscriptionOrdersPagingModel = new PagingModel(subscriptionOrders, subscriptionOrders.count);
+	    subscriptionOrdersPagingModel.setPageSize(pageSize);
+	    subscriptionOrdersPagingModel.setStart(start);
+
+
+        var mandateObj = null;
+
+        var wordlineDirectPaymentInstrument = worldlineDirectCommonHelper.getWorldlinePaymentInstrument(originalOrder);
+
+        if (wordlineDirectPaymentInstrument && wordlineDirectPaymentInstrument.custom.worldlineDirectPaymentMethod === WorldlineDirectConstants.PAYMENT_PRODUCT_DIRECT_DEBIT)
+        {
+            var mandateInfo = worldlineApiFacade.getMandate(wordlineDirectPaymentInstrument.custom.worldlineDirectMandateReference);
+
+            if (mandateInfo.success) {
+                mandateObj = {
+                    name: [mandateInfo.mandate.customer.personalInformation.title, mandateInfo.mandate.customer.personalInformation.name.firstName, mandateInfo.mandate.customer.personalInformation.name.surname].join(' '),
+                    companyName: mandateInfo.mandate.customer.companyName,
+                    iban: mandateInfo.mandate.customer.bankAccountIban.iban,
+                    address: mandateInfo.mandate.customer.mandateAddress.street + ', ' + mandateInfo.mandate.customer.mandateAddress.city + ', ' + mandateInfo.mandate.customer.mandateAddress.countryCode + ' ' + mandateInfo.mandate.customer.mandateAddress.zip,
+                    status: mandateInfo.mandate.status,
+                };
+            }
+        }
+    
+	    res.render('worldlinebm/subscriptionOrderList', {
+	    	order: originalOrder,
+	    	paymentInstrument: wordlineDirectPaymentInstrument,
+	    	PagingModel: subscriptionOrdersPagingModel,
+	        paginationParameters: getPaginationParameters(subscriptionOrdersPagingModel, URLUtils.https('WorldlineDirectAdmin-SubscriptionOrders').toString()),
+	        isSearchByOrderNo: true,
+            mandate: mandateObj,
+	    });
+	    
+		next();
+	}
+);
+
+server.post('CancelSubscription',
+	    server.middleware.https,
+	    csrfProtection.validateRequest,
+	function (req, res, next) {
+        var WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+        var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');
+        var worldlineApiFacade = require('*/cartridge/scripts/worldline/direct/api/facade');
+
+        var Transaction = require('dw/system/Transaction');
+		var orderNo = request.httpParameterMap.OrderNo.value;
+		var order = OrderMgr.getOrder(orderNo);
+
+        var wordlineDirectPaymentInstrument = worldlineDirectCommonHelper.getWorldlinePaymentInstrument(order);
+
+        if (!wordlineDirectPaymentInstrument) {
+            throw new Error('WORLDLINE_PAYMENT_INSTRUMENT_NOT_FOUND');
+        }
+
+        if (wordlineDirectPaymentInstrument.custom.worldlineDirectPaymentMethod === WorldlineDirectConstants.PAYMENT_PRODUCT_GROUP_CARD) {
+            worldlineApiFacade.deleteToken(wordlineDirectPaymentInstrument.getCreditCardToken());
+        }
+        else if (wordlineDirectPaymentInstrument.custom.worldlineDirectPaymentMethod === WorldlineDirectConstants.PAYMENT_PRODUCT_DIRECT_DEBIT) {
+            worldlineApiFacade.revokeMandate(wordlineDirectPaymentInstrument.custom.worldlineDirectMandateReference);
+        }
+    
+		Transaction.wrap(function() {
+			order.custom.worldlineDirectSubscriptionStatus = WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_CANCELLED;
+            order.custom.worldlineDirectSubscriptionEndDate = new Date();
+            order.custom.worldlineDirectSubscriptionNextDate = null;
+		});
+		
+		var redirectUrl = URLUtils.https('WorldlineDirectAdmin-SubscriptionOrders', 'OrderNo', orderNo);
+		res.redirect(redirectUrl);
+	    next();
+});
+
+server.post('UnblockSubscription',
+	    server.middleware.https,
+	    csrfProtection.validateRequest,
+	function (req, res, next) {
+		const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+		const Transaction = require('dw/system/Transaction');
+		var orderNo = request.httpParameterMap.OrderNo.value;
+		var order = OrderMgr.getOrder(orderNo);
+		Transaction.wrap(function() {
+			order.custom.worldlineDirectSubscriptionStatus = WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_ACTIVE;
+		});
+		
+		var redirectUrl = URLUtils.https('WorldlineDirectAdmin-SubscriptionOrders', 'OrderNo', orderNo);
+		res.redirect(redirectUrl);
+	    next();
+});
+
+server.post('BlockSubscription',
+	    server.middleware.https,
+	    csrfProtection.validateRequest,
+	function (req, res, next) {
+		const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+		const Transaction = require('dw/system/Transaction');
+		var orderNo = request.httpParameterMap.OrderNo.value;
+		var order = OrderMgr.getOrder(orderNo);
+		Transaction.wrap(function() {
+			order.custom.worldlineDirectSubscriptionStatus = WorldlineDirectConstants.RECURRING_ORDERS_SUBSCRIPTION_STATUS_BLOCKED;
+		});
+		
+		var redirectUrl = URLUtils.https('WorldlineDirectAdmin-SubscriptionOrders', 'OrderNo', orderNo);
+		res.redirect(redirectUrl);
+	    next();
+});
+
 
 module.exports = server.exports();
 

@@ -1,0 +1,13 @@
+<!--- TEMPLATENAME: adminemail.isml --->
+Original Order No: ${pdict.originalOrderNo}<br/>
+<isif condition="${pdict.orderStatus}">
+Subscription Order No: ${pdict.orderNo}<br/>
+<isif condition="${pdict.recurringStatus}">
+	${pdict.recurringStatus}</br>
+</isif>
+Error: ${pdict.shortError}<br/>
+</isif> 
+Proof:
+${pdict.error}<br/>
+	
+

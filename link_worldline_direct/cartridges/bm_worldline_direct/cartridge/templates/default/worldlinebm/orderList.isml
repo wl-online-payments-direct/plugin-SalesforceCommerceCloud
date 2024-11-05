@@ -7,10 +7,9 @@
 
 <div class="page transactions">
     <div class="worldlinebm_header">
-        <isset name="ordersUrl" value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'orders')}" scope="page" />
         <isbreadcrumb
-            name1="${Resource.msg('transactions.breadcrumbs.name1', 'worldlinebm', null)}" url1="${URLUtils.url('ViewApplication-CompressMenuGroup', 'OverviewPage', 'SiteNavigationBar-ShowSiteOverview')}" 
-            name2="${Resource.msg('transactions.breadcrumbs.name2', 'worldlinebm', null)}" url2="${ordersUrl}" 
+            name1="${Resource.msg('transactions.breadcrumbs.name1', 'worldlinebm', null)}" url1="${URLUtils.https('ViewApplication-CompressMenuGroup', 'OverviewPage', 'SiteNavigationBar-ShowSiteOverview')}" 
+            name2="${Resource.msg('transactions.breadcrumbs.name2', 'worldlinebm', null)}" url2="${URLUtils.https('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'orders')}" 
             name3="${Resource.msg('transactions.breadcrumbs.name3', 'worldlinebm', null)}" 
             />
 

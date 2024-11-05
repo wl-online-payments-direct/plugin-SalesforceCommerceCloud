@@ -560,6 +560,8 @@ function appendPaymentDetailsToResponseViewData(res) {
             } else {
                 selectedPaymentMethod = worldlineDirectConstants.PAYMENT_METHOD_REDIRECT + '__' + selectedPaymentInstrument.paymentProductID;
             }
+        } else if (selectedPaymentMethod === worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT) {
+            selectedPaymentMethod = worldlineDirectConstants.PAYMENT_METHOD_DIRECTDEBIT + '__' + selectedPaymentInstrument.paymentProductID;
         }
     }
 

@@ -1,89 +1,162 @@
 {
     "step-types": {
-        "script-module-step": [{
-            "@type-id": "custom.worldlinePaymentStatusCheck",
-            "@supports-parallel-execution": "false",
-            "@supports-site-context": "true",
-            "@supports-organization-context": "false",
-            "description": "Runs through orders that are in status CREATED or have a pending payment and updates their status using Worldline's API.",
-            "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlinePaymentStatusCheck.js",
-            "function": "execute",
-            "transactional": "true",
-            "timeout-in-seconds": "900",
-            "parameters": {
-                "parameter": [{
-                    "@name": "cancelUncofirmedOrderAfterHours",
-                    "@type": "long",
-                    "@required": "true",
-                    "description": "If after X hours the order still has a PENDING payment status, this cronjob will cancel it.",
-                    "default-value": 30
-                }]
+        "script-module-step": [
+            {
+                "@type-id": "custom.worldlinePaymentStatusCheck",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Runs through orders that are in status CREATED or have a pending payment and updates their status using Worldline's API.",
+                "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlinePaymentStatusCheck.js",
+                "function": "execute",
+                "transactional": "true",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name": "cancelUncofirmedOrderAfterHours",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "If after X hours the order still has a PENDING payment status, this cronjob will cancel it.",
+                            "default-value": "30"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "An error occurs, please re-run the job."
+                        },
+                        {
+                            "@code": "FINISHED",
+                            "description": ""
+                        }
+                    ]
+                }
             },
-            "status-codes": {
-                "status": [{
-                        "@code": "ERROR",
-                        "description": "An error occurs, please re-run the job."
-                    },
-                    {
-                        "@code": "FINISHED",
-                        "description": ""
-                    }
-                ]
-            }
-        }, {
-            "@type-id": "custom.worldlineCaptureAuthorizedPayments",
-            "@supports-parallel-execution": "false",
-            "@supports-site-context": "true",
-            "@supports-organization-context": "false",
-            "description": "A cronjob that captures the payments that are awaiting capture. It can be configured to either capture all awaiting payments or capture only the payments that have been made more than X days ago (using the worldlineDirectCaptureProcedureDelay parameter).",
-            "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlineCaptureAuthorizedPayments.js",
-            "function": "execute",
-            "transactional": "true",
-            "timeout-in-seconds": "900",
-            "parameters": {
-                "parameter": [{
-                    "@name": "worldlineDirectCaptureProcedureDelay",
-                    "@type": "long",
-                    "@required": "true",
-                    "description": "How many days to wait before capturing a payment.",
-                    "default-value": 1
-                }]
+            {
+                "@type-id": "custom.worldlineCaptureAuthorizedPayments",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "A cronjob that captures the payments that are awaiting capture. It can be configured to either capture all awaiting payments or capture only the payments that have been made more than X days ago (using the worldlineDirectCaptureProcedureDelay parameter).",
+                "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlineCaptureAuthorizedPayments.js",
+                "function": "execute",
+                "transactional": "true",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name": "worldlineDirectCaptureProcedureDelay",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "How many days to wait before capturing a payment.",
+                            "default-value": "1"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "An error occurs, please re-run the job."
+                        },
+                        {
+                            "@code": "FINISHED",
+                            "description": ""
+                        }
+                    ]
+                }
             },
-            "status-codes": {
-                "status": [{
-                        "@code": "ERROR",
-                        "description": "An error occurs, please re-run the job."
-                    },
-                    {
-                        "@code": "FINISHED",
-                        "description": ""
-                    }
-                ]
-            }
-        }, {
-            "@type-id": "custom.worldlineProcessWebhooks",
-            "@supports-parallel-execution": "false",
-            "@supports-site-context": "true",
-            "@supports-organization-context": "false",
-            "description": "A cronjob that processes the recorded webhooks in a first-in-first-out manner.",
-            "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlineProcessWebhooks.js",
-            "function": "execute",
-            "transactional": "true",
-            "timeout-in-seconds": "900",
-            "parameters": {
-                "parameter": []
+            {
+                "@type-id": "custom.worldlineProcessWebhooks",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "A cronjob that processes the recorded webhooks in a first-in-first-out manner.",
+                "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlineProcessWebhooks.js",
+                "function": "execute",
+                "transactional": "true",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": []
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "An error occurs, please re-run the job."
+                        },
+                        {
+                            "@code": "FINISHED",
+                            "description": ""
+                        }
+                    ]
+                }
             },
-            "status-codes": {
-                "status": [{
-                        "@code": "ERROR",
-                        "description": "An error occurs, please re-run the job."
-                    },
-                    {
-                        "@code": "FINISHED",
-                        "description": ""
-                    }
-                ]
+            {
+                "@type-id": "custom.worldlineDirectProcessRecurringOrders",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "A cronjob that process recurring orders in the system.",
+                "module": "bm_worldline_direct/cartridge/scripts/jobs/worldlineDirectProcessRecurringOrders.js",
+                "function": "execute",
+                "transactional": "true",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name": "worldlineDirectRetry",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "How many to try to create a new subscription order before marking it as blocked.",
+                            "default-value": "3"
+                        },
+                        {
+                            "@name": "worldlineDirectOCAPIUsername",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "OCAPI Usernsme",
+                            "default-value": "string"
+                        },
+                        {
+                            "@name": "worldlineDirectOCAPIAgentKey",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "OCAPI Agent Key",
+                            "default-value": "string"
+                        },
+                        {
+                            "@name": "mailFrom",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "The email address from which the emails to the customers and administrators of the site are send",
+                            "default-value": "string"
+                        },
+                        {
+                            "@name": "adminEmail",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "The email which should receive the errors that occure during the job execution",
+                            "default-value": "string"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "An error occurs, please re-run the job."
+                        },
+                        {
+                            "@code": "FINISHED",
+                            "description": ""
+                        }
+                    ]
+                }
             }
-        }]
+        ]
     }
 }

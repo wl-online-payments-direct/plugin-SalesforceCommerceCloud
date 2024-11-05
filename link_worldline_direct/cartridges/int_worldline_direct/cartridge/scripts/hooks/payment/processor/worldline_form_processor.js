@@ -11,8 +11,6 @@ function processForm(req, paymentForm, viewFormData) {
     const BasketMgr = require('dw/order/BasketMgr');
     const Resource = require('dw/web/Resource');
 
-    const WorldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
-
     let viewData = viewFormData;
     let currentBasket = BasketMgr.getCurrentBasket();
     let fieldErrors = {};
