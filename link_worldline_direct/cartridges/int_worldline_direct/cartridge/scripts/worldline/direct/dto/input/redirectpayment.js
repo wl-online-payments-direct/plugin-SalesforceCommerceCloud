@@ -24,6 +24,12 @@ function WorldlineDirectRedirectPaymentMethodSpecificInput(paymentInstrument, pa
     this.redirectionData = {
         returnUrl: returnURL
     };
+
+    if (this.paymentProductId === WorldlineDirectConstants.PAYMENT_PRODUCT_BANK_TRANSFER_A2A) {
+        this.paymentProduct5408SpecificInput = {
+            instantPaymentOnly : !!currentSite.getCustomPreferenceValue('worldlineDirectA2AInstantPaymentOnly')
+        };
+    }
 }
 
 module.exports = WorldlineDirectRedirectPaymentMethodSpecificInput;

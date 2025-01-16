@@ -100,6 +100,11 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectCardSchemeReferenceData">
                 <display-name xml:lang="x-default">Card Scheme Reference Data</display-name>
+                <display-name xml:lang="de">Referenzdaten für das Kartensystem</display-name>
+                <display-name xml:lang="es">Datos de referencia de la red de tarjetas</display-name>
+                <display-name xml:lang="fr">Données de référence du système de cartes</display-name>
+                <display-name xml:lang="it">Dati di riferimento del programma di carte</display-name>
+                <display-name xml:lang="nl">Referentiegegevens kaartensysteem</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
@@ -107,6 +112,11 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectMandateReference">
                 <display-name xml:lang="x-default">Mandate Reference</display-name>
+                <display-name xml:lang="de">Mandatsreferenz</display-name>
+                <display-name xml:lang="es">Mandato Referencia</display-name>
+                <display-name xml:lang="fr">Référence du mandat</display-name>
+                <display-name xml:lang="it">Riferimento al mandato</display-name>
+                <display-name xml:lang="nl">Mandaat Referentie</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>

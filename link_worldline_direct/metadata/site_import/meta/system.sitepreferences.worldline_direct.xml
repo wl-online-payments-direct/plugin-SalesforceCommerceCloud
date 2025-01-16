@@ -74,29 +74,85 @@
                 <description xml:lang="es">Si esta opción no está habilitada, los métodos de pago Oney3x-4x y Klarna no estarán disponibles.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
+                <default-value>true</default-value>
             </attribute-definition>
-
             <attribute-definition attribute-id="worldlineDirect3DSEnforceSCA">
                 <display-name xml:lang="x-default">Enforce Strong Customer Authentication</display-name>
-                <description xml:lang="x-default"></description>
+                <display-name xml:lang="de">Durchsetzung einer starken Kundenauthentifizierung</display-name>
+                <display-name xml:lang="es">Imponer una autenticación sólida de los clientes</display-name>
+                <display-name xml:lang="fr">Renforcer l'authentification des clients</display-name>
+                <display-name xml:lang="it">Applicare l'autenticazione forte del cliente</display-name>
+                <display-name xml:lang="nl">Krachtige klantverificatie afdwingen</display-name>
+                <description xml:lang="x-default"/>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
+                <default-value>true</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirect3DSExemption">
                 <display-name xml:lang="x-default">Exemption for transactions under 30 EUR</display-name>
+                <display-name xml:lang="de">Steuerbefreiung für Umsätze unter 30 EUR</display-name>
+                <display-name xml:lang="es">Exención para las transacciones inferiores a 30 EUR</display-name>
+                <display-name xml:lang="fr">Exemption pour les transactions inférieures à 30 EUR</display-name>
+                <display-name xml:lang="it">Esenzione per transazioni inferiori a 30 EUR</display-name>
+                <display-name xml:lang="nl">Vrijstelling voor transacties van minder dan 30 EUR</display-name>
                 <description xml:lang="x-default">When enabled, merchants are liable in case of fraud for transactions below €30.</description>
+                <description xml:lang="de">Wenn diese Funktion aktiviert ist, haften Händler im Falle von Betrug für Transaktionen unter 30 €.</description>
+                <description xml:lang="es">Cuando está activada, los comerciantes son responsables en caso de fraude en las transacciones inferiores a 30 euros.</description>
+                <description xml:lang="fr">Lorsque cette option est activée, les commerçants sont responsables en cas de fraude pour les transactions inférieures à 30 euros.</description>
+                <description xml:lang="it">Se abilitata, i commercianti sono responsabili in caso di frode per transazioni inferiori a 30 €.</description>
+                <description xml:lang="nl">Als dit is ingeschakeld, zijn winkeliers aansprakelijk in geval van fraude bij transacties onder de €30.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
+                <default-value>false</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectApplySurcharge">
                 <display-name xml:lang="x-default">Apply surcharge</display-name>
+                <display-name xml:lang="de">Zuschläge anwenden</display-name>
+                <display-name xml:lang="es">Aplicar recargo</display-name>
+                <display-name xml:lang="fr">Appliquer la surtaxe</display-name>
+                <display-name xml:lang="it">Applicare sovrapprezzo</display-name>
+                <display-name xml:lang="nl">Toeslag toepassen</display-name>
                 <description xml:lang="x-default">Surcharge only applies outside of the EU and requires a certain configuration for your Worldline Merchant Account.</description>
+                <description xml:lang="de">Der Aufpreis gilt nur außerhalb der EU und erfordert eine bestimmte Konfiguration für Ihr Worldline Merchant Account.</description>
+                <description xml:lang="es">El recargo sólo se aplica fuera de la UE y requiere una determinada configuración para su cuenta de vendedor Worldline.</description>
+                <description xml:lang="fr">La surcharge ne s'applique qu'en dehors de l'UE et nécessite une certaine configuration de votre compte marchand Worldline.</description>
+                <description xml:lang="it">Il supplemento si applica solo al di fuori dell'UE e richiede una determinata configurazione per il tuo conto commerciante Worldline.</description>
+                <description xml:lang="nl">Toeslag geldt alleen buiten de EU en vereist een bepaalde configuratie voor uw Worldline Merchant Account.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
+                <default-value>false</default-value>
             </attribute-definition>
-			<attribute-definition attribute-id="worldlineDirectSubscription">
-                <display-name xml:lang="x-default">Subscription</display-name>
+            <attribute-definition attribute-id="worldlineDirectSubscription">
+                <display-name xml:lang="x-default">Enable Subscriptions</display-name>
+                <display-name xml:lang="de">Aktivieren von Abonnements</display-name>
+                <display-name xml:lang="es">Activar suscripciones</display-name>
+                <display-name xml:lang="fr">Activer les abonnements</display-name>
+                <display-name xml:lang="it">Abilitare gli abbonamenti</display-name>
+                <display-name xml:lang="nl">Abonnementen inschakelen</display-name>
                 <description xml:lang="x-default">Turns on and off the order subscription functionality</description>
+                <description xml:lang="de">Schaltet die Bestellabonnementfunktion ein und aus</description>
+                <description xml:lang="es">Activa y desactiva la función de suscripción de pedidos</description>
+                <description xml:lang="fr">Active et désactive la fonctionnalité d'abonnement aux commandes</description>
+                <description xml:lang="it">Attiva e disattiva la funzionalità di sottoscrizione degli ordini</description>
+                <description xml:lang="nl">Schakelt de functionaliteit voor bestelabonnementen in en uit</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="worldlineDirectA2AInstantPaymentOnly">
+                <display-name xml:lang="x-default">Instant bank transfers only</display-name>
+                <display-name xml:lang="de">Nur sofortige Banküberweisungen</display-name>
+                <display-name xml:lang="es">Sólo transferencias bancarias instantáneas</display-name>
+                <display-name xml:lang="fr">Virements bancaires instantanés uniquement</display-name>
+                <display-name xml:lang="it">Solo bonifici bancari immediati</display-name>
+                <display-name xml:lang="nl">Alleen directe bankoverschrijvingen</display-name>
+                <description xml:lang="x-default">Activate this option to only accept instant bank transfers from your consumers</description>
+                <description xml:lang="de">Aktivieren Sie diese Option, um nur Sofortüberweisungen von Ihren Kunden zu akzeptieren.</description>
+                <description xml:lang="es">Active esta opción para aceptar únicamente transferencias bancarias instantáneas de sus consumidores</description>
+                <description xml:lang="fr">Activez cette option pour n'accepter que les virements bancaires instantanés de vos consommateurs.</description>
+                <description xml:lang="it">Attiva questa opzione per accettare solo bonifici bancari immediati dai tuoi consumatori</description>
+                <description xml:lang="nl">Activeer deze optie om alleen directe bankoverschrijvingen van je klanten te accepteren</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -109,11 +165,12 @@
                 <attribute attribute-id="worldlineDirectMerchantID"/>
                 <attribute attribute-id="worldlineDirectOperationCode"/>
                 <attribute attribute-id="worldlineDirectCheckoutType"/>
+                <attribute attribute-id="worldlineDirectCheckoutSendLineItemPrices"/>
                 <attribute attribute-id="worldlineDirect3DSEnforceSCA"/>
                 <attribute attribute-id="worldlineDirect3DSExemption"/>
+                <attribute attribute-id="worldlineDirectA2AInstantPaymentOnly"/>
                 <attribute attribute-id="worldlineDirectApplySurcharge"/>
-                <attribute attribute-id="worldlineDirectCheckoutSendLineItemPrices"/>
-				<attribute attribute-id="worldlineDirectSubscription"/>
+                <attribute attribute-id="worldlineDirectSubscription"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

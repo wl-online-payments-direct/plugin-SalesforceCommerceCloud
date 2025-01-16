@@ -1,4 +1,7 @@
-<isscript>var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');</isscript> 
+<isscript>
+    var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');
+    var worldlineDirectOrderPaymentInstrument = worldlineDirectCommonHelper.getWorldlinePaymentInstrument(pdict.order);
+</isscript> 
 <table class="payment_details">
     <tr>
         <td>${Resource.msg('detailsdialog.paymentdetails.orderno', 'worldlinebm', null)}</td>
@@ -37,6 +40,13 @@
 
         <td>${Resource.msg('detailsdialog.paymentdetails.refundedamount', 'worldlinebm', null)}</td>
         <td><isprint value="${worldlineDirectCommonHelper.convertWorldlineAmountToMoney(pdict.refundedAmount, pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode)}" style="MONEY_LONG" /></td>
+    </tr>
+    <tr>
+        <td>${Resource.msg('detailsdialog.paymentdetails.paymentmethod', 'worldlinebm', null)}</td>
+        <td>${worldlineDirectOrderPaymentInstrument.custom.worldlineDirectPaymentProductName}</td>
+
+        <td></td>
+        <td></td>
     </tr>
 </table>
 

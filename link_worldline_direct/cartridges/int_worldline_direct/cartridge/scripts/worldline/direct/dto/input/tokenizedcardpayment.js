@@ -33,7 +33,32 @@ function WorldlineDirectCardPaymentMethodSpecificInput(paymentInstrument, order)
         this.threeDSecure.exemptionRequest = 'low-value';
     }
 
-    if (order.custom.worldlineDirectSubscriptionOrderType.value === 'CIT') {
+    if (this.paymentProductId === WorldlineDirectConstants.PAYMENT_PRODUCT_CARTES_BANCAIRES_ID) {
+        let productQuantityTotal = order.getProductQuantityTotal();
+
+        this.paymentProduct130SpecificInput = {
+            threeDSecure: {
+                usecase: ((this.authorizationMode === 'SALE') ? 'single-amount' : 'payment-upon-shipment'),
+                numberOfItems: ((productQuantityTotal > 99) ? 99 : productQuantityTotal)
+            }
+        };
+    }
+
+    if (order.custom.worldlineDirectSubscriptionOrderType.value === 'MIT') {
+        this.initialSchemeTransactionId = order.custom.worldlineDirectSubscriptionInitialTransactionID;
+        this.schemeReferenceData = paymentInstrument.custom.worldlineDirectCardSchemeReferenceData;
+        this.isRecurring = true;
+        this.recurring = {
+            recurringPaymentSequenceIndicator: 'recurring',
+        }
+        this.threeDSecure.skipAuthentication = true;
+
+        if (this.paymentProductId === WorldlineDirectConstants.PAYMENT_PRODUCT_CARTES_BANCAIRES_ID) {
+            this.paymentProduct130SpecificInput.threeDSecure.usecase = 'other-recurring-payments';
+        }
+        
+        delete(this.threeDSecure.challengeIndicator);
+    } else {
         let subscribtionData = worldlineDirectSubscriptionHelper.getSubscriptionData(order);
 
         if (subscribtionData.selected) {
@@ -42,17 +67,11 @@ function WorldlineDirectCardPaymentMethodSpecificInput(paymentInstrument, order)
             this.recurring = {
                 recurringPaymentSequenceIndicator: 'first',
             };
+
+            if (this.paymentProductId === WorldlineDirectConstants.PAYMENT_PRODUCT_CARTES_BANCAIRES_ID) {
+                this.paymentProduct130SpecificInput.threeDSecure.usecase = 'other-recurring-payments';
+            }
         }
-    } else if (order.custom.worldlineDirectSubscriptionOrderType.value === 'MIT') {
-        this.initialSchemeTransactionId = order.custom.worldlineDirectSubscriptionInitialTransactionID;
-        this.schemeReferenceData = paymentInstrument.custom.worldlineDirectCardSchemeReferenceData;
-        this.isRecurring = true;
-        this.recurring = {
-            recurringPaymentSequenceIndicator: 'recurring',
-        }
-        this.threeDSecure.skipAuthentication = true;
-        
-        delete(this.threeDSecure.challengeIndicator);
     }
 }
 

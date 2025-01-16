@@ -4,18 +4,33 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="worldlineDirectSubscriptionStartDate">
                 <display-name xml:lang="x-default">Subscription Start Date</display-name>
+                <display-name xml:lang="de">Datum des Abonnementbeginns</display-name>
+                <display-name xml:lang="es">Fecha de inicio de la suscripción</display-name>
+                <display-name xml:lang="fr">Date de début de la souscription</display-name>
+                <display-name xml:lang="it">Data di inizio dell'abbonamento</display-name>
+                <display-name xml:lang="nl">Startdatum abonnement</display-name>
                 <type>date</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
             </attribute-definition>
-			<attribute-definition attribute-id="worldlineDirectSubscriptionEndDate">
+            <attribute-definition attribute-id="worldlineDirectSubscriptionEndDate">
                 <display-name xml:lang="x-default">Subscription End Date</display-name>
+                <display-name xml:lang="de">Enddatum der Zeichnung</display-name>
+                <display-name xml:lang="es">Fecha de finalización de la suscripción</display-name>
+                <display-name xml:lang="fr">Date de fin de souscription</display-name>
+                <display-name xml:lang="it">Data di fine dell'abbonamento</display-name>
+                <display-name xml:lang="nl">Einddatum inschrijving</display-name>
                 <type>date</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionPeriod">
                 <display-name xml:lang="x-default">Subscription Period</display-name>
+                <display-name xml:lang="de">Abonnementzeitraum</display-name>
+                <display-name xml:lang="es">Período de suscripción</display-name>
+                <display-name xml:lang="fr">Période d'abonnement</display-name>
+                <display-name xml:lang="it">Periodo di abbonamento</display-name>
+                <display-name xml:lang="nl">Inschrijvingsperiode</display-name>
                 <type>enum-of-int</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
@@ -52,30 +67,60 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionFrequency">
                 <display-name xml:lang="x-default">Subscription Frequency</display-name>
+                <display-name xml:lang="de">Abonnement-Häufigkeit</display-name>
+                <display-name xml:lang="es">Frecuencia de suscripción</display-name>
+                <display-name xml:lang="fr">Fréquence d'abonnement</display-name>
+                <display-name xml:lang="it">Frequenza di abbonamento</display-name>
+                <display-name xml:lang="nl">Abonnementsfrequentie</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
                 <value-definitions>
                     <value-definition>
                         <display xml:lang="x-default">Day(s)</display>
+                        <display xml:lang="de">Tag(e)</display>
+                        <display xml:lang="es">Día(s)</display>
+                        <display xml:lang="fr">Jour(s)</display>
+                        <display xml:lang="it">Giorno(i)</display>
+                        <display xml:lang="nl">Dag(en)</display>
                         <value>day</value>
                     </value-definition>
                     <value-definition>
                         <display xml:lang="x-default">Week(s)</display>
+                        <display xml:lang="de">Woche(n)</display>
+                        <display xml:lang="es">Semana(s)</display>
+                        <display xml:lang="fr">Semaine(s)</display>
+                        <display xml:lang="it">Settimana(e)</display>
+                        <display xml:lang="nl">Week(en)</display>
                         <value>week</value>
                     </value-definition>
                     <value-definition>
                         <display xml:lang="x-default">Month(s)</display>
+                        <display xml:lang="de">Monat(e)</display>
+                        <display xml:lang="es">Mes(es)</display>
+                        <display xml:lang="fr">Mois</display>
+                        <display xml:lang="it">Mesi)</display>
+                        <display xml:lang="nl">Maand(en)</display>
                         <value>month</value>
                     </value-definition>
                     <value-definition>
                         <display xml:lang="x-default">Year(s)</display>
+                        <display xml:lang="de">Jahr(e)</display>
+                        <display xml:lang="es">Año(s)</display>
+                        <display xml:lang="fr">Année(s)</display>
+                        <display xml:lang="it">Anni)</display>
+                        <display xml:lang="nl">Jaar/jaren</display>
                         <value>year</value>
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionStatus">
                 <display-name xml:lang="x-default">Subscription Status</display-name>
+                <display-name xml:lang="de">Status des Abonnements</display-name>
+                <display-name xml:lang="es">Estado de la suscripción</display-name>
+                <display-name xml:lang="fr">Statut de l'abonnement</display-name>
+                <display-name xml:lang="it">Stato dell'abbonamento</display-name>
+                <display-name xml:lang="nl">Abonnementsstatus</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -104,18 +149,33 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionNextDate">
                 <display-name xml:lang="x-default">Subscription Next Execution Date</display-name>
+                <display-name xml:lang="de">Zeichnung Nächstes Ausführungsdatum</display-name>
+                <display-name xml:lang="es">Suscripción Próxima fecha de ejecución</display-name>
+                <display-name xml:lang="fr">Date d'exécution suivante de la souscription</display-name>
+                <display-name xml:lang="it">Sottoscrizione Prossima data di esecuzione</display-name>
+                <display-name xml:lang="nl">Inschrijving Volgende Uitvoeringsdatum</display-name>
                 <type>date</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionRetryCount">
                 <display-name xml:lang="x-default">Subscription Retry Count</display-name>
+                <display-name xml:lang="de">Anzahl der Wiederholungsversuche bei Abonnements</display-name>
+                <display-name xml:lang="es">Recuento de reintentos de suscripción</display-name>
+                <display-name xml:lang="fr">Nombre de tentatives d'abonnement</display-name>
+                <display-name xml:lang="it">Numero di tentativi di abbonamento</display-name>
+                <display-name xml:lang="nl">Opnieuw proberen abonnement</display-name>
                 <type>double</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionOrderType">
                 <display-name xml:lang="x-default">Subscription Order Type</display-name>
+                <display-name xml:lang="de">Abonnement Auftragsart</display-name>
+                <display-name xml:lang="es">Tipo de pedido de suscripción</display-name>
+                <display-name xml:lang="fr">Type de commande d'abonnement</display-name>
+                <display-name xml:lang="it">Tipo di ordine di abbonamento</display-name>
+                <display-name xml:lang="nl">Type abonnement</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
@@ -132,6 +192,11 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionOriginalOrderID">
                 <display-name xml:lang="x-default">Subscription Original Order ID</display-name>
+                <display-name xml:lang="de">Abonnement Ursprüngliche Bestell-ID</display-name>
+                <display-name xml:lang="es">Suscripción ID de pedido original</display-name>
+                <display-name xml:lang="fr">Abonnement ID de la commande originale</display-name>
+                <display-name xml:lang="it">ID ordine originale abbonamento</display-name>
+                <display-name xml:lang="nl">Abonnement Oorspronkelijke Bestel-ID</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
@@ -139,6 +204,11 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSubscriptionInitialTransactionID">
                 <display-name xml:lang="x-default">Subscription Initial Transaction ID</display-name>
+                <display-name xml:lang="de">Abonnement Anfängliche Transaktions-ID</display-name>
+                <display-name xml:lang="es">Suscripción ID de transacción inicial</display-name>
+                <display-name xml:lang="fr">Abonnement Initial Transaction ID</display-name>
+                <display-name xml:lang="it">ID transazione iniziale abbonamento</display-name>
+                <display-name xml:lang="nl">Abonnement Initiële transactie-ID</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
@@ -148,9 +218,14 @@
         <group-definitions>
             <attribute-group group-id="WORLDLINE_DIRECT_SUBSCRIPTION">
                 <display-name xml:lang="x-default">Worldline-Direct Subscription Data</display-name>
+                <display-name xml:lang="de">Worldline-Direct-Abonnementdaten</display-name>
+                <display-name xml:lang="es">Datos de suscripción a Worldline-Direct</display-name>
+                <display-name xml:lang="fr">Données d'abonnement à Worldline-Direct</display-name>
+                <display-name xml:lang="it">Dati di abbonamento Worldline-Direct</display-name>
+                <display-name xml:lang="nl">Worldline-Direct abonnementsgegevens</display-name>
                 <attribute attribute-id="worldlineDirectSubscriptionStartDate"/>
                 <attribute attribute-id="worldlineDirectSubscriptionEndDate"/>
-				<attribute attribute-id="worldlineDirectSubscriptionPeriod"/>
+                <attribute attribute-id="worldlineDirectSubscriptionPeriod"/>
                 <attribute attribute-id="worldlineDirectSubscriptionFrequency"/>
                 <attribute attribute-id="worldlineDirectSubscriptionStatus"/>
                 <attribute attribute-id="worldlineDirectSubscriptionNextDate"/>

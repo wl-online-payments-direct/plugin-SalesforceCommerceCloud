@@ -4,6 +4,11 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="worldlineDirectAcquiredAmount">
                 <display-name xml:lang="x-default">Acquired amount</display-name>
+                <display-name xml:lang="de">Erworbener Betrag</display-name>
+                <display-name xml:lang="es">Importe adquirido</display-name>
+                <display-name xml:lang="fr">Montant acquis</display-name>
+                <display-name xml:lang="it">Importo acquisito</display-name>
+                <display-name xml:lang="nl">Verworven bedrag</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>

@@ -20,7 +20,7 @@ function getSubscriptionData(currentBasket) {
 
     var subscriptionData = {
 		enabled: Site.current.getCustomPreferenceValue('worldlineDirectSubscription'),
-        allowed: customer.authenticated,
+        allowed: (customer && customer.authenticated),
         subscriptionPeriod: currentBasket.custom.worldlineDirectSubscriptionPeriod,
         subscriptionFrequency: currentBasket.custom.worldlineDirectSubscriptionFrequency,
         startDate: currentBasket.custom.worldlineDirectSubscriptionStartDate,

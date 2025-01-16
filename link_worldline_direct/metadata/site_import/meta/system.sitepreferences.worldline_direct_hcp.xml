@@ -17,13 +17,33 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectHCPGroupCards">
                 <display-name xml:lang="x-default">Groups Cards on the Hosted Checkout Page</display-name>
+                <display-name xml:lang="de">Gruppen Karten auf der Hosted Checkout Seite</display-name>
+                <display-name xml:lang="es">Grupos de tarjetas en la página de pago alojado</display-name>
+                <display-name xml:lang="fr">Groupes de cartes sur la page de paiement hébergée</display-name>
+                <display-name xml:lang="it">Gruppi di carte nella pagina di pagamento ospitata</display-name>
+                <display-name xml:lang="nl">Groepen kaarten op de Hosted Checkout-pagina</display-name>
                 <description xml:lang="x-default">Group credit and debit cards under one single button on the hosted checkout page</description>
+                <description xml:lang="de">Gruppierung von Kredit- und Debitkarten unter einer einzigen Schaltfläche auf der gehosteten Checkout-Seite</description>
+                <description xml:lang="es">Agrupe las tarjetas de crédito y débito en un único botón en la página de pago alojada</description>
+                <description xml:lang="fr">Regrouper les cartes de crédit et de débit sous un seul bouton sur la page de paiement hébergée</description>
+                <description xml:lang="it">Raggruppa le carte di credito e di debito sotto un unico pulsante nella pagina di pagamento ospitata</description>
+                <description xml:lang="nl">Groepeer creditcards en debetkaarten onder één knop op de gehoste afrekenpagina</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectHCPSessionTimeout">
                 <display-name xml:lang="x-default">Hosted Checkout Session Timeout (min)</display-name>
+                <display-name xml:lang="de">Hosted Checkout Session Timeout (min)</display-name>
+                <display-name xml:lang="es">Tiempo de espera de la sesión de pago alojada (min)</display-name>
+                <display-name xml:lang="fr">Délai d'attente de la session de caisse hébergée (min)</display-name>
+                <display-name xml:lang="it">Timeout della sessione di checkout ospitata (min)</display-name>
+                <display-name xml:lang="nl">Time-out hosted afrekensessie (min)</display-name>
                 <description xml:lang="x-default">The number of minutes after which the session will expire. By default, the value is set to 180 minutes.</description>
+                <description xml:lang="de">Die Anzahl der Minuten, nach denen die Sitzung abläuft. Standardmäßig ist der Wert auf 180 Minuten eingestellt.</description>
+                <description xml:lang="es">El número de minutos tras los cuales expirará la sesión. Por defecto, el valor está fijado en 180 minutos.</description>
+                <description xml:lang="fr">Nombre de minutes après lequel la session expirera. Par défaut, la valeur est fixée à 180 minutes.</description>
+                <description xml:lang="it">Numero di minuti dopo i quali la sessione scadrà. Per impostazione predefinita, il valore è impostato su 180 minuti.</description>
+                <description xml:lang="nl">Het aantal minuten waarna de sessie zal verlopen. Standaard is de waarde ingesteld op 180 minuten.</description>
                 <type>int</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>

@@ -356,7 +356,7 @@ function processUnconfirmedOrder(order) {
         }
     }
 
-    if (paymentAPIResponse.success === true) {
+    if (paymentAPIResponse && paymentAPIResponse.success === true) {
         if (WorldlineDirectConstants.REJECTED_PAYMENT_STATUSES.indexOf(apiStatus) > -1) {
             updatePaymentTransaction(order, apiStatus, apiStatusOutput, WorldlineDirectConstants.REJECTED_PAYMENT_STATUS_CATEGORY);
 

@@ -1,4 +1,8 @@
-<isscript>var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');</isscript> 
+<isscript>
+    var worldlineDirectCommonHelper = require('*/cartridge/scripts/worldline/direct/commonHelper');
+    var worldlineDirectConstants = require('*/cartridge/scripts/worldline/direct/constants');
+    var worldlineDirectOrderPaymentInstrument = worldlineDirectCommonHelper.getWorldlinePaymentInstrument(pdict.order);
+</isscript> 
 <isif condition="${pdict.paymentCaptures.length > 0}">
     <table>
         <tr>
@@ -45,9 +49,24 @@
 
     <isprint value="${pdict.paymentDetailsResponse.paymentOutput.amountOfMoney.currencyCode}" />
 
-    <button type="button" class="btn_capture js_btn_capture" ${pdict.capturableAmount === 0 ? "disabled" : ""}>
+    <isscript>
+        var captureConfirmationMsg = Resource.msg('detailsdialog.confirmationmessages.capture', 'worldlinebm', null);
+        var captureDisclaimerMsg = null;
+        var isCaptureButtonDisabled = pdict.capturableAmount === 0;
+
+        if (worldlineDirectOrderPaymentInstrument.custom.worldlineDirectPaymentProductID == worldlineDirectConstants.PAYMENT_PRODUCT_TWINT_ID) {
+            captureConfirmationMsg += "\n\n" + Resource.msg('detailsdialog.captures.twint.disclaimer', 'worldlinebm', null);
+            captureDisclaimerMsg = Resource.msg('detailsdialog.captures.twint.disclaimer', 'worldlinebm', null);
+            isCaptureButtonDisabled = pdict.capturableAmount === 0 || pdict.capturedAmount > 0;
+        }
+    </isscript>
+
+    <button type="button" class="btn_capture js_btn_capture" ${isCaptureButtonDisabled ? "disabled" : ""} data-confirm='${captureConfirmationMsg}'>
         ${Resource.msg('detailsdialog.paymentdetails.btncapture', 'worldlinebm', null)}
     </button>
 
+    <isif condition="${captureDisclaimerMsg}">
+        <div class="text-caption">${captureDisclaimerMsg}</div>
+    </isif>
 </div>
 

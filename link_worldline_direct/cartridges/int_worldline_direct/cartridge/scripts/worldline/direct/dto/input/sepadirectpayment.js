@@ -11,7 +11,7 @@ const worldlineDirectConstants          = require('*/cartridge/scripts/worldline
 function WorldlineDirectSepaDirectPaymentMethodSpecificInput(paymentInstrument, order) {
     this.paymentProductId = parseInt(paymentInstrument.custom.worldlineDirectPaymentProductID, 10);
 
-    if (parseInt(paymentInstrument.custom.worldlineDirectPaymentProductID) === worldlineDirectConstants.PAYMENT_PRODUCT_SEPA_DIRECT_DEBIT_ID) {
+    if (this.paymentProductId === worldlineDirectConstants.PAYMENT_PRODUCT_SEPA_DIRECT_DEBIT_ID) {
         this.paymentProduct771SpecificInput = {};
 
         if (order.custom.worldlineDirectSubscriptionOrderType.value === 'MIT') {

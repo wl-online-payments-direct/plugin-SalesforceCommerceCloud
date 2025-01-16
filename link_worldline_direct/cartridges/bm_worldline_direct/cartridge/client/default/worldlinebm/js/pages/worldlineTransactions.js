@@ -111,7 +111,9 @@ initPaymentsDialogEvents = () => {
             return;
         }
 
-        if (!confirm(resources.confirmationMessages.capture.replace('{0}', amount).replace('{1}', currencyCode))) {
+        var confirmationMsg = $(this).data('confirm') || resources.confirmationMessages.capture;
+
+        if (!confirm(confirmationMsg.replace('{0}', amount).replace('{1}', currencyCode))) {
             return;
         }
 

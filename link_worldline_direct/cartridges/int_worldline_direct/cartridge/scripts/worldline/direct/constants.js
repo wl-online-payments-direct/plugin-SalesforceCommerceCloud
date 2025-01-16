@@ -39,6 +39,9 @@ Constants.PAYMENT_PRODUCT_IDEAL_ID              = 809;
 Constants.PAYMENT_PRODUCT_APPLE_PAY_ID          = 302;
 Constants.PAYMENT_PRODUCT_INTERSOLVE_ID         = 5700;
 Constants.PAYMENT_PRODUCT_SEPA_DIRECT_DEBIT_ID  = 771;
+Constants.PAYMENT_PRODUCT_CARTES_BANCAIRES_ID   = 130;
+Constants.PAYMENT_PRODUCT_TWINT_ID              = 5407;
+Constants.PAYMENT_PRODUCT_BANK_TRANSFER_A2A     = 5408;
 
 // Klarna and Oney require us to send the line item prices with the API request. They will be hidden if the worldlineDirectCheckoutSendLineItemPrices site preference is not checked
 Constants.PAYMENT_PRODUCTS_WITH_LINEITEM_PRICES = [3301, 3302, 5110, 5600];

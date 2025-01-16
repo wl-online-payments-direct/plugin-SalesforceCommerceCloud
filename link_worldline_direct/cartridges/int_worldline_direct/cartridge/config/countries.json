@@ -22,4 +22,7 @@
 }, {
     "id": "de_DE",
     "currencyCode": "EUR"
+},{
+    "id": "en_CH",
+    "currencyCode": "CHF"
 }]

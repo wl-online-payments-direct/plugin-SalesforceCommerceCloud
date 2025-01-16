@@ -2,19 +2,19 @@
 <services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
 
     <service-credential service-credential-id="worldline.https.direct.yoursiteid.TEST">
-        <url>https://payment.preprod.direct.ingenico.com</url>
+        <url>https://payment.preprod.direct.worldline-solutions.com</url>
         <user-id>API_KEY</user-id>
         <password encrypted="true" encryption-type="common.export">API_SECRET</password>
     </service-credential>
 	
 	<service-credential service-credential-id="worldline.https.direct.yoursiteid.LIVE">
-        <url>https://payment.direct.ingenico.com</url>
+        <url>https://payment.direct.worldline-solutions.com</url>
         <user-id>API_KEY</user-id>
         <password encrypted="true" encryption-type="common.export">API_SECRET</password>
     </service-credential>
 	
 	<service-credential service-credential-id="worldline.httpform.ocapi">
-        <url>https://zzok-002.dx.commercecloud.salesforce.com</url>
+        <url>https://zzok-003.dx.commercecloud.salesforce.com</url>
         <user-id>OCAPI_CLIENT_ID</user-id>
         <password encrypted="true" encryption-type="common.export">OCAPI_CLIENT_SECRET</password>
     </service-credential>

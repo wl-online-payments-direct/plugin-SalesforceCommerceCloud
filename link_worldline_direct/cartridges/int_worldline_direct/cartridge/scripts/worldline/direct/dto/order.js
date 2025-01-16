@@ -117,30 +117,12 @@ function calculateOrderLinePrices(order) {
         shippingCostTax = precisionRound(worldlineDirectCommonHelper.convertMoneyToWorldlineAmount(order.getDefaultShipment().adjustedShippingTotalTax), 0);
     }
 
-    // the shipping cost will be sent as a separate line item
-    lineItems.push({
-        amountOfMoney: {
-            amount: shippingCost + shippingCostTax,
-            currencyCode: order.getCurrencyCode()
-        },
-        invoiceData: {
-            description: Resource.msg('label.shipping.cost', 'cart', null)
-        },
-        orderLineDetails: {
-            productPrice: shippingCost,
-            taxAmount: shippingCostTax,
-            quantity: 1,
-            productCode: "SHIPPING",
-            productName: Resource.msg('label.shipping.cost', 'cart', null)
-        }
-    });
-
     orderTotal += shippingCost + shippingCostTax;
 
     return {
         lineItems: lineItems,
-        // shippingCost: shippingCost,
-        // shippingCostTax: shippingCostTax,
+        shippingCost: shippingCost,
+        shippingCostTax: shippingCostTax,
         orderTotal: orderTotal
     };
 }
@@ -179,8 +161,8 @@ function WorldlineDirectOrder(order, paymentIsCreditCardHostedTokenization) {
         var orderLinePrices = calculateOrderLinePrices(order);
 
         this.amountOfMoney.amount = orderLinePrices.orderTotal;
-        // this.shipping.shippingCost = orderLinePrices.shippingCost;
-        // this.shipping.shippingCostTax = orderLinePrices.shippingCostTax;
+        this.shipping.shippingCost = orderLinePrices.shippingCost;
+        this.shipping.shippingCostTax = orderLinePrices.shippingCostTax;
 
         this.shoppingCart = {
             items: orderLinePrices.lineItems

@@ -45,6 +45,18 @@ function WorldlineDirectCardPaymentMethodSpecificInput(paymentInstrument, order)
         };
         this.tokenize = true;
     }
+    
+    if (this.paymentProductId === WorldlineDirectConstants.PAYMENT_PRODUCT_CARTES_BANCAIRES_ID) {
+        let productQuantityTotal = order.getProductQuantityTotal();
+        let useCase = ((subscribtionData.selected) ? 'other-recurring-payments' : ((this.authorizationMode === 'SALE') ? 'single-amount' : 'payment-upon-shipment'));
+
+        this.paymentProduct130SpecificInput = {
+            threeDSecure: {
+                usecase: useCase,
+                numberOfItems: ((productQuantityTotal > 99) ? 99 : productQuantityTotal)
+            }
+        };
+    }
 }
 
 module.exports = WorldlineDirectCardPaymentMethodSpecificInput;

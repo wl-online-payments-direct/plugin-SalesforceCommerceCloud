@@ -157,6 +157,11 @@
             </attribute-definition>
             <attribute-definition attribute-id="worldlineDirectSurchargeAmount">
                 <display-name xml:lang="x-default">Surcharge Amount</display-name>
+                <display-name xml:lang="de">Zuschlagsbetrag</display-name>
+                <display-name xml:lang="es">Importe del recargo</display-name>
+                <display-name xml:lang="fr">Montant de la surtaxe</display-name>
+                <display-name xml:lang="it">Importo del supplemento</display-name>
+                <display-name xml:lang="nl">Toeslag Bedrag</display-name>
                 <type>double</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
